@@ -1,7 +1,7 @@
 # .NET
 Desenvolvimento .NET.
 
-## PASSO A PASSO DE AMBIENTAÇÃO
+## Passo a passo de ambientação
 
 1. Baixar extensão no VSCODE: Angular Language Service
 Link: https://marketplace.visualstudio.com/items?itemName=Angular.ng-template
