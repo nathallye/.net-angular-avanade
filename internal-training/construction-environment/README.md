@@ -1,5 +1,6 @@
-# .NET & AngularJS
-Desenvolvimento .NET & AngularJS.
+# C#, .NET & AngularJS
+
+Estudos sobre C#, .NET & AngularJS.
 
 ## Passo a passo de ambientação
 
