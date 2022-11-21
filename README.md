@@ -1,4 +1,4 @@
-# .NET & AngularJS
+# C#, .NET & AngularJS
 
 Estudos sobre C#, .NET & AngularJS.
 
