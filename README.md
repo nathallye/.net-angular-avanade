@@ -1,4 +1,4 @@
-# .NET
+# .NET & AngularJS
 Desenvolvimento .NET.
 
 ## Passo a passo de ambientação
