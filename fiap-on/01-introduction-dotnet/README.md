@@ -28,3 +28,15 @@ O componente responsável por esse isolamento entre aplicação e sistema operac
   - Compatibilidade de versão.
   - Multiplataforma (por exemplo: Windows 7, Windows 8, Windows 8.1, Windows 10, Windows Phone e Xbox 360)
   - Execuções paralelas com diferentes versões do framework.
+
+## IDE Visual Studio
+
+O ambiente de desenvolvimento ou IDE (Integrated Development Environment) do .NET Framework é chamado de Visual Studio. É a ferramenta de suporte ao desenvolvimento das linguagens C# (C Sharp), Visual Basic .NET (VB.NET), C, C++ e Xamarin.
+
+### Produtos suportados
+
+O Visual Studio oferece suporte a três linguagens de programação, são elas: 
+  - Microsoft Visual C++.
+  - Microsoft Visual C#.
+  - Microsoft Visual Basic (VB.NET). 
+  Possui também o Microsoft Visual Web Developer, plataforma para desenvolvimento de aplicações ou serviços web, para os quais se deve usar as bibliotecas do pacote ASP.NET, podendo-seescolher entre as linguagens C# ou VB.NET.
