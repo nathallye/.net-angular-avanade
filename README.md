@@ -25,8 +25,12 @@ Link para baixar direto: https://aka.ms/ssmsfullsetup
 
 Link: https://visualstudio.microsoft.com/pt-br/free-developer-offers/
 
-E nele as cargas de trabalho que iremos usar:
+E nele as Cargas de Trabalho que iremos usar:
 
 ![image](https://user-images.githubusercontent.com/86172286/203126144-9cfb3927-51f7-4177-b8ba-ea0b424c07e7.png)
 
+E os Componentes Individuais:
 
+![image](https://user-images.githubusercontent.com/86172286/203127574-7b50c7c0-22b6-4818-94b3-9189d88ae362.png)
+
+Feito isso, podemos instalar.
