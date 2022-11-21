@@ -39,4 +39,4 @@ O Visual Studio oferece suporte a três linguagens de programação, são elas:
   - Microsoft Visual C++.
   - Microsoft Visual C#.
   - Microsoft Visual Basic (VB.NET). 
-  Possui também o Microsoft Visual Web Developer, plataforma para desenvolvimento de aplicações ou serviços web, para os quais se deve usar as bibliotecas do pacote ASP.NET, podendo-seescolher entre as linguagens C# ou VB.NET.
+  Possui também o Microsoft Visual Web Developer, plataforma para desenvolvimento de aplicações ou serviços web, para os quais se deve usar as bibliotecas do pacote ASP.NET podendo-seescolher entre as linguagens C# ou VB.NET.
