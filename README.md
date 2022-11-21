@@ -24,3 +24,9 @@ Link para baixar direto: https://aka.ms/ssmsfullsetup
 5. Baixar o Visual Studio Community
 
 Link: https://visualstudio.microsoft.com/pt-br/free-developer-offers/
+
+E nele as cargas de trabalho que iremos usar:
+
+![image](https://user-images.githubusercontent.com/86172286/203126144-9cfb3927-51f7-4177-b8ba-ea0b424c07e7.png)
+
+
