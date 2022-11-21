@@ -1,5 +1,6 @@
 # .NET & AngularJS
-Desenvolvimento .NET & AngularJS.
+
+Estudos sobre C#, .NET & AngularJS.
 
 - ## [FIAP ON](fiap-on/README.md)
   - ### [Introdução à Plataforma .NET](fiap-on/01-introduction-dotnet/README.md)
