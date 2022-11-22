@@ -54,5 +54,10 @@ Observacão: Uma linguagem é definida como estaticamente tipada quando a pessoa
 
 - Ainda ter um ambiente onde o desenvolvedor pode focar na sua lógica o tempo todo, o resto é responsabilidade do Framework;
 
+## Planejamento de Sprint com .Net
+
+![image](https://user-images.githubusercontent.com/86172286/203321452-1b5ea647-d4a3-4ef7-af24-69024e38109d.png)
+
+![image](https://user-images.githubusercontent.com/86172286/203321322-a850220e-9aa4-4c79-923d-11ea830a6670.png)
 
 
