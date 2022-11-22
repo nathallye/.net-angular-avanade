@@ -78,3 +78,25 @@ Feito isso, podemos instalar.
 
 - Feito isso, podemos clicar no botão abaixo `Review + create(Revisar + criar)`. Será exibida uma tela com o resumo das informações desse servidor antes de criar, e para finalizar podemos clicar em `Create(Criar)`.
 
+- Ao finalizar a criação do nosso Servidor SQL podemos acessá-lo indo em `Go to resource(Ir para o recurso)`:
+
+![13](https://user-images.githubusercontent.com/86172286/203437803-dc7bbab3-c79e-4da9-a27f-2eeba0e693d8.jpg)
+
+### Acessando o servidor criado
+
+- Nessa tela conseguimos as informações necessárias para acessar esse servidor na nossa máquina via `SQL Server Management Studio`:
+
+![14](https://user-images.githubusercontent.com/86172286/203438106-1438a854-f241-4018-a760-b05ed892f1ea.jpg)
+
+- Para isso, vamos abrir o `Microsoft SQL Server Management Studio` e inserir as informações do nosso servidor SQL criado no Azure:
+
+![15](https://user-images.githubusercontent.com/86172286/203438437-3bcd2b96-c674-4c31-8ae7-33f04aa01ff6.jpg)
+
+- Vamos receber um aviso que o nosso IP não tem acesso ao servidor. Para abtermos o acesso vamos em `Sign In...` e na janela do navegador que irá abrir vamos acessar nossa conta do Azure, feito isso conseguimos permitir o acesso desse endereço IP no nosso servidor:
+
+![16](https://user-images.githubusercontent.com/86172286/203438931-57d46e71-39d3-4d0a-9106-e9a8b52ec7a4.jpg)
+
+![17](https://user-images.githubusercontent.com/86172286/203438947-dbf2607a-e9e2-430c-9668-81335e15ff4d.jpg)
+
+
+
