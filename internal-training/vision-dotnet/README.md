@@ -62,3 +62,4 @@ Observacão: Uma linguagem é definida como estaticamente tipada quando a pessoa
 
 ![image](https://user-images.githubusercontent.com/86172286/203321881-c1e27b1c-7e14-4840-a120-9e7b61abc9b3.png)
 
+![image](https://user-images.githubusercontent.com/86172286/203322320-08de0b98-2773-431d-8d3c-b48530c78a36.png)
