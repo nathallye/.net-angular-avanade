@@ -31,3 +31,8 @@ E os Componentes Individuais:
 ![image](https://user-images.githubusercontent.com/86172286/203127574-7b50c7c0-22b6-4818-94b3-9189d88ae362.png)
 
 Feito isso, podemos instalar.
+
+## Criação de um serviço de Banco de Dados SQL no Azure
+
+1. Vamos criar um novo recurso
+2. 
