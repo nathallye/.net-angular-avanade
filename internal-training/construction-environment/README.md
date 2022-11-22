@@ -98,5 +98,18 @@ Feito isso, podemos instalar.
 
 <img width="800" src="https://user-images.githubusercontent.com/86172286/203438947-dbf2607a-e9e2-430c-9668-81335e15ff4d.jpg">
 
+## Criação de um projeto Angular
+
+- Instalação do Angular:
+
+```
+npm i -g @angular/cli
+```
+
+- Utilizamos o comando ng new para criar um novo projeto em Angular. Ao executar esse comando, será criada uma nova pasta contendo uma estrutura de diretórios com os arquivos necessários para iniciar um projeto nesse framework:
+
+```
+ng new [project-name]
+```
 
 
