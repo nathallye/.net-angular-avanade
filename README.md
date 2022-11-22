@@ -9,5 +9,6 @@ Estudos sobre C#, .NET & AngularJS.
   - ### [Entity Framework](fiap-on/04-entity-framework/README.md)
   - ### [WEB API (Restful)](fiap-on/05-web-api/README.md)
 
-- ## [Treinamento Interno com Marcos Sabino](internal-training/README.md)
-  - ### [Passo a passo de ambientação](internal-training/construction-environment/README.md)
+- ## [Treinamento Interno](internal-training/README.md)
+  - ### [Passo a passo de ambientação com Marcos Sabino](internal-training/construction-environment/README.md)
+  - ### [Visão .NET com Guilherme Pereira](internal-training/vision-dotnet/README.md)
