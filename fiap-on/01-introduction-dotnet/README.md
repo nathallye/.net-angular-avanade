@@ -55,7 +55,7 @@ O `espaço de trabalho` para o desenvolvedor no Visual Studio é conhecido como 
 
 A solução é responsável por agrupar vários projetos .NET, permitindo a navegação entre eles e a compilação de todos ao mesmo tempo.O projeto .NET é o responsável pelo agrupamento do código-fonte, ícones, imagens, xml, dll e qualquer outra fonte que será compilada. No sistema de arquivo, um projeto é apresentado pela extensão .csproj (C#) ou .vbproj (VB). 
 
-![image](https://user-images.githubusercontent.com/86172286/203596858-0b2fc13f-2abb-493b-9bad-462fd1fe06cb.png)
+![image](https://user-images.githubusercontent.com/86172286/203445544-9d6accab-ac23-4779-b7b1-9611056ce071.png)
 
 ### Escrevendo o código
 
@@ -109,8 +109,6 @@ Essas ações podem ser acionadas pelo menu `Build`, na barra superior da ferram
 
 Para organizar nossos projetos em C#, precisamos falar de namespaces. Essa palavra é reservada no C#, `responsável por declarar um escopo ou bloco que contém um conjunto de classes relacionadas`. Também pode ser usada para `controlar o acesso entre conjunto de classes de namespaces diferentes`.
 
-![image](https://user-images.githubusercontent.com/86172286/203597065-d3d68523-7caf-4db6-baf8-b51b028d34cb.png)
-
 Por padrão, o Visual Studio define como primeiro namespaceo nome do projeto.
 
 O padrão definido pela Microsoft para a criação de namespaces deve seguir o do exemplo abaixo:
@@ -119,9 +117,7 @@ O padrão definido pela Microsoft para a criação de namespaces deve seguir o d
 E outra boa prática que vamos adotar é a criação das pastas na estrutura do nome usado para o namespace. 
 Exemplo: `...\FiapHelloWorld\FiapHelloWorld\Models`
 
-![image](https://user-images.githubusercontent.com/86172286/203597115-2b40c0cc-9867-46f0-b9a7-adfb2368c5a7.png)
 
-![image](https://user-images.githubusercontent.com/86172286/203597138-ac955892-7d6c-4c08-8fc4-4b6ad0743427.png)
 
 Para a criação de um namespace, basta clicar com o botão direito no projeto C#, escolher a opção `Add > New Folder` e `digitar o nome da pasta`. 
 Para o nosso exemplo, será criada uma pasta com o nome `Models`. Para entender o uso do namespace, vamos clicar com o botão direito na pasta Models e selecione a opção `Add > Class`.Em seguida, vamos selecionar a opção `Class` e definir o nome de `HelloModel`.
@@ -247,20 +243,14 @@ Quando temos a necessidade de validar alguns pontos do código e navegar pelas c
 
 Vamos iniciar pela classe do modelo (Models\HelloModel.cs). Vamos abrir a classe no editor e posicionar o cursor na linha de criação do atributo Message. Com a tecla `F9` ou um clique na margem esquerda da janela do editor, podemos adicionar um ponto de interrupção (`breakpoint`). 
 
-![image](https://user-images.githubusercontent.com/86172286/203597263-ee6da547-bfde-49be-82b1-14dc527d1c20.png)
-
 Para `testar o breakpoint`, execute o projeto (`F5`) e espere até o Visual Studio interromper a execução ao chegar na linha selecionada. Com a execução interrompida na linha selecionada,algumas ações para ajudar na compreensão do programa podem ser tomadas. A seguir,vamos ver detalhes das ações mais comuns de debug.
 
 #### Immediate Window
 
 É uma ferramenta para inserir comandos, mudar valores de variáveisou testar regrasem tempo de execução.A janela Immediate Windowsé exibida no rodapédo Visual Studio no momentoda execução do aplicativo, ou pode ser aberta no menu `Debug > Windows > Immediate` ou `Crtl + Alt + I`.
 
-Dentro da janela, podemos inserir linhas de código C# para alterar valores ou acessar o conteúdo e verificar valores. A tecla enter executa a alteração.
-
-![image](https://user-images.githubusercontent.com/86172286/203597325-d2640ceb-0d18-4c02-97b0-dd7b215ea2c3.png)
+Dentro da janela, podeMOS inserir linhas de código C# para alterar valores ou acessar o conteúdo e verificar valores. A tecla enter executa a alteração.
 
 #### Quick Watch
 
 É a forma mais rápida de acessar conteúdos de variáveis, objetos ou expressões durante a execução em modo debug. A janela `Quick Watch` pode ser acessada clicando com o botão direito sobre a variável e selecionando a opção QuickWatch... ou pela tecla `Shift + F9`.
-
-![image](https://user-images.githubusercontent.com/86172286/203597418-089566fc-7544-4a68-821a-6a343e96087b.png)
