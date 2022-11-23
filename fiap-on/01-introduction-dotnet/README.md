@@ -239,3 +239,18 @@ namespace FiapHelloWorld
 
 ### Debug
 
+Quando temos a necessidade de validar alguns pontos do código e navegar pelas classes do projeto durante a execução a fim de entender o que acontece com nossas classes, atributos e comandos, vamos usar as ferramentas do Visual Studio para depuração.
+
+Vamos iniciar pela classe do modelo (Models\HelloModel.cs). Vamos abrir a classe no editor e posicionar o cursor na linha de criação do atributo Message. Com a tecla `F9` ou um clique na margem esquerda da janela do editor, podemos adicionar um ponto de interrupção (`breakpoint`). 
+
+Para `testar o breakpoint`, execute o projeto (`F5`) e espere até o Visual Studio interromper a execução ao chegar na linha selecionada. Com a execução interrompida na linha selecionada,algumas ações para ajudar na compreensão do programa podem ser tomadas. A seguir,vamos ver detalhes das ações mais comuns de debug.
+
+#### Immediate Window
+
+É uma ferramenta para inserir comandos, mudar valores de variáveisou testar regrasem tempo de execução.A janela Immediate Windowsé exibida no rodapédo Visual Studio no momentoda execução do aplicativo, ou pode ser aberta no menu `Debug > Windows > Immediate` ou `Crtl + Alt + I`.
+
+Dentro da janela, podeMOS inserir linhas de código C# para alterar valores ou acessar o conteúdo e verificar valores. A tecla enter executa a alteração.
+
+#### Quick Watch
+
+É a forma mais rápida de acessar conteúdos de variáveis, objetos ou expressões durante a execução em modo debug. A janela `Quick Watch` pode ser acessada clicando com o botão direito sobre a variável e selecionando a opção QuickWatch... ou pela tecla `Shift + F9`.
