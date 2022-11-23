@@ -10,7 +10,9 @@ O C# é uma linguagem simples, orientada a objetos, que combina a produtividade 
 
 O Quadro Tipos primitivos mostra os tipos primitivos de variáveis do C#. Os tipos listados são conhecidos como tipos primitivos ou `value types`. Na linguagem C#, todas as variáveis e constantes são fortemente tipadas, toda declaração de método requer a especificação do tipo de cada parâmetro de entrada e também a especificação do tipo do retorno.
 
-![image](https://user-images.githubusercontent.com/86172286/203656597-bfd833b5-c27c-44e5-adf9-ea87cfe36f6b.png)
+<div align='center'>
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203656597-bfd833b5-c27c-44e5-adf9-ea87cfe36f6b.png">
+</div>
 
 As informações de um tipo de variável podem conter detalhes como:
 
@@ -131,7 +133,9 @@ Tipos mais usados: `int`, `double`, `bool` e `string`.
 
 ### Operadores
 
-![image](https://user-images.githubusercontent.com/86172286/203656648-5ccd65af-62d8-4cf7-9ba9-5fd6866dae1c.png)
+<div align='center'>
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203656648-5ccd65af-62d8-4cf7-9ba9-5fd6866dae1c.png">
+</div>
 
 Exemplos:
 
