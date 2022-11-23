@@ -295,5 +295,6 @@ A lista abaixo aponta as formas possíveis de navegação por breakpoints, e sua
   
 As ações de Debug podem ser usadas por meio das teclas de atalho, ou na opção Debug no menu superior, ou nos botões da barra de ferramenta.
 
-![image](https://user-images.githubusercontent.com/86172286/203602573-bb4e5c22-5fea-41ad-bc6c-14e3724bd91f.png)
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203602573-bb4e5c22-5fea-41ad-bc6c-14e3724bd91f.png">
+</div>
