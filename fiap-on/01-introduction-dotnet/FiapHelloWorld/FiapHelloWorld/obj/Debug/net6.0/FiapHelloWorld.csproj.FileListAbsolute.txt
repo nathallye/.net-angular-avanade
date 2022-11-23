@@ -1,0 +1,15 @@
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\bin\Debug\net6.0\FiapHelloWorld.exe
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\bin\Debug\net6.0\FiapHelloWorld.deps.json
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\bin\Debug\net6.0\FiapHelloWorld.runtimeconfig.json
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\bin\Debug\net6.0\FiapHelloWorld.dll
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\bin\Debug\net6.0\FiapHelloWorld.pdb
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\obj\Debug\net6.0\FiapHelloWorld.csproj.AssemblyReference.cache
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\obj\Debug\net6.0\FiapHelloWorld.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\obj\Debug\net6.0\FiapHelloWorld.AssemblyInfoInputs.cache
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\obj\Debug\net6.0\FiapHelloWorld.AssemblyInfo.cs
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\obj\Debug\net6.0\FiapHelloWorld.csproj.CoreCompileInputs.cache
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\obj\Debug\net6.0\FiapHelloWorld.dll
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\obj\Debug\net6.0\refint\FiapHelloWorld.dll
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\obj\Debug\net6.0\FiapHelloWorld.pdb
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\obj\Debug\net6.0\FiapHelloWorld.genruntimeconfig.cache
+C:\Users\natha\source\repos\fiap-on\FiapHelloWorld\FiapHelloWorld\obj\Debug\net6.0\ref\FiapHelloWorld.dll
