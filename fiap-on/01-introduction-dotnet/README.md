@@ -40,3 +40,53 @@ O Visual Studio oferece suporte a três linguagens de programação, são elas:
   - Microsoft Visual C#.
   - Microsoft Visual Basic (VB.NET). 
   Possui também o Microsoft Visual Web Developer, plataforma para desenvolvimento de aplicações ou serviços web, para os quais se deve usar as bibliotecas do pacote ASP.NET podendo-seescolher entre as linguagens C# ou VB.NET.
+
+## Primeiro projeto
+
+### Criação de um Projeto console
+
+- Vamos em `Create a new project` e selecionar o template `Console App`;
+
+- Feito isso, na janela de configuração do novo projeto vamos definir o nome e o diretório que queremos salvá-lo.
+
+### Estrutura do projeto
+
+O `espaço de trabalho` para o desenvolvedor no Visual Studio é conhecido como `solution`, ou “solução”, em português. No sistema de arquivos do computador, toda solução é apresentada por arquivo com a extensãos `ln`.
+
+A solução é responsável por agrupar vários projetos .NET, permitindo a navegação entre eles e a compilação de todos ao mesmo tempo.O projeto .NET é o responsável pelo agrupamento do código-fonte, ícones, imagens, xml, dll e qualquer outra fonte que será compilada. No sistema de arquivo, um projeto é apresentado pela extensão .csproj (C#) ou .vbproj (VB). 
+
+
+
+### Escrevendo o código
+
+Anteriormente, foram executados os passos para a criação de um projeto C# do tipo Console Application, que por padrão gera a classe `Program.cs`, a qual será responsável pela `execução dos nossos comandos`. 
+
+Agora, vamos inserir algumas linhas de código e executar o primeiro programa. Com um duplo clique no arquivo `Program.cs`, disponível na janela `Solutions Explorer`, podemos editar o conteúdo do programa e inserir as linhas de código necessárias. Assim, vamos inserir uma linha para a impressão de uma mensagem na tela e outra linha que mantém a janela para a visualização do usuário até que uma tecla seja pressionada:
+
+``` C#
+using System;
+
+namespace FiapHelloWorld
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      Console.WriteLine("Fiap - Ola C#"); // trecho para manter a janela aberta
+      
+      Console.Read();
+    }
+  }
+}
+```
+
+### Compilando e executando
+
+A forma mais simples e prática para executar uma plicação criadano Visual Studio é pressionando a tecla `F5`. Com o projeto aberto, pressione a tecla F5 e observe o resultado.
+
+Para encerrar a execução do programa, na tela de exibição da mensagem “Fiap - Ola C#”, pressione a tecla Enter, ou na janela do Visual Studio aperte “Shift + F5”.
+
+A tecla F5 é a forma mais simples de compilação e execução de projetos, mas é possível realizar outras ações no Visual Studio para facilitar o dia a dia do desenvolvedor, como: compilar todos os projetos de uma solução, compilar apenas um projeto sem executá-lo, limpar compilações anteriorese até efetuar uma análise do código criado. 
+
+Essas ações podem ser acionadas pelo menu `Build`, na barra superior da ferramenta.  Outro atalho para compilação e execução éa barra de tarefas `Standard`, que apresenta botões para execução, encerramento, continuação em caso de debug e outras funções não relacionadas àexecução e compilação.
+
