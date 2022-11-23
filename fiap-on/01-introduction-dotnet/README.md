@@ -55,7 +55,9 @@ O `espaço de trabalho` para o desenvolvedor no Visual Studio é conhecido como 
 
 A solução é responsável por agrupar vários projetos .NET, permitindo a navegação entre eles e a compilação de todos ao mesmo tempo.O projeto .NET é o responsável pelo agrupamento do código-fonte, ícones, imagens, xml, dll e qualquer outra fonte que será compilada. No sistema de arquivo, um projeto é apresentado pela extensão .csproj (C#) ou .vbproj (VB). 
 
-![image](https://user-images.githubusercontent.com/86172286/203598053-7eeedad4-f9e3-46f6-8ace-36051425477c.png)
+<div align="center">
+  <img width="500" src="https://user-images.githubusercontent.com/86172286/203598053-7eeedad4-f9e3-46f6-8ace-36051425477c.png">
+</div>
 
 ### Escrevendo o código
 
@@ -109,7 +111,9 @@ Essas ações podem ser acionadas pelo menu `Build`, na barra superior da ferram
 
 Para organizar nossos projetos em C#, precisamos falar de namespaces. Essa palavra é reservada no C#, `responsável por declarar um escopo ou bloco que contém um conjunto de classes relacionadas`. Também pode ser usada para `controlar o acesso entre conjunto de classes de namespaces diferentes`.
 
-![image](https://user-images.githubusercontent.com/86172286/203598261-2cdee8f4-c99e-4422-bb74-720ae2fa19dc.png)
+<div align="center">
+  <img width="500" src="https://user-images.githubusercontent.com/86172286/203598261-2cdee8f4-c99e-4422-bb74-720ae2fa19dc.png">
+</div>
 
 Por padrão, o Visual Studio define como primeiro namespaceo nome do projeto.
 
@@ -119,12 +123,16 @@ O padrão definido pela Microsoft para a criação de namespaces deve seguir o d
 E outra boa prática que vamos adotar é a criação das pastas na estrutura do nome usado para o namespace. 
 Exemplo: `...\FiapHelloWorld\FiapHelloWorld\Models`
 
-![image](https://user-images.githubusercontent.com/86172286/203598286-81e25b1c-839a-4e90-bbb1-6dee059d9639.png)
+<div align="center">
+  <img width="500" src="https://user-images.githubusercontent.com/86172286/203598286-81e25b1c-839a-4e90-bbb1-6dee059d9639.png">
+</div>
 
 Para a criação de um namespace, basta clicar com o botão direito no projeto C#, escolher a opção `Add > New Folder` e `digitar o nome da pasta`. 
 Para o nosso exemplo, será criada uma pasta com o nome `Models`. Para entender o uso do namespace, vamos clicar com o botão direito na pasta Models e selecione a opção `Add > Class`.Em seguida, vamos selecionar a opção `Class` e definir o nome de `HelloModel`.
 
-![image](https://user-images.githubusercontent.com/86172286/203598340-04801325-84c6-4db1-ac58-8088f104d4da.png)
+<div align="center">
+  <img width="500" src="https://user-images.githubusercontent.com/86172286/203598340-04801325-84c6-4db1-ac58-8088f104d4da.png">
+</div>
 
 Analisando o código-fonte da classe criada, pode-se notar que foi definido o namespace `FiapHelloWorld.Models` como padrão. Pois bem, é possível definir outro nome para um namespace sem mudar o nome da pasta, porém, por questão de bom senso, vamos mantê-los sempre iguais. 
 
@@ -247,7 +255,9 @@ Quando temos a necessidade de validar alguns pontos do código e navegar pelas c
 
 Vamos iniciar pela classe do modelo (Models\HelloModel.cs). Vamos abrir a classe no editor e posicionar o cursor na linha de criação do atributo Message. Com a tecla `F9` ou um clique na margem esquerda da janela do editor, podemos adicionar um ponto de interrupção (`breakpoint`).
 
-![image](https://user-images.githubusercontent.com/86172286/203598517-c5007463-1e04-4913-91c5-724b3d005e19.png)]
+<div align="center">
+  <img width="500" src="https://user-images.githubusercontent.com/86172286/203598517-c5007463-1e04-4913-91c5-724b3d005e19.png">
+</div>
 
 Para `testar o breakpoint`, execute o projeto (`F5`) e espere até o Visual Studio interromper a execução ao chegar na linha selecionada. Com a execução interrompida na linha selecionada,algumas ações para ajudar na compreensão do programa podem ser tomadas. A seguir,vamos ver detalhes das ações mais comuns de debug.
 
@@ -257,10 +267,15 @@ Para `testar o breakpoint`, execute o projeto (`F5`) e espere até o Visual Stud
 
 Dentro da janela, podeMOS inserir linhas de código C# para alterar valores ou acessar o conteúdo e verificar valores. A tecla enter executa a alteração.
 
-![image](https://user-images.githubusercontent.com/86172286/203598572-fa749bd4-a018-40ad-9635-751cf5861ccb.png)
+<div align="center">
+  <img width="500" src="https://user-images.githubusercontent.com/86172286/203598572-fa749bd4-a018-40ad-9635-751cf5861ccb.png">
+</div>
 
 #### Quick Watch
 
 É a forma mais rápida de acessar conteúdos de variáveis, objetos ou expressões durante a execução em modo debug. A janela `Quick Watch` pode ser acessada clicando com o botão direito sobre a variável e selecionando a opção QuickWatch... ou pela tecla `Shift + F9`.
 
-![image](https://user-images.githubusercontent.com/86172286/203598609-db228700-52f1-4f4b-8907-41e1f3c52a7a.png)
+<div align="center">
+  <img width="500" src="https://user-images.githubusercontent.com/86172286/203598609-db228700-52f1-4f4b-8907-41e1f3c52a7a.png">
+</div>
+
