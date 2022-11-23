@@ -55,7 +55,7 @@ O `espaço de trabalho` para o desenvolvedor no Visual Studio é conhecido como 
 
 A solução é responsável por agrupar vários projetos .NET, permitindo a navegação entre eles e a compilação de todos ao mesmo tempo.O projeto .NET é o responsável pelo agrupamento do código-fonte, ícones, imagens, xml, dll e qualquer outra fonte que será compilada. No sistema de arquivo, um projeto é apresentado pela extensão .csproj (C#) ou .vbproj (VB). 
 
-
+![image](https://user-images.githubusercontent.com/86172286/203445544-9d6accab-ac23-4779-b7b1-9611056ce071.png)
 
 ### Escrevendo o código
 
