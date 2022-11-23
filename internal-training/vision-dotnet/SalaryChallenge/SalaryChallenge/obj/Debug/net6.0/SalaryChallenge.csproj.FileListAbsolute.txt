@@ -1,0 +1,15 @@
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\bin\Debug\net6.0\SalaryChallenge.exe
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\bin\Debug\net6.0\SalaryChallenge.deps.json
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\bin\Debug\net6.0\SalaryChallenge.runtimeconfig.json
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\bin\Debug\net6.0\SalaryChallenge.dll
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\bin\Debug\net6.0\SalaryChallenge.pdb
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\obj\Debug\net6.0\SalaryChallenge.csproj.AssemblyReference.cache
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\obj\Debug\net6.0\SalaryChallenge.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\obj\Debug\net6.0\SalaryChallenge.AssemblyInfoInputs.cache
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\obj\Debug\net6.0\SalaryChallenge.AssemblyInfo.cs
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\obj\Debug\net6.0\SalaryChallenge.csproj.CoreCompileInputs.cache
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\obj\Debug\net6.0\SalaryChallenge.dll
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\obj\Debug\net6.0\refint\SalaryChallenge.dll
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\obj\Debug\net6.0\SalaryChallenge.pdb
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\obj\Debug\net6.0\SalaryChallenge.genruntimeconfig.cache
+C:\Users\natha\source\repos\fiap-on\SalaryChallenge\SalaryChallenge\obj\Debug\net6.0\ref\SalaryChallenge.dll
