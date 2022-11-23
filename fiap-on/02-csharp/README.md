@@ -461,7 +461,10 @@ Vamos imaginar a necessidade de criação de uma aplicação para controlar curs
 Uma classe na linguagem C# é criada a partir da descrição dos modificadores de acesso,acrescidada palavra `class` e do nome da classe.
 
 ```
-[modificador de acesso] class [NomeDaClasse] { }
+[modificador de acesso] class [NomeDaClasse] 
+{
+
+}
 ```
 <div align='center'>
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203656922-62f26f94-9e53-4ff7-817d-b9a326531612.png">
