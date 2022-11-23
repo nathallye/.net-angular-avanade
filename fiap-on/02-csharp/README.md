@@ -463,4 +463,10 @@ Uma classe na linguagem C# é criada a partir da descrição dos modificadores d
 ```
 [modificador de acesso] class [NomeDaClasse] { }
 ```
+<div align='center'>
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203656922-62f26f94-9e53-4ff7-817d-b9a326531612.png">
+</div>
 
+<div align='center'>
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203656947-e34dbb90-9f54-428c-b451-044cec13d88a.png">
+</div>
