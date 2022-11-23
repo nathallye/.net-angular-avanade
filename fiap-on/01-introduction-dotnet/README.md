@@ -1,4 +1,4 @@
-# Introdução à Plataforma .NETCOOL
+# Introdução à Plataforma .NET
 
 ## História
 
@@ -61,20 +61,35 @@ A solução é responsável por agrupar vários projetos .NET, permitindo a nave
 
 Anteriormente, foram executados os passos para a criação de um projeto C# do tipo Console Application, que por padrão gera a classe `Program.cs`, a qual será responsável pela `execução dos nossos comandos`. 
 
+``` C#
+using System;
+
+namespace FiapHelloWorld // namespace(pacote/modulo)
+{
+  class Program // classe
+  {
+    static void Main(string[] args) // método
+    {
+      
+    }
+  }
+}
+```
+
 Agora, vamos inserir algumas linhas de código e executar o primeiro programa. Com um duplo clique no arquivo `Program.cs`, disponível na janela `Solutions Explorer`, podemos editar o conteúdo do programa e inserir as linhas de código necessárias. Assim, vamos inserir uma linha para a impressão de uma mensagem na tela e outra linha que mantém a janela para a visualização do usuário até que uma tecla seja pressionada:
 
 ``` C#
 using System;
 
-namespace FiapHelloWorld
+namespace FiapHelloWorld 
 {
-  class Program
+  class Program 
   {
     static void Main(string[] args)
     {
-      Console.WriteLine("Fiap - Ola C#"); // trecho para manter a janela aberta
+      Console.WriteLine("Fiap - Ola C#"); 
       
-      Console.Read();
+      Console.Read(); // trecho para manter a janela aberta
     }
   }
 }
@@ -88,5 +103,139 @@ Para encerrar a execução do programa, na tela de exibição da mensagem “Fia
 
 A tecla F5 é a forma mais simples de compilação e execução de projetos, mas é possível realizar outras ações no Visual Studio para facilitar o dia a dia do desenvolvedor, como: compilar todos os projetos de uma solução, compilar apenas um projeto sem executá-lo, limpar compilações anteriorese até efetuar uma análise do código criado. 
 
-Essas ações podem ser acionadas pelo menu `Build`, na barra superior da ferramenta.  Outro atalho para compilação e execução éa barra de tarefas `Standard`, que apresenta botões para execução, encerramento, continuação em caso de debug e outras funções não relacionadas àexecução e compilação.
+Essas ações podem ser acionadas pelo menu `Build`, na barra superior da ferramenta. Outro atalho para compilação e execução éa barra de tarefas `Standard`, que apresenta botões para execução, encerramento, continuação em caso de debug e outras funções não relacionadas àexecução e compilação.
+
+### Organizando o projeto(Criando Namespaces e Classes)
+
+Para organizar nossos projetos em C#, precisamos falar de namespaces. Essa palavra é reservada no C#, `responsável por declarar um escopo ou bloco que contém um conjunto de classes relacionadas`. Também pode ser usada para `controlar o acesso entre conjunto de classes de namespaces diferentes`.
+
+Por padrão, o Visual Studio define como primeiro namespaceo nome do projeto.
+
+O padrão definido pela Microsoft para a criação de namespaces deve seguir o do exemplo abaixo:
+`NomeDaEmpresa.NomeDoProjeto.ModuloDoSistema`
+
+E outra boa prática que vamos adotar é a criação das pastas na estrutura do nome usado para o namespace. 
+Exemplo: `...\FiapHelloWorld\FiapHelloWorld\Models`
+
+
+
+Para a criação de um namespace, basta clicar com o botão direito no projeto C#, escolher a opção `Add > New Folder` e `digitar o nome da pasta`. 
+Para o nosso exemplo, será criada uma pasta com o nome `Models`. Para entender o uso do namespace, vamos clicar com o botão direito na pasta Models e selecione a opção `Add > Class`.Em seguida, vamos selecionar a opção `Class` e definir o nome de `HelloModel`.
+
+Analisando o código-fonte da classe criada, pode-se notar que foi definido o namespace `FiapHelloWorld.Models` como padrão. Pois bem, é possível definir outro nome para um namespace sem mudar o nome da pasta, porém, por questão de bom senso, vamos mantê-los sempre iguais. 
+
+``` C#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FiapHelloWorld.Models
+{
+  internal class HelloModel
+  {
+  }
+}
+```
+
+Dentro de um namespace, é possível criar, além de classes, outros tipos de componentes, como: `interface`, `struct`, `enum`, `delegate`.
+
+O Visual studio por padrão não declara a classe/`class` como pública/`public`, então iremos fazer essa declaração manualmente para conseguirmos acessar essa classe de uma forma geral:
+
+``` C#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FiapHelloWorld.Models
+{
+  public class HelloModel
+  {
+  }
+}
+```
+
+Feito isso, para entendermos o uso do modelo, iremos declarar uma propriedade publica/`public` do tipo `string` chamada Mensagem/`Message` que irá receber como valor a string "Olá Model C#":
+
+``` C#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FiapHelloWorld.Models
+{
+  public class HelloModel
+  {
+    public string Message = "Olá Model C#";
+  }
+}
+```
+
+Agora para usarmos esse modelo/`model` iremos voltar na classe `Program.cs` e usar a classe modelo e imprimir o texto declarado na propriedade `Message`.
+Primeiramente iremos criar uma instância desse `Models.HelloModel` que irá chamar `helloModel`:
+
+``` C#
+using System;
+
+namespace FiapHelloWorld 
+{
+  class Program 
+  {
+    static void Main(string[] args) 
+    {
+      Models.HelloModel helloModel = new Models.HelloModel();
+
+      Console.Read(); 
+    }
+  }
+}
+```
+
+Se quisermos abreviar a chamada da classe podemos chamar/importar esse diretório `Models` usando a palavra reservada `using`:
+
+``` C#
+using System;
+using FiapHelloWorld.Models;
+
+namespace FiapHelloWorld 
+{
+  class Program 
+  {
+    static void Main(string[] args) 
+    {
+      HelloModel helloModel = new Models.HelloModel();
+
+      Console.Read(); 
+    }
+  }
+}
+```
+
+Feito isso, conseguimos imprimir a mensagem de chamando a propriedade `Message` de dentro da instância `helloModel`:
+
+``` C#
+using System;
+using FiapHelloWorld.Models;
+
+namespace FiapHelloWorld 
+{
+  class Program 
+  {
+    static void Main(string[] args) 
+    {
+      HelloModel helloModel = new Models.HelloModel();
+      Console.WriteLine(helloModel.Message);
+
+      Console.Read(); 
+    }
+  }
+}
+```
+
+### Debug
 
