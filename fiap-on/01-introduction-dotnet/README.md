@@ -2,7 +2,7 @@
 
 ## História
 
-Na década de 1990,a Microsoft tinha como produto principal as linguagens Visual Basic e Visual C++, que possuíam suporte de execução apenas na plataforma Windows. No final dessa década, iniciou-se a aceitação de linguagens independentes de plataforma de execução, tendo o Java como uma das mais conhecidas e usadas.
+Na década de 1990, a Microsoft tinha como produto principal as linguagens Visual Basic e Visual C++, que possuíam suporte de execução apenas na plataforma Windows. No final dessa década, iniciou-se a aceitação de linguagens independentes de plataforma de execução, tendo o Java como uma das mais conhecidas e usadas.
 
 ## Criação do CSharp(C#)
 
@@ -10,7 +10,7 @@ Com o avanço das linguagens de programação (entre elas,o Java e o Delphi) e d
 
 Assim, a nova estratégia da empresa foi a criação de uma nova linguagem independente de licenciamentos e acordos, com grande foco em independência de plataforma e dispositivo. Essa iniciativa foi criada a partir do projeto COOL (C-like Object Oriented Language), que teve como base outras linguagens, como: Java, C, C++, Smalltalk, Delphi e Visual Basic (VB).
 
-O projeto COOL foi renomeado para C# 1.0 (C Sharp 1.0)elançado em conjunto com o .NET Framework em 2002. Desde essa época,a linguagem passou por várias atualizações, a versão mais atual é a 7.0, que teve como uma das grandes melhorias a implementação de chamadas assíncronas, além da evolução na velocidade de execução de comandos. 
+O projeto COOL foi renomeado para C# 1.0 (C Sharp 1.0) e lançado em conjunto com o .NET Framework em 2002. Desde essa época, a linguagem passou por várias atualizações, a versão mais atual é a 7.0, que teve como uma das grandes melhorias a implementação de chamadas assíncronas, além da evolução na velocidade de execução de comandos. 
 
 O Framework .NET é um ambiente para a execução de programas de computador que fornece uma variedade de serviços aos aplicativos em execução.
 
