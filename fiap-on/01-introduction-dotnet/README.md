@@ -298,3 +298,8 @@ As ações de Debug podem ser usadas por meio das teclas de atalho, ou na opçã
 <div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203602573-bb4e5c22-5fea-41ad-bc6c-14e3724bd91f.png">
 </div>
+
+### Atalhos
+
+Visual Studio fornece diversas teclas de atalho para facilitar o dia a dia do desenvolvedor e aumentar a produtividade na construção de código. O Quadro “Atalhos do Visual Studio” mostra algumas opções mais comuns para os desenvolvedores C#.
+
