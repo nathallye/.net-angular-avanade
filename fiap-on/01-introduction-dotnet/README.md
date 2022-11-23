@@ -279,3 +279,19 @@ Dentro da janela, podeMOS inserir linhas de código C# para alterar valores ou a
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203598609-db228700-52f1-4f4b-8907-41e1f3c52a7a.png">
 </div>
 
+### Navegando pelo código
+
+A lista abaixo aponta as formas possíveis de navegação por breakpoints, e suas teclas de atalho:
+
+  - `Step-Into (F11)`, para executar a próxima linha de código, mesmo se a linha de código estiver em outro bloco de código, outra classe ou até mesmo em outra rotinaexterna. 
+
+  - `Step-over (F10)`, usado para avançar a execução dentro da mesma estrutura de código.
+
+  - `Step Backward(Alt + ´)`, para retroceder a execução para a linha anterior.
+
+  - `Continue (F5)`, executa a aplicação até o próximo breakpoint.
+
+  - `StepOut (Shift + F11)`, usado para retornar aoponto de debug que originou a chama
+  
+As ações de Debug podem ser usadas por meio das teclas de atalho, ou na opção Debug no menu superior, ou nos botões da barra de ferramenta.
+
