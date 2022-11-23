@@ -89,14 +89,19 @@ Feito isso, podemos instalar.
 ![14](https://user-images.githubusercontent.com/86172286/203438106-1438a854-f241-4018-a760-b05ed892f1ea.jpg)
 
 - Para isso, vamos abrir o `Microsoft SQL Server Management Studio` e inserir as informações do nosso servidor SQL criado no Azure:
-
-<img width="800" src="https://user-images.githubusercontent.com/86172286/203438437-3bcd2b96-c674-4c31-8ae7-33f04aa01ff6.jpg">
+<div align="center">
+  <img width="800" src="https://user-images.githubusercontent.com/86172286/203438437-3bcd2b96-c674-4c31-8ae7-33f04aa01ff6.jpg">
+</div>
 
 - Vamos receber um aviso que o nosso IP não tem acesso ao servidor. Para abtermos o acesso vamos em `Sign In...` e na janela do navegador que irá abrir vamos acessar nossa conta do Azure, feito isso conseguimos permitir o acesso desse endereço IP no nosso servidor:
 
-<img width="800" src="https://user-images.githubusercontent.com/86172286/203438931-57d46e71-39d3-4d0a-9106-e9a8b52ec7a4.jpg">
+<div align="center">
+  <img width="800" src="https://user-images.githubusercontent.com/86172286/203438931-57d46e71-39d3-4d0a-9106-e9a8b52ec7a4.jpg">
+</div>
 
-<img width="800" src="https://user-images.githubusercontent.com/86172286/203438947-dbf2607a-e9e2-430c-9668-81335e15ff4d.jpg">
+<div align="center">
+  <img width="800" src="https://user-images.githubusercontent.com/86172286/203438947-dbf2607a-e9e2-430c-9668-81335e15ff4d.jpg">
+</div>
 
 ## Criação de um projeto Angular
 
