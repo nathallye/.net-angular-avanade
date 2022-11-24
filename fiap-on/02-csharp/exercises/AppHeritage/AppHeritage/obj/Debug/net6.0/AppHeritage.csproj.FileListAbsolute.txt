@@ -1,0 +1,15 @@
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\bin\Debug\net6.0\AppHeritage.exe
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\bin\Debug\net6.0\AppHeritage.deps.json
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\bin\Debug\net6.0\AppHeritage.runtimeconfig.json
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\bin\Debug\net6.0\AppHeritage.dll
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\bin\Debug\net6.0\AppHeritage.pdb
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\obj\Debug\net6.0\AppHeritage.csproj.AssemblyReference.cache
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\obj\Debug\net6.0\AppHeritage.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\obj\Debug\net6.0\AppHeritage.AssemblyInfoInputs.cache
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\obj\Debug\net6.0\AppHeritage.AssemblyInfo.cs
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\obj\Debug\net6.0\AppHeritage.csproj.CoreCompileInputs.cache
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\obj\Debug\net6.0\AppHeritage.dll
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\obj\Debug\net6.0\refint\AppHeritage.dll
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\obj\Debug\net6.0\AppHeritage.pdb
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\obj\Debug\net6.0\AppHeritage.genruntimeconfig.cache
+C:\Users\natha\source\repos\fiap-on\AppHeritage\AppHeritage\obj\Debug\net6.0\ref\AppHeritage.dll

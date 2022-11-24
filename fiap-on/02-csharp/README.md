@@ -1191,3 +1191,294 @@ namespace AppCourses
 }
 ```
 
+### Coleções
+
+#### Arrays
+
+Em qualquer linguagem de programação, a codificação de arrays é muito importante. Um dos problemas mais comuns no uso de arrays é a limitação de tamanho, é necessário ser preciso com esse detalhe, caso contrário, a solução implementada com arrays pode virar um grande problema.
+
+Em resumo, um array é uma `estrutura de dados` que facilita o `armazenamento de vários elementos` e torna a leitura e o acesso fáceis para os desenvolvedores. O exemplo abaixo apresenta as duas formas de criação de um array e o acesso e a manipulação dos dados de algumas posições do array:
+
+``` C#
+using System;
+
+namespace Collections
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      // Exemplo 1
+      string[] names1 = { "João", "Maria", "José" };
+
+      // Exemplo 2
+      string[] names2 = new string[3];
+      names1[0] = "João";
+      names2[1] = "Maria";
+      names2[2] = "José";
+    }
+  }
+}
+```
+
+Nota-se que foram criados dois arrays com valores iguais. O primeiro array foi inicializado com conteúdo de nomes e não teve seu tamanho especificado pelo desenvolvedor. Já o segundo foi criado com o tamanho especificado e o seu conteúdo foi adicionado em cada posição. A criação de um array é semelhante à criação de uma instância de objeto, com a diferença do uso de colchetes “[ ... ]”, adicionado ao tipo do objeto.
+
+No exemplo anterior, criamos um array para armazenar uma lista de nomes, mas podemos enriquecer nosso exemplo e criar array de classes específicas do nosso sistema:
+
+``` C#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Collections.Classes
+{
+  public class Course
+  {
+    public int Code;
+    public string NameCourse;
+
+    public Course(int code, string name)
+    {
+      this.Code = code;
+      this.NameCourse = name;
+    }
+  }
+}
+```
+
+``` C#
+using System;
+using Collections.Classes;
+
+namespace Collections
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      // Criando um array de cursos
+      Course[] listCourses = new Course[3];
+
+      // Criando os items do array
+      listCourses[0] = new Course(1, "Curso 1");
+      listCourses[1] = new Course(2, "Curso 2");
+      listCourses[2] = new Course(3, "Curso 3");
+
+      // Navegando pelo array e imprimindo o conteúdo
+      foreach (Course curso in listCourses)
+      {
+          Console.WriteLine(curso.NameCourse);
+      }
+
+      Console.Read();
+    }
+  }
+}
+```
+
+#### Listas
+
+Podemos classificar as listas como uma `evolução dos arrays`. Com os arrays, é fácil guardar e acessar elementos. Porém, o que `não é fácil de fazer com arrays é a manipulação, ou seja, dicionar e remover elementos de forma rápida`.
+
+`Para facilitar a manipulação e resolver problemas com arrays, temos as listas`, que na linguagem C# são representadas pela `classe List` e a `interface IList`.
+
+A criação de uma lista em C# segue o padrão da criação de um objeto, mas exige que seja especificadaqual a classe dos objetos que serão armazenados na lista. O bloco abaixo apresenta a declaração de uma instância de `List`, no qual vamos armazenar uma coleção de objetos do tipo `Course`:
+
+``` C#
+using System;
+using Collections.Classes;
+
+namespace Collections
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+          List<Course> courses = new List<Course>();
+        }
+    }
+}
+```
+
+##### Adicionando elementos na lista
+
+Com um objeto do tipo `List` instanciado, podemos iniciar a manipulação de elementos e entender seu funcionamento. Por meio do `método Add`, `adicionamos instâncias do objeto Course`, a inclusão de elementos na lista também pode ser feita com o método `Insert`. Apesar de parecerem similares, possuem comportamentos diferentes. Para o método `Add`, `o novo elemento é adicionado no final da lista`. Já para o método `Insert`, o desenvolvedor precisa `informar qual é a posição em que o objeto deve ser inserido`:
+
+``` C#
+using System;
+using Collections.Classes;
+
+namespace Collections
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      List<Course> courses = new List<Course>();
+
+      courses.Add(new Course(1, "Curso 1"));
+      courses.Add(new Course(2, "Curso 2"));
+      courses.Add(new Course(4, "Curso 4"));
+
+      // Inserindo um curso em uma posição específica.
+      courses.Insert(2, new Course(3, "Curso 3"));
+
+      foreach (var course in courses)
+      {
+          Console.WriteLine(course.NameCourse);
+      }
+
+      Console.Read();
+    }
+  }
+}
+```
+
+##### Removendo elementos na lista
+
+Assim como a operação de adição de elementos em `List`, temos dois métodos que podemos usar para remover itens de uma lista. São eles:
+  - `Remove` – Remove a primeira instância de um objeto específico da List.
+  - `RemoveAt` – Remove o objeto de uma posição específica.
+
+``` C#
+using System;
+using Collections.Classes;
+
+namespace Collections
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      List<Course> courses = new List<Course>();
+
+      Course c1 = new Course(1, "Curso 1");
+      courses.Add(c1);
+
+      courses.Add(new Course(2, "Curso 2"));
+      courses.Add(new Course(4, "Curso 4"));
+
+      // Inserindo um curso em uma posição específica.
+      courses.Insert(2, new Course(3, "Curso 3"));
+
+      // Removendo um objeto de uma determinada posição
+      courses.RemoveAt(3);
+      // Removendo o objeto pela referência de c1
+      courses.Remove(c1);
+
+      foreach (var course in courses)
+      {
+        Console.WriteLine(course.NameCourse);
+      }
+
+      Console.Read();
+    }
+  }
+}
+```
+
+### Conjuntos
+
+As coleções em C# são encontradas no namespace `System.Collections`. Segue o quadro com as coleções mais utilizadas:
+
+
+
+Para fixar o conhecimento, veremos dois exemplos de trabalho com coleções. No primeiro deles, vamos utilizar uma coleção do tipo `SortedSet`, na qual vamos executar operações de busca e verificar o mecanismo de ordenação automática. No segundo, vamos utilizar uma coleção do tipo `Dictionary`, executando os operadores de adição, interação e a forma de acesso aos objetos da coleção:
+
+``` C#
+using System;
+using Collections.Classes;
+
+namespace Collections
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      // Criando uma lista ordenada
+      SortedSet<string> students = new SortedSet<string>();
+
+      // Adicionando elementos na lista
+      students.Add("Alberto");
+      students.Add("Giovanna");
+      students.Add("Fabio");
+      students.Add("Victor");
+      students.Add("Carlos");
+
+      Console.Write("Encontrou o aluno Carlos: ");
+
+      // Procurando na lista um determinado elemento
+      Console.WriteLine(students.Contains("Carlos"));
+      Console.WriteLine("");
+
+      foreach (string student in students)
+      {
+        Console.WriteLine(student);
+      }
+
+      Console.Read();
+    }
+  }
+}
+```
+
+``` C#
+using System;
+
+namespace Collections.Classes
+{
+  public class Course
+  {
+    public int Code;
+    public string NameCourse;
+
+    public Course(int code, string name)
+    {
+      this.Code = code;
+      this.NameCourse = name;
+    }
+  }
+}
+```
+
+``` C#
+using System;
+using Collections.Classes;
+
+namespace Collections
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      Course c1 = new Course(1, "Curso 1");
+      Course c2 = new Course(2, "Curso 2");
+      Course c3 = new Course(3, "Curso 3");
+
+      // Criando um lista de objeto na estrutura chave + valor
+      Dictionary<string, Course> dictionary = new Dictionary<String, Course>();
+      dictionary.Add(c1.NameCourse, c1);
+      dictionary.Add(c2.NameCourse, c2);
+      dictionary.Add(c3.NameCourse, c3);
+
+      // procurando um determinado elemento
+      Console.Write("Encontrou o Curso 2: ");
+      Console.WriteLine(dictionary["Curso 2"] == null ? false : true);
+      Console.WriteLine("");
+
+      // Navegando pela coleção e imprimindo os objetos.
+      foreach (KeyValuePair<string, Course> itemCourse in dictionary)
+      {
+        string key = itemCourse.Key;
+        Course c = dictionary[key];
+        Console.WriteLine(c.NameCourse);
+      }
+
+      Console.Read();
+    }
+  }
+}
+```
+
