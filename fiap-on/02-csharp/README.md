@@ -466,6 +466,7 @@ Uma classe na linguagem C# é criada a partir da descrição dos modificadores d
 
 }
 ```
+
 <div align='center'>
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203656922-62f26f94-9e53-4ff7-817d-b9a326531612.png">
 </div>
@@ -473,3 +474,130 @@ Uma classe na linguagem C# é criada a partir da descrição dos modificadores d
 <div align='center'>
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203656947-e34dbb90-9f54-428c-b451-044cec13d88a.png">
 </div>
+
+#### Atributos
+
+As propriedades definidas na seção anterior (código, nome do curso, nome do instrutor, carga horária, quantidade mínima e máxima de alunos) serão transformadasem atributos da nossa classe. Os atributos serão os responsáveis por armazenar as informações do objeto. 
+
+No código escrito para definir a classe, os atributos são declarados como variáveis, podendo ser do tipo de um outro objetoou tipo primitivo do C#. A declaração de um atributo é igual àdeclaração de uma variável, porém na boa prática de C#,os atributos devem ser escritos com a primeira letra em maiúsculo (UperCamelCase).
+
+As variáveis que definem um atributo em uma classe são chamadas de variáveis de instância, pois só é possível armazenar informação nessa variável após a instanciação da Classe, ou seja, no objeto.
+
+#### Métodos
+
+São os responsáveis pela `execução das ações nos objetos`. Eles dão comportamento ao objeto e são executados ao receber uma mensagem em tempo de execução da classe.
+
+Diferentemente da linguagem Java, em C# todo `método` deve ter seu nome ini`ciado com letra maiúscula`, assim como os atributos de uma classe. Todo o método tem acesso aos dados armazenados nas propriedades da instância, sendo capaz de controlá-los e alterá-los
+
+Todos os métodos necessitam de quatro informações para sua implementação, são elas: `modificador de acesso`, `tipo de retorno`, `nome do método` e `argumentos` (não obrigatório).Para nossa classe Curso/`Course`, vamos elaborar o primeiro método que terá a responsabilidade de criar um novo curso. Esse método receberá o nome do curso e o nome do instrutor:
+
+``` C#
+using System;
+
+namespace AppCourses
+{
+  public class Course
+  {
+    int Code;
+    string NameCourse;
+    string NameInstructor;
+    int Workload;
+    int MinStudents;
+    int MaxStudents;
+
+    public void CreateCourse(string name, string instructor)
+    {
+      this.NameCourse = name;
+      this.NameInstructor = instructor;
+    }
+  }
+}
+```
+
+A palavra reservada `void`, indica que esse método não retorna nenhuma informação depois da execução.
+
+Agora temos a necessidade de criar dois novos métodos. O primeiro é responsável por matricular um aluno no curso. O segundo tem a função de recuperar a quantidade máxima de alunos aceitos pelo curso, assim, precisamos definir um tipo de dado que será retornado no método e também codificar o método para retornar ainformação necessária. 
+
+O retorno de informações por um método é feito por meio da palavra reservada `return`:
+
+``` C#
+using System;
+
+namespace AppCourses
+{
+  public class Course
+  {
+    int Code;
+    string NameCourse;
+    string NameInstructor;
+    int Workload;
+    int MinStudents;
+    int MaxStudents;
+
+    public void CreateCourse(string name, string instructor)
+    {
+      this.NameCourse = name;
+      this.NameInstructor = instructor;
+    }
+
+    public bool EnrollStudent(int nameStudent)
+    {
+      // verificar a quantidade de alunos
+      return true;
+    }
+
+    public int GetMaxStudents()
+    {
+      // Retorna o valor do atributo
+      return this.MaxStudents;
+    }
+  }
+}
+```
+
+#### Construtores
+
+De forma resumida, um construtor é um método especial executado assim que uma nova instância da classe é criada. Na maioria dos casos, os construtores são responsáveis pela alocação de recursos e definição inicial dos atributos do objeto. 
+
+Todas as classes possuem pelo menos um construtor. Caso o desenvolvedor não implemente nenhum construtor na classe, a linguagem cria o construtor-padrão ou `default`. Esse construtor não recebe nenhum parâmetro e não possui nenhum bloco de código implementado.
+
+Existem três particularidades no construtor que o diferenciam de um método, são elas:
+  - O construtor não tem especificação de retorno.
+  - Não utiliza a palavra return, pois nunca retorna nenhum valor.
+  - É obrigatório ter o mesmo nome da classe.
+
+Para fixar o conhecimento, vamos adicionar alguns construtores à classe Curso/`Course`, com a ideia de inicializar os objetos com valores predefinidos.
+
+
+
+Agora podemos criar objetos do tipo Curso/`Course` com três formas de instanciar a classe. 
+A primeira delas foi mantida como padrão; a segunda podemos afirmar que substitui o método `CreateCourse` implementado nos exemplos anteriores; e, por fim, o terceiro construtor, que inicializa o objeto do tipo curso com nome e capacidades mínima e máxima já definidos.
+
+``` C#
+static void Main(string[] args) 
+{
+  // Construtor padrão
+  Course courseXamarin = new Course();
+  courseXamarin.CreateCourse("Xamarin", "Flavio Moreni");
+
+  // Definindo nome do curso e instrutor
+  Course courseIonic = new Course("Ionic", "Antonio Coutinho");
+
+  // Definindo nome do curso e capacidade mínima e máxima
+  Course courseNode = new Course("Node.js", 5, 40);
+}
+```
+
+#### Modificadores de acesso
+
+O objetivo de se utilizar modificadores de acesso é prover segurança entre os componentes de um sistema. Os modificadores são palavras-chave que determinam o `nível de acesso` em `classes`, `construtores`, `métodos` e `propriedades`. 
+
+A linguagem C# possui `cinco modificadores de acesso`, são eles: `public`, `protected internal`, `protected`, `internal` e `private`. Para cada tipo de objeto, o C# tem um modificador-padrão, ou seja, quando o desenvolvedor não declara nenhum modificador, o framework.NET define automaticamente os seguintes modificadores:
+  - Classes – padrão `internal`.
+  - Atributos de classe – padrão `private`.
+  - Membros de estrutura – padrão `private`.
+  - Namespace, interfaces e  e numeradores – padrão `public`, esses tipos não podem sofrer alteração nos modificadores, sempre serão públicos.
+
+Além das definições de modificadores-padrão, cada modificador tem uma definição de acesso. O  quadro apresenta todos os modificadores, os  componentes que podem ser aplicados e os níveis de acesso permitidos:
+
+
