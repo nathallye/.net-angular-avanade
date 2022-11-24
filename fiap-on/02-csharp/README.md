@@ -10,7 +10,7 @@ O C# é uma linguagem simples, orientada a objetos, que combina a produtividade 
 
 O Quadro Tipos primitivos mostra os tipos primitivos de variáveis do C#. Os tipos listados são conhecidos como tipos primitivos ou `value types`. Na linguagem C#, todas as variáveis e constantes são fortemente tipadas, toda declaração de método requer a especificação do tipo de cada parâmetro de entrada e também a especificação do tipo do retorno.
 
-<div align='center'>
+<div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203656597-bfd833b5-c27c-44e5-adf9-ea87cfe36f6b.png">
 </div>
 
@@ -133,7 +133,7 @@ Tipos mais usados: `int`, `double`, `bool` e `string`.
 
 ### Operadores
 
-<div align='center'>
+<div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203656648-5ccd65af-62d8-4cf7-9ba9-5fd6866dae1c.png">
 </div>
 
@@ -467,11 +467,11 @@ Uma classe na linguagem C# é criada a partir da descrição dos modificadores d
 }
 ```
 
-<div align='center'>
+<div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203656922-62f26f94-9e53-4ff7-817d-b9a326531612.png">
 </div>
 
-<div align='center'>
+<div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203656947-e34dbb90-9f54-428c-b451-044cec13d88a.png">
 </div>
 
@@ -483,7 +483,7 @@ No código escrito para definir a classe, os atributos são declarados como vari
 
 As variáveis que definem um atributo em uma classe são chamadas de variáveis de instância, pois só é possível armazenar informação nessa variável após a instanciação da Classe, ou seja, no objeto.
 
-<div align='center'>
+<div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203667125-f4144b67-ec6f-4ee2-ab07-03896ebd24c3.png">
 </div>
 
@@ -572,7 +572,7 @@ Existem três particularidades no construtor que o diferenciam de um método, s�
 
 Para fixar o conhecimento, vamos adicionar alguns construtores à classe Curso/`Course`, com a ideia de inicializar os objetos com valores predefinidos.
 
-<div align='center'>
+<div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203667067-979648df-6cd3-4b23-b27e-7a62648c1c0f.png">
 </div>
 
@@ -581,7 +581,7 @@ A primeira delas foi mantida como padrão; a segunda podemos afirmar que substit
 
 ``` C#
 using System;
-using AppCourses.Class;
+using AppCourses.Classes;
 
 namespace AppCourses
 {
@@ -615,7 +615,7 @@ A linguagem C# possui `cinco modificadores de acesso`, são eles: `public`, `pro
 
 Além das definições de modificadores-padrão, cada modificador tem uma definição de acesso. O  quadro apresenta todos os modificadores, os  componentes que podem ser aplicados e os níveis de acesso permitidos:
 
-<div align='center'>
+<div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203667017-51d2a069-c6a9-406e-938c-749865e57eda.png">
 </div>
 
@@ -671,7 +671,7 @@ Com as alterações na classe `Course`, podemos usar nossa classe `Program.cs` p
 
 ``` C#
 using System;
-using AppCourses.Class;
+using AppCourses.Classes;
 
 namespace AppCourses
 {
@@ -694,15 +694,15 @@ namespace AppCourses
 
 Podemos notar que três linhas ficaram sinalizadas e apresentam problemas de compilação. A razão desses problemas é a permissão de acesso que foi concedida aos atributos `Codigo/Code`, `CargaHoraria/Workload`e `MinimoAlunos/MinStudents`, impossibilitando o acesso pela classe Program.
 
-<div align='center'>
-  <img height="200" src="https://user-images.githubusercontent.com/86172286/203827256-f185d2b1-aa14-42cc-9e67-2013cba9ca06.png">
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203827256-f185d2b1-aa14-42cc-9e67-2013cba9ca06.png">
 </div>
 
 Em seguida, vamos efetuar os testes com os construtores:
 
 ``` C#
 using System;
-using AppCourses.Class;
+using AppCourses.Classes;
 
 namespace AppCourses
 {
@@ -728,15 +728,15 @@ namespace AppCourses
 
 Podemos notar que a instância `course3` apresenta erro, pois seu perfil de acesso foi declarado como `private`, assim, não é permitido o acesso de fora da classe `Course`.
 
-<div align='center'>
-  <img height="200" src="https://user-images.githubusercontent.com/86172286/203827384-cb51c6ba-0219-4205-b27f-f13c509b1e28.png">
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203827384-cb51c6ba-0219-4205-b27f-f13c509b1e28.png">
 </div>
 
 Para finalizar, o último exemplo traz os acessos aos métodos:
 
 ``` C#
 using System;
-using AppCourses.Class;
+using AppCourses.Classes;
 
 namespace AppCourses
 {
@@ -766,10 +766,37 @@ namespace AppCourses
 
 É possível notar que os métodos `MatricularAluno/EnrollStudent()` e `ConsultarMaximoAlunos/GetMaxStudents()` apresentam erro de acesso na chamada da classe Program.cs.
 
-<div align='center'>
-  <img height="200" src="https://user-images.githubusercontent.com/86172286/203827526-7d2c286f-a2ea-4ee3-9706-28c53823aee2.png">
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203827526-7d2c286f-a2ea-4ee3-9706-28c53823aee2.png">
 </div>
 
 A forma fácil de corrigir esses problemas é declarando todos os atributos, construtores e métodos como públicos/`public`, assim não teremos mais problemas de acesso. 
 
 Mas, muita atenção, essa estratégia é apenas para resolvermos os erros e continuar executando nossa aplicação. Projetos profissionais requerem níveis bem definidos de acesso aos componentes.
+
+#### Herança
+
+A vantagem do uso do conceito de herança éa reutilização de código. Assim como o encapsulamento e o polimorfismo, a herança é uma característica da orientação a objeto.
+
+Temos dois conceitos de classe para a herança. A primeira é a `base`, classe que terá seu código reaproveitado. A segunda é a classe `derivada`, que é especialização da classe base.
+
+Toda `classe derivada é formada implicitamente por todos os membros da classe base`, `exceto construtores e finalizadores`. Assim, todo código da classe base fica disponível para utilização na classe derivada, além de ser `possível adicionar novos comportamentos e atributos`, tornando, assim, a classe derivada uma classe mais especializada da classe base.
+
+Uma `classe derivada pode ter apenas uma classe base`, `porém a herança é transitiva`, ou seja, `se sua classe base for uma classe derivada, sua classe final herdará todos os membros declarados nas duas classes base`.
+
+Para entender a herança em C#, vamos criar uma classe chamada `CursoFerias/CourseVocation`,que será derivada da nossa classe `Course`. A forma de implementar a herança no C# é usando o `:` depois do nome da classe seguido do nome da classe base:
+
+``` C#
+using System;
+
+namespace AppCourses.Classes
+{
+  public class CourseVocation: Course
+  {
+  }
+}
+```
+
+Criando uma instância da classe `CursoFerias/CourseVocation`, é possível notar que temos acesso a todos os membros da classe `Curso/Course`:
+
+
