@@ -803,7 +803,6 @@ Criando uma instância da classe `CursoFerias/CourseVocation`, é possível nota
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203829776-0583addf-77f0-4887-8c06-1ab9fdc2d82a.png">
 </div>
 
-
 ##### Virtuais
 
 A palavra-chave `virtual indica para o método que uma classe derivada pode substituir o método por sua própria implementação`. O método da classe derivada precisa ser declarado com a palavra-chave `override`. O não uso dos termos `virtual` e `override` não tem erros de compilação, porém apresenta resultados diferentes.
@@ -1383,7 +1382,9 @@ namespace Collections
 
 As coleções em C# são encontradas no namespace `System.Collections`. Segue o quadro com as coleções mais utilizadas:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203873055-0caddf28-a557-467f-a247-d6c1a75afa08.png">
+</div>
 
 Para fixar o conhecimento, veremos dois exemplos de trabalho com coleções. No primeiro deles, vamos utilizar uma coleção do tipo `SortedSet`, na qual vamos executar operações de busca e verificar o mecanismo de ordenação automática. No segundo, vamos utilizar uma coleção do tipo `Dictionary`, executando os operadores de adição, interação e a forma de acesso aos objetos da coleção:
 
