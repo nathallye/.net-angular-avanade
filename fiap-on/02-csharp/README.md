@@ -694,7 +694,9 @@ namespace AppCourses
 
 Podemos notar que três linhas ficaram sinalizadas e apresentam problemas de compilação. A razão desses problemas é a permissão de acesso que foi concedida aos atributos `Codigo/Code`, `CargaHoraria/Workload`e `MinimoAlunos/MinStudents`, impossibilitando o acesso pela classe Program.
 
-
+<div align='center'>
+  <img height="200" src="https://user-images.githubusercontent.com/86172286/203827256-f185d2b1-aa14-42cc-9e67-2013cba9ca06.png">
+</div>
 
 Em seguida, vamos efetuar os testes com os construtores:
 
@@ -726,7 +728,9 @@ namespace AppCourses
 
 Podemos notar que a instância `course3` apresenta erro, pois seu perfil de acesso foi declarado como `private`, assim, não é permitido o acesso de fora da classe `Course`.
 
-
+<div align='center'>
+  <img height="200" src="https://user-images.githubusercontent.com/86172286/203827384-cb51c6ba-0219-4205-b27f-f13c509b1e28.png">
+</div>
 
 Para finalizar, o último exemplo traz os acessos aos métodos:
 
@@ -762,7 +766,9 @@ namespace AppCourses
 
 É possível notar que os métodos `MatricularAluno/EnrollStudent()` e `ConsultarMaximoAlunos/GetMaxStudents()` apresentam erro de acesso na chamada da classe Program.cs.
 
-
+<div align='center'>
+  <img height="200" src="https://user-images.githubusercontent.com/86172286/203827526-7d2c286f-a2ea-4ee3-9706-28c53823aee2.png">
+</div>
 
 A forma fácil de corrigir esses problemas é declarando todos os atributos, construtores e métodos como públicos/`public`, assim não teremos mais problemas de acesso. 
 
