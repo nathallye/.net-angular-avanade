@@ -607,5 +607,5 @@ A linguagem C# possui `cinco modificadores de acesso`, são eles: `public`, `pro
 Além das definições de modificadores-padrão, cada modificador tem uma definição de acesso. O  quadro apresenta todos os modificadores, os  componentes que podem ser aplicados e os níveis de acesso permitidos:
 
 <div align='center'>
-  <img width="700" src="https://user-images.githubusercontent.com/86172286/203667017-51d2a069-c6a9-406e-938c-749865e57eda.pn">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203667017-51d2a069-c6a9-406e-938c-749865e57eda.png">
 </div>
