@@ -580,17 +580,26 @@ Agora podemos criar objetos do tipo Curso/`Course` com três formas de instancia
 A primeira delas foi mantida como padrão; a segunda podemos afirmar que substitui o método `CreateCourse` implementado nos exemplos anteriores; e, por fim, o terceiro construtor, que inicializa o objeto do tipo curso com nome e capacidades mínima e máxima já definidos.
 
 ``` C#
-static void Main(string[] args) 
+using System;
+using AppCourses.Class;
+
+namespace AppCourses
 {
-  // Construtor padrão
-  Course courseXamarin = new Course();
-  courseXamarin.CreateCourse("Xamarin", "Flavio Moreni");
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      // Construtor padrão
+      Course courseXamarin = new Course();
+      courseXamarin.CreateCourse("Xamarin", "Flavio Moreni");
 
-  // Definindo nome do curso e instrutor
-  Course courseIonic = new Course("Ionic", "Antonio Coutinho");
+      // Definindo nome do curso e instrutor
+      Course courseIonic = new Course("Ionic", "Antonio Coutinho");
 
-  // Definindo nome do curso e capacidade mínima e máxima
-  Course courseNode = new Course("Node.js", 5, 40);
+      // Definindo nome do curso e capacidade mínima e máxima
+      Course courseNode = new Course("Node.js", 5, 40);
+    }
+  }
 }
 ```
 
@@ -609,3 +618,152 @@ Além das definições de modificadores-padrão, cada modificador tem uma defini
 <div align='center'>
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203667017-51d2a069-c6a9-406e-938c-749865e57eda.png">
 </div>
+
+Para validar os modificadores e os acessos permitidos, vamos aplicar algumas alterações na classe Curso/`Course`. Nos atributos da classe, devemos aplicar cada um dos tipos do quadro; em um dos construtores, aplicaremos o modificador private, e assim faremos em cada um dos métodos:
+
+``` C#
+using System;
+
+namespace AppCourses
+{
+  public class Course
+  {
+    int Code;
+    internal string NameCourse;
+    public string NameInstructor;
+    private int Workload;
+    protected int MinStudents;
+    protected internal int MaxStudents;
+
+    public Course()
+    {
+      // construtor padrão
+    }
+
+    protected internal Course(string name, string instructor)
+    {
+      this.NameCourse = name;
+      this.NameInstructor = instructor;
+    }
+
+    public void CreateCourse(string name, string instructor)
+    {
+      this.NameCourse = name;
+      this.NameInstructor = instructor;
+    }
+
+    private bool EnrollStudent(int nameStudent)
+    {
+      // verificar a quantidade de alunos
+      return true;
+    }
+
+    private int GetMaxStudents()
+    {
+      // Retorna o valor do atributo
+      return MaxStudents;
+    }
+  }
+}
+```
+
+Com as alterações na classe `Course`, podemos usar nossa classe `Program.cs` para validar os acessos. Na classe Program.cs, vamos criar uma `instância` da classe Course e tentar acessar  todos os atributos:
+
+``` C#
+using System;
+using AppCourses.Class;
+
+namespace AppCourses
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      Course course1 = new Course();
+
+      course1.Code = 1;
+      course1.NameCourse = "Course";
+      course1.NameInstructor = "Instructor";
+      course1.Workload = 40;
+      course1.MinStudents = 10;
+      course1.MaxStudents = 50;
+    }
+  }
+}
+```
+
+Podemos notar que três linhas ficaram sinalizadas e apresentam problemas de compilação. A razão desses problemas é a permissão de acesso que foi concedida aos atributos `Codigo/Code`, `CargaHoraria/Workload`e `MinimoAlunos/MinStudents`, impossibilitando o acesso pela classe Program.
+
+
+
+Em seguida, vamos efetuar os testes com os construtores:
+
+``` C#
+using System;
+using AppCourses.Class;
+
+namespace AppCourses
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      Course course1 = new Course();
+
+      course1.Code = 1;
+      course1.NameCourse = "Course";
+      course1.NameInstructor = "Instructor";
+      course1.Workload = 40;
+      course1.MinStudents = 10;
+      course1.MaxStudents = 50;
+
+      Course course2 = new Course("Course", "Instructor");
+      Course course3 = new Course("Node.js", 5, 40);
+    }
+  }
+}
+```
+
+Podemos notar que a instância `course3` apresenta erro, pois seu perfil de acesso foi declarado como `private`, assim, não é permitido o acesso de fora da classe `Course`.
+
+
+
+Para finalizar, o último exemplo traz os acessos aos métodos:
+
+``` C#
+using System;
+using AppCourses.Class;
+
+namespace AppCourses
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      Course course1 = new Course();
+
+      course1.Code = 1;
+      course1.NameCourse = "Course";
+      course1.NameInstructor = "Instructor";
+      course1.Workload = 40;
+      course1.MinStudents = 10;
+      course1.MaxStudents = 50;
+
+      course1.CreateCourse("name", "instructor");
+      course1.EnrollStudent("student");
+      course1.GetMaxStudents();
+
+      Course course2 = new Course("Course", "Instructor");
+      Course course3 = new Course("Node.js", 5, 40);
+    }
+  }
+}
+```
+
+É possível notar que os métodos `MatricularAluno/EnrollStudent()` e `ConsultarMaximoAlunos/GetMaxStudents()` apresentam erro de acesso na chamada da classe Program.cs.
+
+
+
+A forma fácil de corrigir esses problemas é declarando todos os atributos, construtores e métodos como públicos/`public`, assim não teremos mais problemas de acesso. 
+
+Mas, muita atenção, essa estratégia é apenas para resolvermos os erros e continuar executando nossa aplicação. Projetos profissionais requerem níveis bem definidos de acesso aos componentes.
