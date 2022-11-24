@@ -544,7 +544,7 @@ namespace AppCourses
       this.NameInstructor = instructor;
     }
 
-    public bool EnrollStudent(int nameStudent)
+    public bool EnrollStudent(string nameStudent)
     {
       // verificar a quantidade de alunos
       return true;
@@ -652,7 +652,7 @@ namespace AppCourses
       this.NameInstructor = instructor;
     }
 
-    private bool EnrollStudent(int nameStudent)
+    private bool EnrollStudent(string nameStudent)
     {
       // verificar a quantidade de alunos
       return true;
@@ -661,7 +661,7 @@ namespace AppCourses
     private int GetMaxStudents()
     {
       // Retorna o valor do atributo
-      return MaxStudents;
+      return this.MaxStudents;
     }
   }
 }
@@ -791,7 +791,7 @@ using System;
 
 namespace AppCourses.Classes
 {
-  public class CourseVocation: Course
+  public class CourseVocation : Course
   {
   }
 }
@@ -802,3 +802,392 @@ Criando uma instância da classe `CursoFerias/CourseVocation`, é possível nota
 <div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/203829776-0583addf-77f0-4887-8c06-1ab9fdc2d82a.png">
 </div>
+
+
+##### Virtuais
+
+A palavra-chave `virtual indica para o método que uma classe derivada pode substituir o método por sua própria implementação`. O método da classe derivada precisa ser declarado com a palavra-chave `override`. O não uso dos termos `virtual` e `override` não tem erros de compilação, porém apresenta resultados diferentes.
+
+Para entendermos melhor, três classes serão criadas para o exemplo: a primeira é a classe base; a segunda é a classe derivada; e a terceira é a classe de execução. 
+Segue o exemplo validando métodos sem o uso das palavras `virtual` e `override`:
+
+``` C#
+using System;
+
+namespace AppHeritage.Classes
+{
+  public class ClassBase
+  {
+    public void Method() 
+    {
+      Console.WriteLine("Método ClassBase");
+    }
+  }
+}
+```
+
+``` C#
+using System;
+
+namespace AppHeritage.Classes
+{
+  public class ClassDerivative : ClassBase
+  {
+    public void Method()
+    {
+      Console.WriteLine("Método ClassDerivative");
+    }
+  }
+}
+```
+
+``` C#
+using System;
+using AppHeritage.Classes;
+
+namespace AppHeritage
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      ClassBase a = new ClassBase();
+      a.Method();
+
+      ClassDerivative b = new ClassDerivative();
+      b.Method();
+
+      ClassBase c = new ClassDerivative();
+      c.Method();
+
+      Console.Read();
+    }
+  }
+}
+```
+
+Após a execução do programa, as mensagens impressas na tela mostram que a instância `c` executou o método da classe base. 
+
+Para resolver o problema da última execução do método, vamos usar a declaração de `virtual` e `override`:
+
+``` C#
+using System;
+
+namespace AppHeritage.Classes
+{
+  public class ClassBase
+  {
+    public virtual void Method() 
+    {
+      Console.WriteLine("Método ClassBase");
+    }
+  }
+}
+```
+
+``` C#
+using System;
+
+namespace AppHeritage.Classes
+{
+  public class ClassDerivative: ClassBase
+  {
+    public override void Method()
+    {
+      Console.WriteLine("Método ClassDerivative");
+    }
+  }
+}
+```
+
+``` C#
+using System;
+using AppHeritage.Classes;
+
+namespace AppHeritage
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      ClassBase a = new ClassBase();
+      a.Method();
+
+      ClassDerivative b = new ClassDerivative();
+      b.Method();
+
+      ClassBase c = new ClassDerivative();
+      c.Method();
+
+      Console.Read();
+    }
+  }
+}
+```
+
+Após a execução, é possível notar que a última impressão foi a mensagem "Método Derivada", ou seja, o método da classe base foi realmente substituí do pelo método da classe derivada.
+
+As palavras `virtual` e `override` têm comportamentos diferentes na linguagem Java. Em Java,quando queremos que um método não seja sobrescrito, devemos declará-lo como final; sem o modificador final, qualquer método pode ser sobrescrito. Em Java, não temos a palavra override, para sobrescrever um método, bastar codificar na classe filho com o mesmo nome, retorno e parâmetros de entrada.
+
+##### Abstract
+
+A palavra-chave `abstract` pode ser `usada em classes e métodos`. Seu objetivo ou uso é `permitir que classes ou métodos que estão incompletos sejam implementados nas classes que herdam a abstração`, as classes derivadas. Tanto uma classe abstrata quanto um método abstrato possuem particularidades, seguem algumas:
+
+**Classe:**
+  - Não pode ser instanciada. Não é permitido criar um objeto a partir de uma classe abstrata.
+  - Geralmente, é usada como classe base para outras classes.
+  - Pode conter métodos abstratos e métodos comuns e possuir construtores e propriedades. 
+  - Não pode ser estática (`static`). 
+  - Pode herdar de outra classe abstrata.
+
+**Método:**
+  - Não possui implementação na classe abstrata. É composto apenas por sua assinatura.
+  - A classe que deriva de uma classe abstrata precisa implementar seus métodos abstratos.   Caso contrário, um erro de compilação é apresentado.
+  - Método abstrato é `virtual` e deve ser implementado usando o modificador `override`.
+  - Somente pode existir em uma classe abstrata. 
+  - Não pode usar os modificadores `static` e `virtual`.
+
+Abaixo, um exemplo de uso classe e método `abstract`:
+
+``` C#
+using System;
+
+namespace AppHeritage.Classes
+{
+  public abstract class ClassBase
+  {
+    public virtual void Method() 
+    {
+      Console.WriteLine("Método ClassBase");
+    }
+
+    public abstract void MethodAbstract();
+  }
+}
+```
+
+``` C#
+using System;
+
+namespace AppHeritage.Classes
+{
+  public class ClassDerivative : ClassBase
+  {
+    public override void Method()
+    {
+      Console.WriteLine("Método ClassDerivative");
+    }
+
+    public override void MethodAbstract()
+    {
+      Console.WriteLine("Método MethodAbstract");
+    }
+  }
+}
+```
+
+``` C#
+using System;
+using AppHeritage.Classes;
+
+namespace AppHeritage
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      ClassDerivative b = new ClassDerivative();
+      b.Method();
+
+      ClassBase c = new ClassDerivative();
+      c.Method();
+      c.MethodAbstract();
+
+      Console.Read();
+    }
+  }
+}
+```
+
+##### Interface
+
+O conceito de `interface` tem uma leve semelhança com abstract. É outra forma de herança e de atribuir comportamentos. 
+
+A primeira diferença de uma interface para uma classe abstrata é que um pode derivar de mais de uma interface. A segunda é que uma interface define apenas assinaturas de métodos, nunca possuem a sua implementação. 
+
+A terceira e última é que, por `convenção`, o C# usa a `letra I como prefixo` em todas as interfaces. 
+
+``` C#
+using System;
+
+namespace AppCourses.Classes
+{
+
+  public interface IStudent
+  {
+    void CreateStudent();
+  }
+
+  public interface IInstructor
+  {
+    void CreateInstructor();
+  }
+
+  public class Course : IStudent, IInstructor
+  {
+    public void CreateStudent()
+    {
+      Console.WriteLine("Criando aluno.");
+    }
+
+    public void CreateInstructor()
+    {
+      Console.WriteLine("Criando instrutor.");
+    }
+  }
+}
+```
+
+### Exceções/Exceptions
+
+Exceções são condições de erro no fluxo de execução e indicam que um evento inesperado ocorreu durante a execução. Quando eventos inesperados acontecem, objetos de exceção são criados e, em seguida, lançados para a classe que enviou a mensagem para a execução.
+
+O framework .NET é responsável pelo lançamento de várias exceções (por exemplo: tentativa de abrir um arquivo inexistente no sistema de arquivos). Por outro lado, os desenvolvedores podem ou devem lançar exceções no código. Seguem algumas situações em que exceções devem ser lançadas: 
+  - método não pode concluir toda a sua funcionalidade;
+  - valores de argumentos dos métodos estão incorretos;
+  - chamadas a componentes inexistentes ou sem instância em memória;
+  - falhas em conexão com recursos externos (por exemplo: banco de dados).
+
+Para trabalhar e entender o uso de `exceptions`, é preciso tratar de três tópicos. O primeiro é o lançamento de exceptions; o segundo é o tratamento de exceptions; e o último é a criação de exceptions personalizadas.
+
+#### Lançamento de exception
+
+O `lançamento de uma exception é feito pela palavra reservada throw`. A palavra `throw` sinaliza que uma situação não esperada aconteceu durante a execução. Todas as exceções em C# são herdadas da classe `System.Exception`:
+
+``` C#
+using System;
+
+namespace AppCourses.Classes
+{
+  public class Course
+  {
+    public void CreateStudent(string name)
+    {
+      if (name == null)
+      {
+        // lançando uma exception
+        throw new Exception("Nome do aluno inválido");
+      }
+    }
+  }
+}
+```
+
+#### Tratamento de exception
+
+A forma de tratar exception em C# é usando o bloco de código `try...catch`. O código a seguir apresenta um exemplo para capturar duas exceções, a primeira delas é `System.NullReferenceException` e a segunda é `Exception`:
+
+``` C#
+using System;
+using AppCourses.Classes;
+
+namespace AppCourses
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      try
+      {
+        string name = null;
+        Console.WriteLine(name.Substring(2));
+        new Course().CreateStudent(name);
+      }
+      // capturando uma exceção de referência nula.
+      catch (NullReferenceException)
+      {
+        Console.WriteLine("Nome do aluno incorreto");
+      }
+      catch (Exception)
+      {
+        Console.WriteLine("Problema na execução da operação");
+        throw new Exception("Problema na execução da operação");
+      }
+    }
+  }
+}
+```
+
+#### Personalizando exceptions
+
+A linguagem C# permite o lançamento de exceções do namespace `System` e também a criação de exceções personalizadas derivando de `System.Exception`. Para criar uma exceção personalizada, a classe derivada precisa definir quatro construtores. Segue o exemplo de uma exception personalizada:
+
+``` C#
+using System;
+
+namespace AppCourses.Classes
+{
+  public class CustomException: Exception
+  {
+    public CustomException() : base() { }
+    public CustomException(string message) : base(message) { }
+    public CustomException(string message, System.Exception inner) : base(message, inner) { }
+    protected CustomException(
+      System.Runtime.Serialization.SerializationInfo info,
+      System.Runtime.Serialization.StreamingContext context) { }
+  }
+}
+```
+
+Agora, podemos alterar a regra de validação do `name` e substituir a exceção `System.Exception` para a `CustomException`, assim, é necessário também a alteração no bloco `try...catch` e tratar a nova exception:
+
+``` C#
+using System;
+
+namespace AppCourses.Classes
+{
+  public class Course
+  {
+    public void CreateStudent(string name)
+    {
+      if (name == null)
+      {
+        // lançando uma exception
+        throw new CustomException("Nome do aluno inválido");
+      }
+    }
+  }
+}
+```
+
+``` C#
+using System;
+using AppCourses.Classes;
+
+namespace AppCourses
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      try
+      {
+        string name = null;
+        Console.WriteLine(name.Substring(2));
+        new Course().CreateStudent(name);
+      }
+      // capturando uma exceção de referência nula.
+      catch (CustomException p)
+        {
+          Console.WriteLine(p.Message);
+        }
+      catch (Exception)
+      {
+        Console.WriteLine("Problema na execução da operação");
+        throw new Exception("Problema na execução da operação");
+      }
+    }
+  }
+}
+```
+
