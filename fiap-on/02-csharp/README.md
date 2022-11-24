@@ -799,4 +799,6 @@ namespace AppCourses.Classes
 
 Criando uma instância da classe `CursoFerias/CourseVocation`, é possível notar que temos acesso a todos os membros da classe `Curso/Course`:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203829776-0583addf-77f0-4887-8c06-1ab9fdc2d82a.png">
+</div>
