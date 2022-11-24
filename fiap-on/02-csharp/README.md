@@ -483,6 +483,10 @@ No código escrito para definir a classe, os atributos são declarados como vari
 
 As variáveis que definem um atributo em uma classe são chamadas de variáveis de instância, pois só é possível armazenar informação nessa variável após a instanciação da Classe, ou seja, no objeto.
 
+<div align='center'>
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203667125-f4144b67-ec6f-4ee2-ab07-03896ebd24c3.png">
+</div>
+
 #### Métodos
 
 São os responsáveis pela `execução das ações nos objetos`. Eles dão comportamento ao objeto e são executados ao receber uma mensagem em tempo de execução da classe.
@@ -568,7 +572,9 @@ Existem três particularidades no construtor que o diferenciam de um método, s�
 
 Para fixar o conhecimento, vamos adicionar alguns construtores à classe Curso/`Course`, com a ideia de inicializar os objetos com valores predefinidos.
 
-
+<div align='center'>
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203667067-979648df-6cd3-4b23-b27e-7a62648c1c0f.png">
+</div>
 
 Agora podemos criar objetos do tipo Curso/`Course` com três formas de instanciar a classe. 
 A primeira delas foi mantida como padrão; a segunda podemos afirmar que substitui o método `CreateCourse` implementado nos exemplos anteriores; e, por fim, o terceiro construtor, que inicializa o objeto do tipo curso com nome e capacidades mínima e máxima já definidos.
@@ -600,4 +606,6 @@ A linguagem C# possui `cinco modificadores de acesso`, são eles: `public`, `pro
 
 Além das definições de modificadores-padrão, cada modificador tem uma definição de acesso. O  quadro apresenta todos os modificadores, os  componentes que podem ser aplicados e os níveis de acesso permitidos:
 
-
+<div align='center'>
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/203667017-51d2a069-c6a9-406e-938c-749865e57eda.pn">
+</div>
