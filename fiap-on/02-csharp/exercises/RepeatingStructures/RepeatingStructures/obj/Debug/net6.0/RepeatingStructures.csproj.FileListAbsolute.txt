@@ -1,0 +1,15 @@
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\bin\Debug\net6.0\RepeatingStructures.exe
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\bin\Debug\net6.0\RepeatingStructures.deps.json
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\bin\Debug\net6.0\RepeatingStructures.runtimeconfig.json
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\bin\Debug\net6.0\RepeatingStructures.dll
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\bin\Debug\net6.0\RepeatingStructures.pdb
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\obj\Debug\net6.0\RepeatingStructures.csproj.AssemblyReference.cache
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\obj\Debug\net6.0\RepeatingStructures.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\obj\Debug\net6.0\RepeatingStructures.AssemblyInfoInputs.cache
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\obj\Debug\net6.0\RepeatingStructures.AssemblyInfo.cs
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\obj\Debug\net6.0\RepeatingStructures.csproj.CoreCompileInputs.cache
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\obj\Debug\net6.0\RepeatingStructures.dll
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\obj\Debug\net6.0\refint\RepeatingStructures.dll
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\obj\Debug\net6.0\RepeatingStructures.pdb
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\obj\Debug\net6.0\RepeatingStructures.genruntimeconfig.cache
+C:\Users\natha\source\repos\fiap-on\RepeatingStructures\RepeatingStructures\obj\Debug\net6.0\ref\RepeatingStructures.dll

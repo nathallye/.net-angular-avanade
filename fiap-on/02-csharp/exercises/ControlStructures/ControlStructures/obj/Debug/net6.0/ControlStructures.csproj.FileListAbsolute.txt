@@ -1,0 +1,15 @@
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\bin\Debug\net6.0\ControlStructures.exe
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\bin\Debug\net6.0\ControlStructures.deps.json
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\bin\Debug\net6.0\ControlStructures.runtimeconfig.json
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\bin\Debug\net6.0\ControlStructures.dll
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\bin\Debug\net6.0\ControlStructures.pdb
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\obj\Debug\net6.0\ControlStructures.csproj.AssemblyReference.cache
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\obj\Debug\net6.0\ControlStructures.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\obj\Debug\net6.0\ControlStructures.AssemblyInfoInputs.cache
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\obj\Debug\net6.0\ControlStructures.AssemblyInfo.cs
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\obj\Debug\net6.0\ControlStructures.csproj.CoreCompileInputs.cache
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\obj\Debug\net6.0\ControlStructures.dll
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\obj\Debug\net6.0\refint\ControlStructures.dll
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\obj\Debug\net6.0\ControlStructures.pdb
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\obj\Debug\net6.0\ControlStructures.genruntimeconfig.cache
+C:\Users\natha\source\repos\fiap-on\ControlStructures\ControlStructures\obj\Debug\net6.0\ref\ControlStructures.dll

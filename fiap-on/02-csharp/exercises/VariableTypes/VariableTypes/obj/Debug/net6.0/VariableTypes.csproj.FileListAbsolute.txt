@@ -1,0 +1,15 @@
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\bin\Debug\net6.0\VariableTypes.exe
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\bin\Debug\net6.0\VariableTypes.deps.json
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\bin\Debug\net6.0\VariableTypes.runtimeconfig.json
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\bin\Debug\net6.0\VariableTypes.dll
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\bin\Debug\net6.0\VariableTypes.pdb
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\obj\Debug\net6.0\VariableTypes.csproj.AssemblyReference.cache
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\obj\Debug\net6.0\VariableTypes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\obj\Debug\net6.0\VariableTypes.AssemblyInfoInputs.cache
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\obj\Debug\net6.0\VariableTypes.AssemblyInfo.cs
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\obj\Debug\net6.0\VariableTypes.csproj.CoreCompileInputs.cache
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\obj\Debug\net6.0\VariableTypes.dll
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\obj\Debug\net6.0\refint\VariableTypes.dll
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\obj\Debug\net6.0\VariableTypes.pdb
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\obj\Debug\net6.0\VariableTypes.genruntimeconfig.cache
+C:\Users\natha\source\repos\fiap-on\VariableTypes\VariableTypes\obj\Debug\net6.0\ref\VariableTypes.dll
