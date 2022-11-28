@@ -104,7 +104,7 @@ Já temos dois modelos/models definidos e criados em nosso projeto, precisamos a
 - Alteração da descrição ou de comercialização.
 - Listagem dos tipos já existentes no sistema.
 
-#### Controllerse Actions
+#### Controllers e Actions
 
 Em um projeto ASP.NET Core MVC2, `toda solicitação do usuário feita pelo navegador será recebida e gerenciada por um Controller`, ficando este `responsável por receber o pedido, acionar os componentes necessários e gerar a resposta para o navegador`. Podemos criar um Controller para cada funcionalidade da nossa aplicação (por exemplo: `CriarTipoProduto/CreateProductType`, `ExcluirTipoProduto/DeleteProductType`, `AlterarTipoProduto/UpdateProductType` e `ListaTipos/ListTypes`), essa abordagem funciona, mas `não é recomendada`. Para organizar melhor nossas funcionalidades, temos os conceitos das `Actions`. As `ações (Actions) nada mais são do que métodos adicionados na classe de controle com o objetivo de organizar e padronizar ainda mais nosso código`. Com o uso das Actions, devemos criar um controlador para cada domínio e ações para cada funcionalidade (por exemplo: `ControllerTipoProduto/ControllerProductType`, Actions `Criar/Create`, `Excluir/Delete`, `Alterar/Update` e `Listar/List`).
 
@@ -149,7 +149,7 @@ Agora podemos observar a classe criada no namespace Controllers; no código da c
   <img width="700" src="https://user-images.githubusercontent.com/86172286/204359050-33455d16-cff9-484a-8737-906ae947bf3f.png">
 </div>
 
-Controller criado, agora podemos fazer o primeiro teste. Pressione a tecla F5 e aguarde o navegador-padrão do seu computador ser aberto. Com o navegador aberto, complemente o endereço com o `caminho/ProductType` e pressione enter. O navegador irá exibir uma tela de erro informando que nenhuma View com o nome de Index foi encontrada. Apesar de apresentar uma mensagem de erro, significa que nosso teste foi bem-sucedido, pois, afinal, não criamos a View.
+Controller criado, agora podemos fazer o primeiro teste. Pressione a tecla F5 e aguarde o navegador-padrão do seu computador ser aberto. Com o navegador aberto, complemente o endereço com o `localhost:7120/ProductType` e pressione enter. O navegador irá exibir uma tela de erro informando que nenhuma View com o nome de Index foi encontrada. Apesar de apresentar uma mensagem de erro, significa que nosso teste foi bem-sucedido, pois, afinal, não criamos a View.
 
 #### Associando uma Viewe Controller
 
@@ -169,11 +169,26 @@ Com a View concluída, verifique na janela `Solution Explorers` e na pasta `View
 
 Nosso próximo passo é editar o arquivo `Index.cshtml` e, no bloco `<body>`, adicionar uma mensagem com o nome do Controller e a Action à qual a View pertence:
 
-``` C#
+``` HTML
+@{
+  Layout = null;
+}
 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Index</title>
+</head>
+<body>
+  <div>
+    Executando Controller <b>ProductType</b> e a Action <b>Index</b>
+  </div>
+</body>
+</html>
 ```
 
-Arquivo editado, voltamos a testar nosso Controller. Pressione F5, aguarde o navegador ser carregado, informe o caminho/Product/Index e tecle Enter. Assim nosso Controller será executado novamente e a `ViewIndex` que acabamos de construir será retornada para o navegador:
+Arquivo editado, voltamos a testar nosso Controller. Pressione F5, aguarde o navegador ser carregado, informe o `localhost:7120/Product/Index` ou apenas `localhost:7120/ProductType` e tecle Enter. Assim nosso Controller será executado novamente e a `ViewIndex` que acabamos de construir será retornada para o navegador:
 
 <div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/204361172-03bb8817-3fd2-4d9a-b381-75d60206a063.png">
