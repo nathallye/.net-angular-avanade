@@ -8,7 +8,9 @@ Neste módulo, serão apresentados o conceito do padrão arquitetural MVC (Model
 
 MVC é um padrão arquitetural que divide uma aplicação em três camadas de componentes: modelo, visão e controlador. Usado por muitos desenvolvedores com a intenção de estruturar melhor o código de grandes aplicativose determinar a responsabilidade de cada grupo de componente, o framework MVC é utilizado em aplicativos desktop, mobile e web.
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204311452-e1a6083b-b037-46a3-b49c-5d674e5ce2d2.png">
+</div>
 
 A lista a seguir traz com detalhes a responsabilidade de cada componente:
 
@@ -41,13 +43,17 @@ No  Visual  Studio  2022,  selecione  o  `Create a new project`  >  em seguida v
 
 Criado  o  projeto,  conseguimos  verificar  sua  estrutura.  Na  janela `Solutions Explorer`,temos nossa solução, novo projeto Web, e na estrutura do projeto foram criadasas  pastas `Controllers`, `Models` e `Views`:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204311207-7e7ee638-ff23-4f23-bf86-9053ca32c37e.png">
+</div>
 
 ### Modelos
 
 Com   o   nosso   projeto   criado,   precisamos   iniciar   o   entendimento   dos componentes do MVC e a implementação do nosso conceito de negócio. Não  existe  uma  regra  para  a  ordem  de  criação  dos  componentes. Algumas equipes   iniciam   a   construção   pela   camada   de   modelos,   pois   possuem   uma modelagem  de  banco  de  dados pré-estabelecida. Outras  iniciam  pela  visão  e controladores,  pois, assim,conseguem  criar  um  protótipo  e  validar  o  fluxo  da aplicação. Para  nossa  primeira  implementação,  vamos  iniciar  pela  camada  de  modelo, na  qual  vamos  representar  nosso  modelo  de  negócio  para  os  **tipos  de  produto**. Inicialmente, teremos apenas 1 (um) tipo de produto (tinta), mas,no futuro, podemos diversificar   para   outros   itens   das   cidades   inteligentes, como:   filtros   de   água, captadores  de  energia  solar  etc:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204311570-e0383dd2-17d3-44b5-a262-e2b7b709bcbf.png">
+</div>
 
 Os componentes da camada de modelo são simples classes C#, que devem ser   adicionadas   no `namespace Models do   projeto`.   Para   criar   o   modelo `TipoProduto/ProductType`, clique com o `botão direito na pasta Models e escolha a opção Add` > `Class`.  Defina  o  nome  como `ProductType.cs`,  utilize  o Diagrama  de Classe – Produto  e  Categoria e  adicione  os  atributos  `IdTipo/IDType`, `DescricaoTipo/DescriptionType`   e   `Comercializado/Marketed`, com   seus   respectivos   tipos:
 
