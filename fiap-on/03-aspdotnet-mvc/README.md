@@ -201,3 +201,109 @@ O Controller e a Action criados até este ponto retornam para a requisição a v
 <div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/204361341-9977613c-f33d-4b49-ae43-950214238785.png">
 </div>
+
+### Rotas e navegação
+
+#### Convenções
+
+O framework ASP.NET Core MVC 2 usa uma simples `convenção para associar Actions dos Controllers às Views`. Para o nosso exemplo, o Controller `ProductTypeController`, foi criada uma subpasta com o nome `TypeProduct` dentro da pasta `Views`, e para o Action `Index` foi criado o arquivo `Index.cshtml`. 
+
+A convenção de nomes e estrutura das pastas é associar as Views aos Controllers. Essas convenções são simples e fáceis. Seguindo a padronização de nomes, já temos boa parte do trabalho reduzido e delegado para o framework. Tiramos a responsabilidade de o nosso código definir essas associações e deixamos com o framework. Com isso, ficam claras a facilidade e a simplicidade de seseguir as recomendações de uso das nomenclaturas e estruturas criadas e sugeridas pelo ASP.NET Core MVC2.
+
+#### Rotas da URL
+
+Analisando a URL da aplicação `http://localhost:7120/ProductType/Index`, o primeiro bloco apresenta o protocolo, nome do servidor e a porta de comunicação; o segundo bloco representa: 
+
+- **ProductType** – Controller responsável por gerenciar a execução. 
+- **Index** – Action que atenderá à requisição. 
+
+A composição entre Controller e Action é conhecidacomo `Rota` e todo projeto ASP.NET Core MVC 2 possui uma classe C# responsável por essa configuração. Na janela da Solution Explorer, navegue até a classe `Startup.cs` e abra o código do método `Configure`. A Figura a seguir, exibe o conteúdo da classe `Startup.cs`:
+
+
+
+O bloco de código do método `Configure` é o responsável por interceptar todas as chamadas do aplicativo, analisar o caminho da URL requisitada e mapear para o Controller e a Action correspondentes. Podemos notar que no código da implementação `routes.MapRoute()` da Figura.  Temos  um  padrão  na propriedade url `{controller}/{action}/{id}` definindo que os caminhos deverão ser compostos pelo nome do controle, ação e id (valores opcionais). 
+
+Ainda no `MapRoute`, temos uma definição **default**, que define quais `Controller` e `Action` deverão ser executados; caso nenhuma informação seja informada na url, o padrão é o Controller chamado Home e a Action Index. 
+
+Podemos alterar o controlador-padrão de Home para `ProductType` e executar o aplicativo novamente, assim será possível acessar nossa funcionalidade usando apenas a url<http://localhost:7120/>. 
+
+Embora essas configurações possam ser alteradas, é recomendado manter o padrão. Assim, vamos manter o ControllerHome como padrão. Para não deixar nossa aplicação sem uma apresentação inicial, vamos executar os passos dos capítulos anteriores e criar um novo Controller (`HomeController`) e uma View (`Index.cshtml`). Na View, devemos escrever uma mensagem para identificar que estamos navegando pela homepage:
+
+``` C#
+using FiapSmartCityMVC.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+
+namespace FiapSmartCityMVC.Controllers
+{
+  public class HomeController : Controller
+  {
+    private readonly ILogger<HomeController> _logger;
+
+    public HomeController(ILogger<HomeController> logger)
+    {
+      _logger = logger;
+    }
+
+    public IActionResult Index()
+    {
+      return View();
+    }
+
+    public IActionResult Privacy()
+    {
+      return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+      return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+  }
+}
+```
+
+``` HTML
+@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Index</title>
+</head>
+<body>
+  <div>
+    <h1>Nossa home-page.</h1>
+  </div>
+</body>
+</html>
+```
+
+**Obs.:** A versão atual do .NET já trás isso configurado por default.
+
+Vamos executar novamente o aplicativo, podemos notar que a nossa `homepage` será apresentada como página inicial. Vamos acessar os endereços abaixo no navegador e verificar que todos vão exibir a mesma visão (homepage):
+
+- http://localhost:6588/
+- http://localhost:6588/Home
+- http://localhost:6588/Home/Index
+
+#### Views
+
+Até este ponto, vimos que as Views no framework ASP.NET Core MVC 2 são arquivos `.cshtml` com base em HTML e que, por convenção,são salvas na pasta `Views` e na subpasta com o `nome do Controller associado`.Apenas com o uso de HTML sabemos que não é possível ter dinamismo para manipular e persistir informações em nossa base de dados. Para isso, o ASP.NET Core MVC2 possui o mecanismo de `view engine`, que usa a linguagem `C# com a marcação Razor`. Podemos fazer uma relação com JSP da linguagem Java e a Expression Language(EL) que facilita os famosos `scriptlets`.
+
+#### ASP.NET Razor
+
+O Razor é um dos mecanismos do ASP.NET Core MVC 2 responsáveis por construir nossas `Views dinâmicas`;antes de seu lançamento, o mecanismo-padrãoer a o ASPX, que usava como base scriptlets ASP.NET puro. Ainda disponível para a criação de projetos MVC, não é recomendado pelo framework.
+
+Em 2011, integrado com a versão do ASP.NET MVC 3, foi lançado o view engine Razor com o objetivo de simplificar a codificação na camada View. O Razor trouxe alguns benefícios significativos para os desenvolvedores, segue uma lista deles:
+
+- Usa a linguagem C# como base deseus scriptlets.
+- Apresenta sintaxe limpa, reduzindo o código.
+- Simplifica o acesso aos componentes Model.
+- Permite escrever testes unitários apenas para a camada Views.
+- Uso do autocomplete (IntelliSense) para completar sintaxe de código no Visual Studio.
+- Facilita o uso de layouts predefinidos para todo o site.
