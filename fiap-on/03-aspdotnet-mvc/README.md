@@ -151,6 +151,29 @@ Agora podemos observar a classe criada no namespace Controllers; no código da c
 
 Controller criado, agora podemos fazer o primeiro teste. Pressione a tecla F5 e aguarde o navegador-padrão do seu computador ser aberto. Com o navegador aberto, complemente o endereço com o `caminho/ProductType` e pressione enter. O navegador irá exibir uma tela de erro informando que nenhuma View com o nome de Index foi encontrada. Apesar de apresentar uma mensagem de erro, significa que nosso teste foi bem-sucedido, pois, afinal, não criamos a View.
 
+#### Associando uma Viewe Controller
 
+Anteriormente, criamos  e  testamos  nosso Controller,  porém  a  validação  da execução  foi  feita  por  meio  da  tela  de  erro,  informando  que  não  existe  uma `View` para ser exibida. Então, vamos criar a primeira View e validar a execução do nosso Controller. A View será uma página HTML com uma mensagem de texto informando o nome do Controller e da Action. 
+
+Com  o Controller `ProductTypeController` aberto  na  janela  de  edição,  clique com o botão direto sobre o nome da Action Index e selecione a opção `Add View` (uma janela com detalhes da viewserá apresentada). Mantenha o nome de `Index` e  o template como `Empty`.  No  rodapé  da  janela, remova a opção `Use  a  layout page` e para finalizar clique no botão `Add`:
+
+
+
+Com  a View concluída,  verifique  na  janela Solution  Explorers e  na  pasta `Views` foram adicionados uma  subpasta  `ProductType`  e  um  arquivo  `Index.cshtml` (arquivo da View):
+
+
+
+Nosso  próximo  passo  é editar  o  arquivo  `Index.cshtml`  e, no bloco `<body>`, adicionar  uma  mensagem  com  o  nome  do Controller e  a Action à qual  a View pertence:
+
+
+
+Arquivo editado, voltamos a testar nosso Controller. Pressione F5, aguarde o navegador  ser  carregado, informe  o  caminho/Product/Index  e  tecle  Enter. Assim nosso Controller será executado novamente e a `ViewIndex` que acabamos de construir  será  retornada  para  o  navegador:
+
+
+
+
+#### Método de retorno – View()
+
+O Controller e a Action criados  até  este ponto  retornam  para  a  requisição  a visão do mesmo nome da ação por meio método View(). O   `método View()` apresenta   algumas   sobrecargas,   as   quais permitem passagem de  parâmetros  para  informar  resultados  diferentes,  como  outra View. Podemos alterar a View-padrão,passando uma string como parâmetro, ou informar um objeto que será usado para a renderização da View. A figura abaixo lista todas as sobrecargas permitidas para o retorno do método View():
 
 
