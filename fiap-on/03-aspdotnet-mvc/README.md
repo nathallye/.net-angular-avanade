@@ -1,4 +1,4 @@
-# ASP.NETMVC
+# ASP.NET MVC
 
 ## Introdução
 
@@ -121,22 +121,33 @@ Todo `Controller` necessita de uma `Action`, caso não seja criada, nada será e
 As Actions podem ser implementadas com algumas responsabilidades diferentes, como de apresentar uma View ao usuário, por exemplo, ações que serão responsáveis por retornar um arquivo para download. 
 Abaixo, segue a especificação dos vários tipos de retorno de uma Action, os quais são implementados pela classe `ActionResult`:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204358454-9c15cc15-9b3e-45f0-8a7f-0014ff69ab89.png">
+</div>
 
 #### Implementando Controllers
 
 Clique com o botão direito do mouse na pasta Controllers do projeto e selecione a opção `Add` > `Controller`, o Visual Studio apresentará a janela `Add Scaffold`. Selecione a opção `MVC Controller – Empty`:
 
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204358688-fd7bab1e-6040-4182-acf9-f4d9b8254e05.png">
+</div>
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204358720-298bd7e0-c187-49ab-a59d-4ddf4334dc56.png">
+</div>
 
 O próximo passo é definir o nome do controlador, que  será `TipoProdutoController/ProductTypeController` em nosso projeto. Clique no botão `Add` e aguarde a criação. Lembre-se, todo Controller deverá ter o sufixo Controller em seu nome:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204359004-e5f03782-1009-4609-96ee-0117696a9a3e.png">
+</div>
 
 Agora podemos observar a classe criada no namespace Controllers; no código da classe Controller, é possível ver a importação do namespace **Microsoft.AspNetCore.Mvc** e a extensão da classe **Microsoft.AspNetCore.Mvc.Controller**. Como padrão da criação de todo Controller, a `action Index` foi adicionada na classe, por meio do método de mesmo nome, e o retorno é um objeto do tipo `ActionResult`:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204359050-33455d16-cff9-484a-8737-906ae947bf3f.png">
+</div>
 
 Controller criado, agora podemos fazer o primeiro teste. Pressione a tecla F5 e aguarde o navegador-padrão do seu computador ser aberto. Com o navegador aberto, complemente o endereço com o `caminho/ProductType` e pressione enter. O navegador irá exibir uma tela de erro informando que nenhuma View com o nome de Index foi encontrada. Apesar de apresentar uma mensagem de erro, significa que nosso teste foi bem-sucedido, pois, afinal, não criamos a View.
 
