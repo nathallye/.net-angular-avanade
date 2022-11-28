@@ -157,11 +157,15 @@ Anteriormente, criamos  e  testamos  nosso Controller,  porém  a  validação  
 
 Com  o Controller `ProductTypeController` aberto  na  janela  de  edição,  clique com o botão direto sobre o nome da Action Index e selecione a opção `Add View` (uma janela com detalhes da viewserá apresentada). Mantenha o nome de `Index` e  o template como `Empty`.  No  rodapé  da  janela, remova a opção `Use  a  layout page` e para finalizar clique no botão `Add`:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204360980-8150adc5-eb88-4ad3-b5b8-5c7357f014c5.png">
+</div>
 
 Com  a View concluída,  verifique  na  janela Solution  Explorers e  na  pasta `Views` foram adicionados uma  subpasta  `ProductType`  e  um  arquivo  `Index.cshtml` (arquivo da View):
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204361085-5c69b609-f5be-4a6e-8c25-13c86adf70ad.png">
+</div>
 
 Nosso  próximo  passo  é editar  o  arquivo  `Index.cshtml`  e, no bloco `<body>`, adicionar  uma  mensagem  com  o  nome  do Controller e  a Action à qual  a View pertence:
 
@@ -169,11 +173,16 @@ Nosso  próximo  passo  é editar  o  arquivo  `Index.cshtml`  e, no bloco `<bod
 
 Arquivo editado, voltamos a testar nosso Controller. Pressione F5, aguarde o navegador  ser  carregado, informe  o  caminho/Product/Index  e  tecle  Enter. Assim nosso Controller será executado novamente e a `ViewIndex` que acabamos de construir  será  retornada  para  o  navegador:
 
-
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204361172-03bb8817-3fd2-4d9a-b381-75d60206a063.png">
+</div>
 
 #### Método de retorno – View()
 
 O Controller e a Action criados  até  este ponto  retornam  para  a  requisição  a visão do mesmo nome da ação por meio método View(). O   `método View()` apresenta   algumas   sobrecargas,   as   quais permitem passagem de  parâmetros  para  informar  resultados  diferentes,  como  outra View. Podemos alterar a View-padrão,passando uma string como parâmetro, ou informar um objeto que será usado para a renderização da View. A figura abaixo lista todas as sobrecargas permitidas para o retorno do método View():
+
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204361341-9977613c-f33d-4b49-ae43-950214238785.png">
+</div>
 
 
