@@ -1150,3 +1150,192 @@ namespace FiapSmartCityMVC.Controllers
 ```
 
 Execute a aplicação e acompanhe as mensagens na janela Output a fim devalidar todo o fluxo das operações.
+
+
+### Layout pages e identidade visual
+
+Apesar de criar componentes View, não implementamos recursos visuais mais profissionais, usamos a estratégia de manter o funcionamento apenas. Passaremos a incrementar nossa camada visual, dando um tom mais profissional com componentes do framework ASP.NET Core MVC 2 para facilitar a evolução do aplicativo. Para isso, vamos usar a biblioteca Bootstrap, pois,além de ser uma biblioteca bemdifundida,foi utilizada em módulos anteriores.
+
+#### Instalando Bootstrap
+
+A primeira alteração em nosso projeto será a instalação da biblioteca Bootstrap, utilizando a ferramenta `Nuget` disponível no Visual Studio. 
+
+O Nuget é um `gerenciador de pacotes` da tecnologia .NET com o qual possível usar pacotes de bibliotecas externas ou construir bibliotecas para ser usadas por outros desenvolvedores. O Nuget possui um repositório central que armazena todos os pacotes, os quais podem ser utilizados por qualquer desenvolvedor da plataforma .NET. Para mais informações, consulte: `https://www.nuget.org/`.
+
+A versão ASP.NET Core MVC já disponibiliza o Bootstrap na criação no projeto, assim não é necessário realizar a instalação. É possível encontrar as pastas e os arquivos da biblioteca na pasta `wwwroot`,disponível na `Solution Explorer` do Visual Studio:
+
+
+
+#### Criando Layouts
+
+O uso do Bootstrap obriga todas as páginas HTML do site a importar as referências para os arquivos da biblioteca (.css e .js). Com o uso dos recursos de Layouts, vamos centralizar as importações em um único ponto do projeto. E mais, todos os websites possuem padrões e áreas comuns em todas as páginas, como: cabeçalho, logotipo, menu, rodapé e outros que a criatividade permitir. Os recursos de Layouts do MVC permitem criar uma única vez os padrões e a partes comuns e usar por todo o projeto sem muito esforço de código. 
+
+Como estamos trabalhando com nossa camada de visualização, devemos trabalhar bastante no `namespace Views` do projeto. `Por convenção, nossos layouts devem ficar em uma subpasta chamada Shared, dentro da pasta Views`. 
+
+Na pasta Shared, vamos abrir o arquivo `_Layout.cshtml`, limpar e adaptar o código HTML para o nosso projeto:
+
+
+
+É possível notar que o arquivo de layout tem seu `conteúdo muito similar` a um `HTML` ou uma `View .cshtml` e também possui algumas `tags Razor` declaradas inicialmente. 
+
+Iremos falar sobre as tags `@ViewBag` e `@RenderBody` logo mais, antes precisamos inserir as tags HTML para o uso do Bootstrap. No corpo da tag `<head>`, é necessário incluir a tag `<link>` com referência ao arquivo `.css` do Bootstrap. É possível fazer isso usando a tag HTML pura, mas, para explorar os recursos do framework, vamos usar o recurso do símbolo `~`, que permite que você transforme caminhos de arquivos relativos para caminhos semi-absolutos, ou seja, não importa o endereço em que sua View é exibida, a tag apontará para o caminho correto dos arquivos de estilo, javascript e imagem:
+
+``` HTML
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FiapSmartCityMVC</title>
+
+  <!-- importando bootstrap e o css do nosso site-->
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="~/css/site.css" />
+</head>
+```
+
+Finalizada a importação do arquivo de estilo, é preciso importar os arquivos de script; para isso é adotada a composição da tag HTML `<script>` e novamente a o recurso do símbolo `~`:
+
+``` HTML
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FiapSmartCityMVC</title>
+
+  <!-- importando bootstrap e o css do nosso site-->
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+  <!-- importando as libs JavaScript -->
+  <script src="~/lib/jquery/dist/jquery.js"></script>
+  <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+```
+
+Para incrementar um pouco mais nosso aplicativo, vamos adicionar uma seção de cabeçalho e rodapé. O cabeçalho será composto por um menu de opção com links para as funcionalidades Tipo de Produto(ProductType) e Produto(Product) - implementado futuramente - o rodapé terá uma seção de contato da **FiapSmartCity**. Esse conteúdo será inserido dentro da tag `<body>`, pois agora ele faz parte do conteúdo visível ao usuário:
+
+``` HTML
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FiapSmartCityMVC</title>
+
+  <!-- importando bootstrap e o css do nosso site-->
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+      <div class="container">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FiapSmartCity</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" 
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+          <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+              <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" asp-area="" asp-controller="ProductType" asp-action="Index">Tipo Produtos</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    @RenderBody()
+  </div>
+
+  <footer class="border-top footer text-muted">
+    <div class="container">
+      <p><b>Fiap Smart City - Copyright &copy; 2020</b></p>
+      <p>Av. Lins de Vasconcelos, 1222 e 1264 - Aclimação - São Paulo/SP</p>
+      <p><a href="tel:+551133858010" class="nav-link">11 3385-8010</a></p>
+    </div>
+  </footer>
+
+  <!-- importando as libs JavaScript -->
+  <script src="~/lib/jquery/dist/jquery.js"></script>
+  <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  <script src="~/js/site.js" asp-append-version="true"></script>
+
+</body>
+</html>
+```
+
+Entre nosso cabeçalho e rodapé, existe a tag Razor **@RenderBody()**, pois bem, aqui está nosso segredo! 
+
+A tag `@RenderBody()` é a responsável por e`specificar o ponto em que o conteúdo da View será renderizado`, ou seja, o conteúdo HTML da View será inserido no espaço da tag `@RenderBody()`. 
+
+Para juntar o quebra-cabeça do Layoute da View, é necessário especificar para nossas Views o nome do arquivo de layout, que é feito pelo bloco `@{ Layout }` do arquivo `.cshtml`. Edite no arquivo `Views\ProductType\Index.cshtml` a declaração do layout logo após a tag `@model`. É recomendado remover todo o conteúdo HTML duplicado entre View e Layout, para não gerar nenhuma quebra ou incompatibilidade no HTML final:
+
+
+``` HTML
+@model IEnumerable<FiapSmartCityMVC.Models.ProductType>
+
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml"; <!-- Referência para o @RenderBody()-->
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Tipo de Produto</title>
+</head>
+<body>
+  <h1>Tipo de Produto</h1>
+  <p>
+    <!-- uso de TagHelpers para definir o Controller e a Action -->
+    <a asp-controller="ProductType" asp-action="Create">Novo Tipo</a>
+  </p>
+  <table class="table" border="1">
+    <tr>
+      <th>Id</th>
+      <th>Descrição</th>
+      <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+      <tr>
+        <td>
+          <label>@item.TypeId</label>
+        </td>
+        <td>
+          <label>@item.TypeDescription</label>
+        </td>
+        <td>
+          <!-- asp-route-id é usado para informar o Id do Item selecionado. -->
+          <a asp-controller="ProductType"
+            asp-action="Update"
+            asp-route-id="@item.TypeId">Editar</a>
+
+          <a asp-controller="ProductType"
+            asp-action="Read"
+            asp-route-id="@item.TypeId">Consultar</a>
+
+          <a asp-controller="ProductType"
+            asp-action="Delete"
+            asp-route-id="@item.TypeId">Excluir</a>
+        </td>
+      </tr>
+    }
+  </table>
+</body>
+</html>
+```
+
+Execute o projeto e navegue para a tela de listagem de tipos (Index.cshtml): 
+
+
+
+Com o layout aplicado na tela de listagem, podemos passar para as demais Views e fazer uso do layout, utilizando a tag `@{ Layout }`.E com a remoção das partes comuns, aplique em todas as Views da funcionalidade de tipo de produto.
