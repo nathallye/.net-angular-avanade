@@ -481,7 +481,9 @@ Ainda no mesmo Controller, vamos adicionar dois novos métodos (Actions). Os doi
 
 Tendo os dois métodos com o mesmo nome, a diferenciação será feita de duas formas: a primeira é com o uso de uma anotação que define qual o verbo HTTP (Get ou Post) que a Action irá aceitar em execução. A segunda forma é por meio de um parâmetro, um dos métodos receberá como model `TypeProduct`:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204417471-53c9646c-495b-4293-922f-215e911d0f0a.png">
+</div>
 
 Para usar as anotações que indicam qual o verbo HTTP é usado no método, é necessário declarar acima da implementação do método, com as seguintes expressões: `[HttpGet]`, `[HttpPost]`. A simulação de gravação dos dados no banco de dados será feita pelo comando `Debug.Print()` do namespace `System.Diagnostics`:
 
@@ -621,6 +623,8 @@ Resultado da View `Cadastrar/Register`:
 
 Podemos usar duas estratégias para validar na implementação. Uma delas é adicionando `breakpoints` nos trechos de código do Controller e, com a tela `F10`, `percorrer linha a linha` para acompanhar a execução. E a outra forma é observar pela `janela Output` do Visual Studio as `mensagens que são impressas pelo comando System.Diagnostics.Debug.Print()`:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204417551-77c9e6fa-0491-4231-90f3-289d82aaf63e.png">
+</div>
 
 Execute a aplicação e acesse a lista de tipos. No link “Novo Tipo”, simule um cadastro de tipo, use breakpoints ou a janela Output para acompanhar os dados digitados. Lembre-se, como estamos usando trechos de código para simulação, os dados da lista não serão alterados.
