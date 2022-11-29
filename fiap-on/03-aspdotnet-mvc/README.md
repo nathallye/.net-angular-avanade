@@ -1581,17 +1581,52 @@ Os erros ficaram assim:
 
 #### Mensagens de sucesso com TempData
 
-Chegou a hora de mostrarao usuário as mensagens informando que as operações foram efetuadas com sucesso, pois,até aqui, apresentamos apenas mensagem de erro.O recurso usado dessa vez é o TempData, que tem a função de armazenar um valor de objeto em uma curta sessão de tempo entre requisições. É acessado pelo conjunto chave-valor, pode ser criado e acessado pelas Viewse Controllere tem o seu conteúdo mantido até o momento que algum componente o recupere.Vamos aplicar o conceito nas camadas de Controllere Views, respectivamente.Porém, antes de aplicar as mensagens em nossos fluxos é necessário efetuar uma pequena configuração na classe Startup.csno método Configure. É necessário mudar o possionamento da linha app.UseCookiePolicy()para a última linha de configuração do projeto. Observe o Código-fonte “Configuração do projeto para uso do TempData” abaixo:
+Chegou a hora de mostrarao usuário as mensagens informando que as operações foram efetuadas com sucesso, pois, até aqui, apresentamos apenas mensagem de erro.
 
+O recurso usado dessa vez é o `TempData`, que tem a função de `armazenar um valor de objeto em uma curta sessão de tempo entre requisições`. É acessado pelo conjunto chave-valor, pode ser `criado e acessado pelas Views e Controllere` tem o seu conteúdo mantido até o momento que algum componente o recupere.
 
-Na ActionCadastrar do TipoProdutoController, é necessário adicionar uma linha de comando que grava uma mensagem de sucesso na TempData.Essa mensagem será adicionada ao fluxo de sucesso do cadastro, veja o Código-fonte Gravando mensagens na TempData:
+Vamos aplicar o conceito nas camadas de Controller e Views, respectivamente. Porém, antes de aplicar as mensagens em nossos fluxos é necessário efetuar uma pequena configuração na classe Startup.cs no método Configure. É necessário mudar o possionamento da linha **app.UseCookiePolicy()** para a última linha de configuração do projeto.
 
+**Obs.:** Na nova versão do .NET não temos o arquivo Startup.cs.
 
+Na `Action Create` do `ProductTypeController`, é necessário adicionar uma linha de comando que grava uma mensagem de sucesso na `TempData`. Essa mensagem será adicionada ao fluxo de sucesso do cadastro:
 
-Mensagem de sucesso inserida na TempData, agora precisamos exibir para o usuário. Lembre-se, quando o usuário finaliza um cadastro com sucesso, ele é direcionado para a Viewde lista de tipos, assim, a exibição do valor da TempDataprecisa ser inserida na TipoProduto\Index.cshtml. Segue exemplo no Código-fonte Exibindo mensagens na TempData:
+``` C#
+// Anotação de uso do Verb HTTP Post
+[HttpPost]
+public IActionResult Create(ProductType productType)
+{
+  if (ModelState.IsValid)
+  {
+    // Simila que os dados foram gravados.
+    Debug.Print("Descrição: " + productType.TypeDescription);
+    Debug.Print("Comercializado: " + productType.TypeDescription);
+    Debug.Print("Gravando o Tipo de Produto");
 
+    // Gravação efetuada com sucesso.
+    // Gravando mensagem de sucesso na TempData
+    @TempData["message"] = "Tipo cadastrado com sucesso!";
+
+    return RedirectToAction("Index", "ProductType");
+
+  // Encontrou um erro no preenchimento do campo descriçao
+  }
+  else
+  {
+    // retorna para tela do formulário
+    return View(productType);
+  }
+}
+```
+
+Mensagem de sucesso inserida na `TempData`, agora precisamos exibir para o usuário. Lembre-se, `quando o usuário finaliza um cadastro com sucesso, ele é direcionado para a View de lista de tipos`, assim, a exibição do valor da TempData `precisa ser inserida na Views/ProdutType/Index.cshtml`:
+
+``` HTML
+
+```
 
 Execute a aplicação, faça o fluxo de cadastro de um novo tipo e verifique a mensagem de sucesso ao final do fluxo. Veja na Figura Exibindo mensagem de sucesso com TempDataatela de lista de tipos com a mensagem de sucesso exibida para o usuário:
+
 
 
 ### Acesso A banco de dados
