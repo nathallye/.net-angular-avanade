@@ -1001,7 +1001,9 @@ Criando a View `Read`, reaproveitando o código da View `Update` para ter funcio
 
 Diferentemente dos demais fluxos, a remoção será feita apenas por uma Action, não utilizaremos View. Segue o método para a consulta dos dados: 
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204423172-97802f4a-1f5a-421a-8160-47d1815e4523.png">
+</div>
 
 Implementação da Action `Delete` do controller `TypeProductController`:
 
