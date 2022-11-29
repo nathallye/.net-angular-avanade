@@ -364,16 +364,263 @@ A ideia desta seção é criar uma listagem de dados para os tipos de produtos d
 
 Na Action Index do `ProductTypeController`, vamos criar um atributo do tipo lista e adicionar três objetos do modelo `ProductType`. Nesse momento, vamos simular que temos os seguintes produtos: Tinta, Filtro de água e Captador de energia. No método de retorno, vamos passar como parâmetro o atributo lista:
 
+``` C#
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
+using FiapSmartCityMVC.Models;
 
+namespace FiapSmartCityMVC.Controllers
+{
+  public class ProductTypeController : Controller
+  {
+    public IActionResult Index()
+    {
+      // Criando o atributo da lista
+      IList<Models.ProductType> listType = new List<ProductType>();
+
+      // Adicionando na lista o TipoProduto da Tinta
+      listType.Add(new ProductType()
+      {
+        TypeId = 1,
+        TypeDescription = "Tinta",
+        Marketed = true
+      });
+
+      listType.Add(new ProductType()
+      {
+        TypeId = 2,
+        TypeDescription = "Filtro de água",
+        Marketed = true
+      });
+
+      listType.Add(new ProductType()
+      {
+        TypeId = 3,
+        TypeDescription = "Captador de energia",
+        Marketed = false
+      });
+
+      // Retornando para View a lista de Tipos
+      return View(listType);
+    }
+  }
+}
+```
 
 Com a lista de tipos de produtos criada de forma simulada e retornada para a View, agora precisamos implementar o mecanismo de exibição e a criação das futuras ações. O objetivo para o componente View é criar uma tabela que apresenta a lista dos dados. Para cada item da lista, serão criados três (3) hiperlinks (Editar, Excluir e Consultar) e, por fim, um (1) hiperlink para cadastrar um novo tipo.
 
 A codificação para as tags **Razor** da nossa implementação deverá compreender: a declaração `@model` para definir o tipo do objeto modelo, um bloco `@foreach` para listar os elementos da lista e as declarações `asp-controller`, `asp-action` e `asp-route-id` para os hiperlinks de edição, exclusão, cadastro e consulta. Nosso objeto modelo é uma lista, com isso, devemos especificar na declaração `@modelo` tipo `IEnumerable`:
 
+``` HTML
+@model IEnumerable<FiapSmartCityMVC.Models.ProductType>
 
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Tipo de Produto</title>
+</head>
+<body>
+  <h1>Tipo de Produto</h1>
+  <p>
+    <!-- uso de TagHelpers para definir o Controller e a Action -->
+    <a asp-controller="ProductType" asp-action="Create">Novo Tipo</a>
+  </p>
+  <table class="table" border="1">
+    <tr>
+      <th>Id</th>
+      <th>Descrição</th>
+      <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+      <tr>
+        <td>
+          <label>@item.TypeId</label>
+        </td>
+        <td>
+          <label>@item.TypeDescription</label>
+        </td>
+        <td>
+          <!-- asp-route-id é usado para informar o Id do Item selecionado. -->
+          <a asp-controller="ProductType"
+            asp-action="Update"
+            asp-route-id="@item.TypeId">Editar</a>
+
+          <a asp-controller="ProductType"
+            asp-action="Read"
+            asp-route-id="@item.TypeId">Consultar</a>
+
+          <a asp-controller="ProductType"
+            asp-action="Delete"
+            asp-route-id="@item.TypeId">Excluir</a>
+        </td>
+      </tr>
+    }
+  </table>
+</body>
+</html>
+```
 
 Vamos executar a aplicação. Pressione a tecla F5 e, no navegador, informe o caminho `localhost:7120/ProductType`. Depois, aguarde o carregamento da lista de tipos de produtos:
 
 <div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/204412888-059a1e1b-6156-4e35-a1aa-b0d1ca5b861f.png">
 </div>
+
+#### Inserindo dados (Viewe Controller)
+
+Avançando na implementação do nosso projeto, precisamos criar os elementos do framework MVC que permitem ao usuário preencher os dados de tipo de produto e simular a gravação na base de dados.
+
+Ainda no mesmo Controller, vamos adicionar dois novos métodos (Actions). Os dois métodos vão receber o nome `Cadastrar/Create`. Pode parecer estranho, mas vamos adotar o mesmo nome para testar a forma particular de sobrecarga de métodos em Controllers. 
+
+Tendo os dois métodos com o mesmo nome, a diferenciação será feita de duas formas: a primeira é com o uso de uma anotação que define qual o verbo HTTP (Get ou Post) que a Action irá aceitar em execução. A segunda forma é por meio de um parâmetro, um dos métodos receberá como model `TypeProduct`:
+
+
+
+Para usar as anotações que indicam qual o verbo HTTP é usado no método, é necessário declarar acima da implementação do método, com as seguintes expressões: `[HttpGet]`, `[HttpPost]`. A simulação de gravação dos dados no banco de dados será feita pelo comando `Debug.Print()` do namespace `System.Diagnostics`:
+
+``` C#
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
+using FiapSmartCityMVC.Models;
+using System.Diagnostics;
+
+namespace FiapSmartCityMVC.Controllers
+{
+  public class ProductTypeController : Controller
+  {
+    public IActionResult Index()
+    {
+      // Criando o atributo da lista
+      IList<Models.ProductType> listType = new List<ProductType>();
+
+      // Adicionando na lista o TipoProduto da Tinta
+      listType.Add(new ProductType()
+      {
+        TypeId = 1,
+        TypeDescription = "Tinta",
+        Marketed = true
+      });
+
+      listType.Add(new ProductType()
+      {
+        TypeId = 2,
+        TypeDescription = "Filtro de água",
+        Marketed = true
+      });
+
+      listType.Add(new ProductType()
+      {
+        TypeId = 3,
+        TypeDescription = "Captador de energia",
+        Marketed = false
+      });
+
+      // Retornando para View a lista de Tipos
+      return View(listType);
+    }
+
+    // Anotação de uso do Verb HTTP Get
+    [HttpGet]
+    public IActionResult Create()
+    {
+      // Imprime a mensagem de execução
+      Debug.Print("Executou a Action Register()");
+
+      // Retorna para a View Cadastrar um 
+      // objeto modelo com as propriedades em branco 
+      return View(new ProductType ());
+    }
+
+    // Anotação de uso do Verb HTTP Post
+    [HttpPost]
+    public IActionResult Create(ProductType productType)
+    {
+      // Imprime os valores do modelo
+      // Debug.Print do System.Diagnostics
+      Debug.Print("Descrição: " + productType.TypeDescription);
+      Debug.Print("Comercializado: " + productType.Marketed);
+
+      // Simila que os dados foram gravados.
+      Debug.Print("Gravando o Tipo de Produto");
+
+      // Substituímos o return View()
+      // pelo método de redirecionamento
+      return RedirectToAction("Index", "ProductType");
+    }
+  }
+}
+```
+
+Implementado o nosso Controller, o próximo passo é criar uma View para fornecer um formulário e elementos para a digitação dos dados. Seguindo as convenções do framework, a View terá o mesmo nome da Action `Cadastrar/Create`. Deverá fazer uso dos tag helpers `asp-controller` e `asp-action` para a criação do formulário, além dos elementos HTML puros para posicionamento e formatação da tela.
+
+Resultado da View `Cadastrar/Register`:
+
+``` HTML
+@model FiapSmartCityMVC.Models.ProductType;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Tipo de Produto - Cadastrar</title>
+</head>
+<body>
+  <h1>Tipo de Produto - Cadastrar</h1>
+
+  <!-- formulário HTML com Tag Helpers-->
+  <form asp-action="Create" asp-controller="ProductType" method="post">
+    <div class="form-horizontal">
+      <hr />
+
+      <div class="form-group">
+        <label>Descrição</label>
+        <div class="col-md-10">
+          <!-- Caixa de Texto -->
+          <input asp-for="TypeDescription" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Comercializado</label>
+        <div class="checkbox">
+          <!-- CheckBox -->
+          <input asp-for="Marketed" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+          <input type="reset" value="Limpar" class="btn btn-default" />
+          <!-- HTML Simple para envio dos dados do formulário -->
+          <input type="submit" value="Cadastrar" class="btn btn-default" />
+        </div>
+      </div>
+      <hr />
+    </div>
+  </form>
+
+  <div>
+    <a asp-controller="ProductType" asp-action="Index">Voltar</a>
+  </div>
+
+</body>
+</html>
+```
+
+Podemos usar duas estratégias para validar na implementação. Uma delas é adicionando `breakpoints` nos trechos de código do Controller e, com a tela `F10`, `percorrer linha a linha` para acompanhar a execução. E a outra forma é observar pela `janela Output` do Visual Studio as `mensagens que são impressas pelo comando System.Diagnostics.Debug.Print()`:
+
+
+
+Execute a aplicação e acesse a lista de tipos. No link “Novo Tipo”, simule um cadastro de tipo, use breakpoints ou a janela Output para acompanhar os dados digitados. Lembre-se, como estamos usando trechos de código para simulação, os dados da lista não serão alterados.
