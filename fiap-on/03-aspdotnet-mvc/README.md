@@ -1692,17 +1692,15 @@ Chegamos ao momento de conectar nosso projeto ao nosso banco de dados e remover 
 
 Esses conjuntos de classes, ou essa biblioteca, são chamados `ADO.NET (ActiveX Data Objects)`. Para aqueles que são familiarizados com a linguagem Java,  podemos comparar o ADO.NET com as bibliotecas java JDBC. `Suas classes são acessadas pelo namespace System.Data`. A Figura Classes ADO.NET apresenta o conceito das bibliotecas ADO.NET:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204672988-2dc0249b-8282-4dc0-a949-4830de35e20b.png">
+</div>
 
 ##### Configurando acesso
 
 Um dos primeiros passos para o trabalho com banco de dados é a configuração inicial, que consiste em baixar as bibliotecas necessárias e configurar usuário, senha, endereço do banco de dados, porta e outros requisitos. 
 
 Em nosso exemplo, vamos usar o banco de dados `SQL Server`, assim é necessário baixar via `Nuget Package Manager` a biblioteca para o cliente de acesso ao SQL Server. Faça uma busca pelo nuget **Sytem.Data.SqlClient**, selecione e solicite a instalação.
-
-Após a instalação do **Sytem.Data.SqlClient**, verifique como ficou a estrutura de bibliotecas do projeto FiapSmartCityMCV:
-
-
 
 Biblioteca para acesso do banco instalada, agora precisamos configurar o caminho do banco de dados, usuário, senha e os demais requisitos. Para não ficar repetindo as configurações em todas as classes de acesso ao banco de dados, vamos adicionar essas informações no arquivo de configuração do projeto `appsettings.json` uma única vez, assim, qualquer alteração será facilitada por estar um único ponto. 
 
