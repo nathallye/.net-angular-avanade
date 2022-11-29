@@ -312,7 +312,7 @@ Em 2011, integrado com a versão do ASP.NET MVC 3, foi lançado o view engine Ra
 - Uso do autocomplete (IntelliSense) para completar sintaxe de código no Visual Studio.
 - Facilita o uso de layouts predefinidos para todo o site.
 
-Para identificar uma expressão Razor em um arquivo `.cshtml`, basta observar blocos  de  código  iniciados pelo caractere `@`:
+Para identificar uma expressão Razor em um arquivo `.cshtml`, basta observar blocos de código iniciados pelo caractere `@`:
 
 ``` HTML
 @{
@@ -355,4 +355,23 @@ Para demonstração, a Figura Exemplo de uso de HtmlHelpers, apresenta a sintaxe
 </div>
 
 #### Listando dados na tela (View)
+
+No bloco anterior, fomos apresentados ao view engine Razor e aos helpers para criar componentes HTML, além de conhecermos os conceitos de rotas, Controllers e convenções. Agora precisamos colocar em prática e implementar nosso projeto. O nosso Controller `ProductType` possui apenas uma simples ação para exemplificar o funcionamento da associação `Controller` > `Action` > `View`. É preciso adicionar os comportamentos: `cadastro`, `alteração`, `exclusão` e `consulta` (**CRUD**).
+
+Para não perdermos tempo criando e configurando nosso banco de dados, vamos partir para uma estratégia de simulação, também conhecida como Mock. Essa estratégia simula os comandos de integração com as tabelas da base de dados. Dessa forma, será possível testar os componentes do MVC e o fluxo de navegação a fim de, posteriormente, criar apenas o código de integração como banco de dados. 
+
+A ideia desta seção é criar uma listagem de dados para os tipos de produtos da `FiapSmartCity`. Para cada informação listada, será necessário criar uma ação que será implementada posteriormente para consultar, editar, excluir, e uma opção para criar um novo tipo. Vamos usar a Action e a View já criadas e adicionar nosso código.
+
+Na Action Index do `ProductTypeController`, vamos criar um atributo do tipo lista e adicionar três objetos do modelo `ProductType`. Nesse momento, vamos simular que temos os seguintes produtos: Tinta, Filtro de água e Captador de energia. No método de retorno, vamos passar como parâmetro o atributo lista:
+
+
+
+Com a lista de tipos de produtos criada de forma simulada e retornada para a View, agora precisamos implementar o mecanismo de exibição e a criação das futuras ações. O objetivo para o componente View é criar uma tabela que apresenta a lista dos dados. Para cada item da lista, serão criados três (3) hiperlinks (Editar, Excluir e Consultar) e, por fim, um (1) hiperlink para cadastrar um novo tipo.
+
+A codificação para as tags **Razor** da nossa implementação deverá compreender: a declaração `@model` para definir o tipo do objeto modelo, um bloco `@foreach` para listar os elementos da lista e as declarações `asp-controller`, `asp-action` e `asp-route-id` para os hiperlinks de edição, exclusão, cadastro e consulta. Nosso objeto modelo é uma lista, com isso, devemos especificar na declaração `@modelo` tipo `IEnumerable`:
+
+
+
+Vamos executar a aplicação. Pressione a tecla F5 e, no navegador, informe o caminho `localhost:7120/ProductType`. Depois, aguarde o carregamento da lista de tipos de produtos:
+
 
