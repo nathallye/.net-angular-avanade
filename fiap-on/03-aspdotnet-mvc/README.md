@@ -1571,9 +1571,13 @@ O segundo passo é inserir no rótulo descritivo do campo a propriedade `asp-for
 </div>
 ```
 
-`Removemos o bloco da tag asp-validation-summary` para `evitar a duplicidade das mensagens de erro na tela do usuário`:
+Os erros ficaram assim:
 
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204665976-12dbfcda-9ef9-442f-9483-1d3d4d212662.png">
+</div>
 
+`Removemos o bloco da tag asp-validation-summary` para `evitar a duplicidade das mensagens de erro na tela do usuário`. 
 
 #### Mensagens de sucesso com TempData
 
