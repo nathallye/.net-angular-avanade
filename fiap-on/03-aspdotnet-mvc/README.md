@@ -1684,4 +1684,50 @@ Execute a aplicação, faça o fluxo de cadastro de um novo tipo e verifique a m
   <img width="700" src="https://user-images.githubusercontent.com/86172286/204668274-63d8d4f7-3b0c-44e4-8765-954a2274c657.png">
 </div>
 
-### Acesso A banco de dados
+### Acesso ao banco de dados
+
+#### ADO.NET
+
+Chegamos ao momento de conectar nosso projeto ao nosso banco de dados e remover nossos códigos simulados (mock). Para isso, o framework .NET disponibiliza um conjunto de classes e interfaces responsáveis por prover acesso e mecanismos de manipulação de dados. 
+
+Esses conjuntos de classes, ou essa biblioteca, são chamados `ADO.NET (ActiveX Data Objects)`. Para aqueles que são familiarizados com a linguagem Java,  podemos comparar o ADO.NET com as bibliotecas java JDBC. `Suas classes são acessadas pelo namespace System.Data`. A Figura Classes ADO.NET apresenta o conceito das bibliotecas ADO.NET:
+
+
+
+##### Configurando acesso
+
+Um dos primeiros passos para o trabalho com banco de dados é a configuração inicial, que consiste em baixar as bibliotecas necessárias e configurar usuário, senha, endereço do banco de dados, porta e outros requisitos. 
+
+Em nosso exemplo, vamos usar o banco de dados `SQL Server`, assim é necessário baixar via `Nuget Package Manager` a biblioteca para o cliente de acesso ao SQL Server. Faça uma busca pelo nuget **Sytem.Data.SqlClient**, selecione e solicite a instalação.
+
+Após a instalação do **Sytem.Data.SqlClient**, verifique como ficou a estrutura de bibliotecas do projeto FiapSmartCityMCV:
+
+
+
+Biblioteca para acesso do banco instalada, agora precisamos configurar o caminho do banco de dados, usuário, senha e os demais requisitos. Para não ficar repetindo as configurações em todas as classes de acesso ao banco de dados, vamos adicionar essas informações no arquivo de configuração do projeto `appsettings.json` uma única vez, assim, qualquer alteração será facilitada por estar um único ponto. 
+
+O `appsettings.json` é um arquivo no formato JSON que contém as configurações do projeto. Agora, precisamos inserir a configuração do nosso banco de dados.
+
+**Obs.:** Para recuperarmos a connection string do nosso banco no SQL Server, no Visual Studio vamos em `View` > `SQL Server Object Explorer` > clicando com o botão direito do mouse sobre o banco de dados local, indo na opção `Properties`. Vai abrir uma nova janela onde contém um campo chamado `Connetion String` e vamos copiá-la.
+
+Abra o arquivo `appsettings.json` (raiz do projeto) e acrescente a configuração da String de conexão para acesso ao banco de dados SQL Server. O nome da string de conexão será `FiapSmartCityConnection`:
+
+``` JSON
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "FiapSmartCityConnection": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FiapSmartCityMVC;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+  }
+}
+```
+
+Com a configuração pronta e disponível para acesso da nossa aplicação ao SQL Server, já é possível efetuar a conexão e executar comandos em nossa base.
+
+##### Componentes ADO.NET
+
