@@ -635,6 +635,9 @@ O fluxo de edição possui algumas semelhanças com o de cadastro. Podemos nos b
 
 Seguemos métodos que devem ser criados para a edição:
 
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204420043-a247c8e4-29a6-401d-8c59-ca0a31ab1e32.png">
+</div>
 
 Implementação da Action de `Update` do controller `TypeProductController`:
 
