@@ -473,7 +473,7 @@ Vamos executar a aplicação. Pressione a tecla F5 e, no navegador, informe o ca
   <img width="700" src="https://user-images.githubusercontent.com/86172286/204412888-059a1e1b-6156-4e35-a1aa-b0d1ca5b861f.png">
 </div>
 
-#### Inserindo dados (Viewe Controller)
+#### Inserindo dados (View e Controller)
 
 Avançando na implementação do nosso projeto, precisamos criar os elementos do framework MVC que permitem ao usuário preencher os dados de tipo de produto e simular a gravação na base de dados.
 
@@ -628,3 +628,185 @@ Podemos usar duas estratégias para validar na implementação. Uma delas é adi
 </div>
 
 Execute a aplicação e acesse a lista de tipos. No link “Novo Tipo”, simule um cadastro de tipo, use breakpoints ou a janela Output para acompanhar os dados digitados. Lembre-se, como estamos usando trechos de código para simulação, os dados da lista não serão alterados.
+
+#### Editando dados (View e Controller)
+
+O fluxo de edição possui algumas semelhanças com o de cadastro. Podemos nos basear no código criado na seção anterior e, com poucas alterações, será possível implementar a edição do tipo de produto. 
+
+Seguemos métodos que devem ser criados para a edição:
+
+
+Implementação da Action de `Update` do controller `TypeProductController`:
+
+``` C#
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
+using FiapSmartCityMVC.Models;
+using System.Diagnostics;
+
+namespace FiapSmartCityMVC.Controllers
+{
+  public class ProductTypeController : Controller
+  {
+    // ACTION INDEX
+    public IActionResult Index()
+    {
+      // Criando o atributo da lista
+      IList<Models.ProductType> listType = new List<ProductType>();
+
+      // Adicionando na lista o TipoProduto da Tinta
+      listType.Add(new ProductType()
+      {
+        TypeId = 1,
+        TypeDescription = "Tinta",
+        Marketed = true
+      });
+
+      listType.Add(new ProductType()
+      {
+        TypeId = 2,
+        TypeDescription = "Filtro de água",
+        Marketed = true
+      });
+
+      listType.Add(new ProductType()
+      {
+        TypeId = 3,
+        TypeDescription = "Captador de energia",
+        Marketed = false
+      });
+
+      // Retornando para View a lista de Tipos
+      return View(listType);
+    }
+
+    // ACTION CREATE
+    // Anotação de uso do Verb HTTP Get
+    [HttpGet]
+    public IActionResult Create()
+    {
+      // Imprime a mensagem de execução
+      Debug.Print("Executou a Action Register()");
+
+      // Retorna para a View Cadastrar um 
+      // objeto modelo com as propriedades em branco 
+      return View(new ProductType ());
+    }
+
+    // Anotação de uso do Verb HTTP Post
+    [HttpPost]
+    public IActionResult Create(ProductType productType)
+    {
+      // Imprime os valores do modelo
+      // Debug.Print do System.Diagnostics
+      Debug.Print("Descrição: " + productType.TypeDescription);
+      Debug.Print("Comercializado: " + productType.Marketed);
+
+      // Simila que os dados foram gravados.
+      Debug.Print("Gravando o Tipo de Produto");
+
+      // Substituímos o return View()
+      // pelo método de redirecionamento
+      return RedirectToAction("Index", "ProductType");
+    }
+
+    // ACTION UPDATE
+    [HttpGet]
+    public IActionResult Update(int Id)
+    {
+      // Imprime a mensagem de execução
+      Debug.Print("Consultando o Tipo com Id = " + Id);
+
+      // Cria o modelo que SIMULA a consulta no  banco de dados
+      ProductType productType = new ProductType()
+      {
+          TypeId = Id,
+          TypeDescription = "Tinta",
+          Marketed = true
+      };
+
+      // Retorna para a View o objeto modelo 
+      // com as propriedades preenchidas com dados do banco de dados 
+      return View(productType);
+    }
+
+    [HttpPost]
+    public IActionResult Editar(ProductType productType)
+    {
+      // Imprime os valores do modelo
+      System.Diagnostics.Debug.Print("Descrição: " + productType.TypeDescription);
+      System.Diagnostics.Debug.Print("Comercializado: " + productType.Marketed);
+
+      // Simila que os dados foram gravados.
+      System.Diagnostics.Debug.Print("Gravando o Tipo Editado");
+
+      // Substituímos o return View()
+      // pelo método de redirecionamento
+      return RedirectToAction("Index", "ProductType");
+    }
+  }
+}
+```
+
+Para a View `Editar/Update`, podemos reaproveitar todo o código-fonte criado na View `Cadastrar/Create`. Com muito cuidado revise os caminhos usados para o post do formulário. Altere o título da página e adicione um componente do tipo hidden,que irá armazenar o Id do tipo. É preciso armazenar o Id do tipo de produto, pois, na execução do comando de atualização no banco de dados (Update), devemos informar a chave primária:
+
+``` HTML
+@model FiapSmartCityMVC.Models.ProductType;
+
+@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Tipo de Produto - Editar</title>
+</head>
+<body>
+  <h1>Tipo de Produto - Editar</h1>
+
+  <!-- formulário HTML com Tag Helpers-->
+  <form asp-action="Update" asp-controller="ProductType" method="post">
+    <input type="hidden" asp-for="TypeId" />
+
+    <div class="form-horizontal">
+      <hr />
+
+      <div class="form-group">
+        <label>Descrição</label>
+        <div class="col-md-10">
+          <!-- Caixa de Texto -->
+          <input asp-for="TypeDescription" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Comercializado</label>
+        <div class="checkbox">
+          <!-- CheckBox -->
+          <input asp-for="Marketed" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+          <input type="reset" value="Limpar" class="btn btn-default" />
+          <!-- HTML Simple para envio dos dados do formulário -->
+          <input type="submit" value="Gravar ALteração" class="btn btn-default" />
+        </div>
+      </div>
+      <hr />
+    </div>
+  </form>
+
+  <div>
+    <a asp-controller="ProductType" asp-action="Index">Voltar</a>
+  </div>
+
+</body>
+</html>
+```
+
+Execute a aplicação e acesse a lista de tipos. No link “Editar” de um tipo, simule a atualização de um tipo, use breakpoints ou a janela Output para acompanhar os dados digitados. Lembre-se, como estamos usando trechos de código para simulação, os dados da lista não serão alterados.
