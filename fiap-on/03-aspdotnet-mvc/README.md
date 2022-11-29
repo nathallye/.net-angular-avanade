@@ -1678,8 +1678,10 @@ Mensagem de sucesso inserida na `TempData`, agora precisamos exibir para o usuá
 </table>
 ```
 
-Execute a aplicação, faça o fluxo de cadastro de um novo tipo e verifique a mensagem de sucesso ao final do fluxo. Veja na Figura Exibindo mensagem de sucesso com TempDataatela de lista de tipos com a mensagem de sucesso exibida para o usuário:
+Execute a aplicação, faça o fluxo de cadastro de um novo tipo e verifique a mensagem de sucesso ao final do fluxo:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204668274-63d8d4f7-3b0c-44e4-8765-954a2274c657.png">
+</div>
 
 ### Acesso A banco de dados
