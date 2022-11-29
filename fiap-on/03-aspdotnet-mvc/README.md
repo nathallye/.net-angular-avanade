@@ -1278,7 +1278,7 @@ Entre nosso cabeçalho e rodapé, existe a tag Razor **@RenderBody()**, pois bem
 
 A tag `@RenderBody()` é a responsável por e`specificar o ponto em que o conteúdo da View será renderizado`, ou seja, o conteúdo HTML da View será inserido no espaço da tag `@RenderBody()`. 
 
-Para juntar o quebra-cabeça do Layoute da View, é necessário especificar para nossas Views o nome do arquivo de layout, que é feito pelo bloco `@{ Layout }` do arquivo `.cshtml`. Edite no arquivo `Views\ProductType\Index.cshtml` a declaração do layout logo após a tag `@model`. É recomendado remover todo o conteúdo HTML duplicado entre View e Layout, para não gerar nenhuma quebra ou incompatibilidade no HTML final:
+Para juntar o quebra-cabeça do Layout e da View, é necessário especificar para nossas Views o nome do arquivo de layout, que é feito pelo bloco `@{ Layout }` do arquivo `.cshtml`. Edite no arquivo `Views\ProductType\Index.cshtml` a declaração do layout logo após a tag `@model`. É recomendado remover todo o conteúdo HTML duplicado entre View e Layout, para não gerar nenhuma quebra ou incompatibilidade no HTML final:
 
 ``` HTML
 @model IEnumerable<FiapSmartCityMVC.Models.ProductType>
@@ -1287,53 +1287,45 @@ Para juntar o quebra-cabeça do Layoute da View, é necessário especificar para
   Layout = "~/Views/Shared/_Layout.cshtml"; <!-- Referência para o @RenderBody()-->
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width" />
-  <title>Tipo de Produto</title>
-</head>
-<body>
-  <h1>Tipo de Produto</h1>
-  <p>
-    <!-- uso de TagHelpers para definir o Controller e a Action -->
-    <a asp-controller="ProductType" asp-action="Create">Novo Tipo</a>
-  </p>
-  <table class="table" border="1">
+<h1>Tipo de Produto</h1>
+<p>
+  <!-- uso de TagHelpers para definir o Controller e a Action -->
+  <a asp-controller="ProductType" asp-action="Create">Novo Tipo</a>
+</p>
+
+<table class="table" border="1">
+  <tr>
+    <th>Id</th>
+    <th>Descrição</th>
+    <th></th>
+  </tr>
+
+  @foreach (var item in Model)
+  {
     <tr>
-      <th>Id</th>
-      <th>Descrição</th>
-      <th></th>
+      <td>
+        <label>@item.TypeId</label>
+      </td>
+      <td>
+        <label>@item.TypeDescription</label>
+      </td>
+      <td>
+        <!-- asp-route-id é usado para informar o Id do Item selecionado. -->
+        <a asp-controller="ProductType"
+          asp-action="Update"
+          asp-route-id="@item.TypeId">Editar</a>
+
+        <a asp-controller="ProductType"
+          asp-action="Read"
+          asp-route-id="@item.TypeId">Consultar</a>
+
+        <a asp-controller="ProductType"
+          asp-action="Delete"
+          asp-route-id="@item.TypeId">Excluir</a>
+      </td>
     </tr>
-
-    @foreach (var item in Model)
-    {
-      <tr>
-        <td>
-          <label>@item.TypeId</label>
-        </td>
-        <td>
-          <label>@item.TypeDescription</label>
-        </td>
-        <td>
-          <!-- asp-route-id é usado para informar o Id do Item selecionado. -->
-          <a asp-controller="ProductType"
-            asp-action="Update"
-            asp-route-id="@item.TypeId">Editar</a>
-
-          <a asp-controller="ProductType"
-            asp-action="Read"
-            asp-route-id="@item.TypeId">Consultar</a>
-
-          <a asp-controller="ProductType"
-            asp-action="Delete"
-            asp-route-id="@item.TypeId">Excluir</a>
-        </td>
-      </tr>
-    }
-  </table>
-</body>
-</html>
+  }
+</table>
 ```
 
 Execute o projeto e navegue para a tela de listagem de tipos (Index.cshtml): 
@@ -1342,4 +1334,131 @@ Execute o projeto e navegue para a tela de listagem de tipos (Index.cshtml):
   <img width="700" src="https://user-images.githubusercontent.com/86172286/204568121-e44abd2a-389a-4b7f-b499-e03067326e04.png">
 </div>
 
-Com o layout aplicado na tela de listagem, podemos passar para as demais Views e fazer uso do layout, utilizando a tag `@{ Layout }`.E com a remoção das partes comuns, aplique em todas as Views da funcionalidade de tipo de produto.
+Com o layout aplicado na tela de listagem, podemos passar para as demais Views e fazer uso do layout, utilizando a tag `@{ Layout }`. E com a remoção das partes comuns, aplique em todas as Views da funcionalidade de tipo de produto.
+
+#### Validações
+
+Até o momento, criamos um fluxo de navegação, adicionamos um cabeçalho e um rodapé padrão para o site por meio de Layout e usamos algumas facilidades do framework ASP.NET Core MVC 2, `porém não inserimos nenhum tipo de validação de dados, deixando que qualquer informação digitada pelo usuário seja aceita no website`. 
+
+É preciso criar bloqueios que não permitama digitação de quaisquer dados nos formulários do sistema, para isso, serão apresentadas algumas técnicas com o uso de recursos do framework paraaimplementação de validações.
+
+##### Validação pelo Controller
+
+Para as validações no `Controller`, tomaremos como base a `Action Cadastrar()` do ProductTypeController. Nela,será adicionada a validação que não permitirá o cadastro de um tipo sem que a descrição seja digitada.
+
+Antes de apresentar a codificação, precisamos saber que todos os `Controllers` do framework possuem uma propriedade chamada `ModelState`, `em que podemos adicionar uma coleção de mensagens de erro e usá-la para controlar nosso fluxo ou deixar as mensagens disponíveis para nossas Views`. A regra aplicada para nosso exemplo deverá ser implementada com os seguintes passos:
+
+- Validar o conteúdo da descrição digitada.
+- Adicionar uma mensagem de erro ao ModelState.
+- Validar se existe algum erro no ModelState.
+- Encontrou erro no ModelState – manter o usuário na tela do formulário e exibir a mensagem de erro.
+- Não encontrou erro no ModelState – simular o cadastro no banco de dados e direcionar o usuário para a tela de lista.
+
+Segue o do Controller com a regra de validação:
+
+``` C#
+// Anotação de uso do Verb HTTP Post
+[HttpPost]
+public IActionResult Create(ProductType productType)
+{
+  // Validando o Campo Descricao
+  if (string.IsNullOrEmpty(productType.TypeDescription))
+  {
+    // Adicionando a mensagem de Erro para descrição em branco
+    ModelState.AddModelError("Descricao", "Descrição obrigatória!");
+  }
+
+  // Se o ModelState não tem nenhum erro
+  if (ModelState.IsValid)
+  {
+    // Simila que os dados foram gravados.
+    Debug.Print("Descrição: " + productType.TypeDescription);
+    Debug.Print("Comercializado: " + productType.TypeDescription);
+    Debug.Print("Gravando o Tipo de Produto");
+
+    return RedirectToAction("Index", "ProductType");
+
+    // Encontrou um erro no preenchimento do campo descriçao
+  }
+  else
+  {
+    // retorna para tela do formulário
+    return View(productType);
+  }
+}
+```
+
+Nosso `Controller` já valida a entrada de dados, porém ainda não informa para o usuário a mensagem de erro.O Razor, com a tag **asp-validation-summary**, vai ajudar nossa aplicação com isso. A tag **asp-validation-summary** renderiza ou exibe em nosso HTML todas as mensagens que foram adicionadas na propriedade `ModelState`, assim, precisamos inseri-la em nossa `View`:
+
+``` HTML
+<!-- formulário HTML com Tag Helpers-->
+<form asp-action="Create" asp-controller="ProductType" method="post">
+  <div class="form-horizontal">
+    <hr />
+
+    <!-- Trecho de validação para se existe mensagem a ser exibida -->
+    @if (!Html.ViewData.ModelState.IsValid)
+    {
+      <!-- Tag para exibição da lista de erros -->
+      <div asp-validation-summary="All" class="alert alert-danger"></div>
+    }
+  <!--[...]-->
+  </div>
+```
+
+Fluxo em execução e a mensagem de erro exibida na tela:
+
+
+
+Implementamos nossa primeira validação, porém cabe uma análise para aplicação futura. Nosso exemplo contou com apenas um atributo sendo validado, você consegue imaginar um formulário com dez campos para a digitação do usuário? Teríamos que criar dez ou mais condições de verificação, correto? No próximo bloco, vamos avaliar uma alteração para esse nosso problema.
+
+##### Validação com Data Annotations
+
+Usando anteriormente as validações pelo nosso Controller, elas são funcionais, porém apresentamalguns pontos negativos, como a digitação de muitas linhas de código que não são reaproveitáveis.Aqui entram as Data Annotations, que têmo mesmo objetivo de validação de dados, porém com algumas vantagens:•Simplicidade.•Produtividade.•Reúso.•Redução de erros.
+
+
+As anotações serão utilizadas na nossa camada de modelo, assim, além de validar a entrega de dados nos componentes Viewe Controller, podemos usá-lasna camada de acesso a dados.Para o nosso exemplo, vamos inserir duas validações na propriedade descrição do modelo de tipo de projeto. Precisamos importar o namespace usingSystem.ComponentModel.DataAnnotationse,com assimples {}(chaves) acima da declaração do atributo,escrevemos a validação.O Código-fonte Validações com Data Annotationsapresenta a classe Modelcom duas validações no atributo Descrição, ambas com o conceito da Data Annotation.
+
+
+Depois de inserir nossas anotações no modelo, vamos remover a validação feita no Controller, veja o Código-fonteRemovendo a validação do Controller:
+
+
+
+Execute a aplicação, refaça o fluxo de cadastro e insira um texto com mais de 50 caracteres no campo dedescrição.Clique no botão Cadastrar e observe a mensagem de erro,conforme a Figura Exibindo mensagem de errocom Data Annotationsa seguir:
+
+
+
+
+Além das anotações do exemplo anterior,que foram usadas para validar o conteúdo de um campo e o tamanho máximo de caracteres digitados, estádisponível uma série de outras validações, como: intervalo de números, validação de e-mail, expressões regulares e tipo de dados. Abaixo,segue o quadro com as anotações mais comuns de validação e a sintaxe de uso:
+
+
+
+
+#### Data Annotationse as Views
+
+Conseguimos validar nossos dados usando as Data Annotations, mas podemos explorar um pouco mais de recursos e padronizar nossa aplicação.O objetivo agora é usar as tagsRazors para inserir os rótulos em nossos formulários e configurar a descrição do rótulo em nosso modelo. Outro ponto é exibir a mensagem de erro de validação em cada um dos campos.O primeiro passo é inserira anotação Display nos atributos do nosso Model. Veja o Código-fonte Anotação para rótulosabaixo:
+
+
+
+O segundo passo é inserir no rótulo descritivo do campo a propriedade asp-fore incluir um elemento span abaixo da caixa de texto com a propriedade asp-validation-forpara exibir a mensagem de erro do campo específico. Segue exemplo:
+
+
+Você pode remover o bloco da tag asp-validation-summary para evitar a duplicidade das mensagens de erro na tela do usuário. Note como a mensagem é apresentada nesse novo formato:
+
+
+#### Mensagens de sucesso com TempData
+
+Chegou a hora de mostrarao usuário as mensagens informando que as operações foram efetuadas com sucesso, pois,até aqui, apresentamos apenas mensagem de erro.O recurso usado dessa vez é o TempData, que tem a função de armazenar um valor de objeto em uma curta sessão de tempo entre requisições. É acessado pelo conjunto chave-valor, pode ser criado e acessado pelas Viewse Controllere tem o seu conteúdo mantido até o momento que algum componente o recupere.Vamos aplicar o conceito nas camadas de Controllere Views, respectivamente.Porém, antes de aplicar as mensagens em nossos fluxos é necessário efetuar uma pequena configuração na classe Startup.csno método Configure. É necessário mudar o possionamento da linha app.UseCookiePolicy()para a última linha de configuração do projeto. Observe o Código-fonte “Configuração do projeto para uso do TempData” abaixo:
+
+
+Na ActionCadastrar do TipoProdutoController, é necessário adicionar uma linha de comando que grava uma mensagem de sucesso na TempData.Essa mensagem será adicionada ao fluxo de sucesso do cadastro, veja o Código-fonte Gravando mensagens na TempData:
+
+
+
+Mensagem de sucesso inserida na TempData, agora precisamos exibir para o usuário. Lembre-se, quando o usuário finaliza um cadastro com sucesso, ele é direcionado para a Viewde lista de tipos, assim, a exibição do valor da TempDataprecisa ser inserida na TipoProduto\Index.cshtml. Segue exemplo no Código-fonte Exibindo mensagens na TempData:
+
+
+Execute a aplicação, faça o fluxo de cadastro de um novo tipo e verifique a mensagem de sucesso ao final do fluxo. Veja na Figura Exibindo mensagem de sucesso com TempDataatela de lista de tipos com a mensagem de sucesso exibida para o usuário:
+
+
+### Acesso A banco de dados
