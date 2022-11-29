@@ -723,9 +723,9 @@ namespace FiapSmartCityMVC.Controllers
       // Cria o modelo que SIMULA a consulta no  banco de dados
       ProductType productType = new ProductType()
       {
-          TypeId = Id,
-          TypeDescription = "Tinta",
-          Marketed = true
+        TypeId = Id,
+        TypeDescription = "Tinta",
+        Marketed = true
       };
 
       // Retorna para a View o objeto modelo 
@@ -906,9 +906,9 @@ namespace FiapSmartCityMVC.Controllers
       // Cria o modelo que SIMULA a consulta no  banco de dados
       ProductType productType = new ProductType()
       {
-          TypeId = Id,
-          TypeDescription = "Tinta",
-          Marketed = true
+        TypeId = Id,
+        TypeDescription = "Tinta",
+        Marketed = true
       };
 
       // Retorna para a View o objeto modelo 
@@ -1089,9 +1089,9 @@ namespace FiapSmartCityMVC.Controllers
       // Cria o modelo que SIMULA a consulta no  banco de dados
       ProductType productType = new ProductType()
       {
-          TypeId = Id,
-          TypeDescription = "Tinta",
-          Marketed = true
+        TypeId = Id,
+        TypeDescription = "Tinta",
+        Marketed = true
       };
 
       // Retorna para a View o objeto modelo 
