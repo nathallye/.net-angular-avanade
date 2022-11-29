@@ -1412,27 +1412,80 @@ Fluxo em execução e a mensagem de erro exibida na tela:
   <img width="700" src="https://user-images.githubusercontent.com/86172286/204654389-31ef6bcf-fa21-45b7-8ea3-5a14bed5fd8b.png">
 </div>
 
+**Obs.:** É criada uma validação automática por especificarmos no model ProductType que TypeDescript é obrigatório, afim de deixar somente uma mensagem de erro deixei esse atributo como opctional (`public string? TypeDescription { get; set; }`).
+
 Implementamos nossa primeira validação, porém cabe uma análise para aplicação futura. Nosso exemplo contou com apenas um atributo sendo validado, você consegue imaginar um formulário com dez campos para a digitação do usuário? Teríamos que criar dez ou mais condições de verificação, correto? No próximo bloco, vamos avaliar uma alteração para esse nosso problema.
 
 ##### Validação com Data Annotations
 
-Usando anteriormente as validações pelo nosso Controller, elas são funcionais, porém apresentamalguns pontos negativos, como a digitação de muitas linhas de código que não são reaproveitáveis.Aqui entram as Data Annotations, que têmo mesmo objetivo de validação de dados, porém com algumas vantagens:•Simplicidade.•Produtividade.•Reúso.•Redução de erros.
+Usando anteriormente as validações pelo nosso `Controller`, elas são funcionais, porém apresentam alguns pontos negativos, como a digitação de muitas linhas de código que não são reaproveitáveis.
 
+Aqui entram as `Data Annotations`, que têm o `mesmo objetivo de validação de dados, porém com algumas vantagens`:
 
-As anotações serão utilizadas na nossa camada de modelo, assim, além de validar a entrega de dados nos componentes Viewe Controller, podemos usá-lasna camada de acesso a dados.Para o nosso exemplo, vamos inserir duas validações na propriedade descrição do modelo de tipo de projeto. Precisamos importar o namespace usingSystem.ComponentModel.DataAnnotationse,com assimples {}(chaves) acima da declaração do atributo,escrevemos a validação.O Código-fonte Validações com Data Annotationsapresenta a classe Modelcom duas validações no atributo Descrição, ambas com o conceito da Data Annotation.
+- Simplicidade.
+- Produtividade.
+- Reúso.
+- Redução de erros.
 
+As anotações serão `utilizadas na nossa camada de modelo`, assim, `além de validar a entrega de dados nos componentes View e Controller`, podemos usá-las na camada de acesso a dados. 
 
-Depois de inserir nossas anotações no modelo, vamos remover a validação feita no Controller, veja o Código-fonteRemovendo a validação do Controller:
+Para o nosso exemplo, vamos inserir duas validações na propriedade descrição do modelo de tipo de projeto. Precisamos importar o namespace using **System.ComponentModel.DataAnnotations** e,com as simples `[](chaves)` acima da declaração do atributo, escrevemos a validação:
 
+``` C#
+using System;
+using System.ComponentModel.DataAnnotations;
 
+namespace FiapSmartCityMVC.Models
+{
+  public class ProductType
+  {
+    public int TypeId { get; set; }
 
-Execute a aplicação, refaça o fluxo de cadastro e insira um texto com mais de 50 caracteres no campo dedescrição.Clique no botão Cadastrar e observe a mensagem de erro,conforme a Figura Exibindo mensagem de errocom Data Annotationsa seguir:
+    [Required(ErrorMessage = "Descrição obrigatória!")]
+    [StringLength(50,
+      MinimumLength = 3,
+      ErrorMessage = "A descrição deve ter, no mínimo, 3 e, no máximo, 50 caracteres.")]
+    public string TypeDescription { get; set; }
+    public bool Marketed { get; set; }
+  }
+}
+```
 
+Depois de inserir nossas anotações no modelo, vamos remover a validação feita no Controller:
 
+``` C#
+// Anotação de uso do Verb HTTP Post
+[HttpPost]
+public IActionResult Create(ProductType productType)
+{
+  // Validando o Campo Descricao
+  //if (string.IsNullOrEmpty(productType.TypeDescription))
+  //{
+    // Adicionando a mensagem de Erro para descrição em branco
+  //  ModelState.AddModelError("Description", "Descrição obrigatória!");
+  //}
 
+  // Se o ModelState não tem nenhum erro
+  if (ModelState.IsValid)
+  {
+    // Simila que os dados foram gravados.
+    Debug.Print("Descrição: " + productType.TypeDescription);
+    Debug.Print("Comercializado: " + productType.TypeDescription);
+    Debug.Print("Gravando o Tipo de Produto");
 
-Além das anotações do exemplo anterior,que foram usadas para validar o conteúdo de um campo e o tamanho máximo de caracteres digitados, estádisponível uma série de outras validações, como: intervalo de números, validação de e-mail, expressões regulares e tipo de dados. Abaixo,segue o quadro com as anotações mais comuns de validação e a sintaxe de uso:
+    return RedirectToAction("Index", "ProductType");
 
+  // Encontrou um erro no preenchimento do campo descriçao
+  }
+  else
+  {
+    // retorna para tela do formulário
+    return View(productType);
+  }
+}
+```
+
+Além das anotações do exemplo anterior, que foram usadas para validar o conteúdo de um campo e o tamanho máximo de caracteres digitados, está disponível uma série de outras validações, como: intervalo de números, validação de e-mail, expressões regulares e tipo de dados. Abaixo,segue o quadro com as anotações mais comuns de validação e a sintaxe de uso:
 
 
 
