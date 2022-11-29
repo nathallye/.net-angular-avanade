@@ -818,7 +818,9 @@ Execute a aplicação e acesse a lista de tipos. No link “Editar” de um tipo
 
 Para criar o fluxo de consulta de dados, podemos replicar parte do trabalho do fluxo de edição (update). No Controller,devemos usar apenas o método que utiliza o verbo HTTP Get, e, para a View, podemos remover a criação de formulário e substituir os elementos de edição (input) por simples labels. Segue o método para a consulta dos dados:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204422370-d98afb18-c956-4542-82b9-40810ac97933.png">
+</div>
 
 Implementação da Action de `Read` do controler `TypeProductController`:
 
