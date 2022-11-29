@@ -93,7 +93,7 @@ using System;
   }
 ```
 
-## Implementando ASP.NET CoreMVC2
+## Implementando ASP.NET CoreMVC 2
 
 ### Funcionalidades
 
@@ -106,7 +106,7 @@ Já temos dois modelos/models definidos e criados em nosso projeto, precisamos a
 
 #### Controllers e Actions
 
-Em um projeto ASP.NET Core MVC2, `toda solicitação do usuário feita pelo navegador será recebida e gerenciada por um Controller`, ficando este `responsável por receber o pedido, acionar os componentes necessários e gerar a resposta para o navegador`. Podemos criar um Controller para cada funcionalidade da nossa aplicação (por exemplo: `CriarTipoProduto/CreateProductType`, `ExcluirTipoProduto/DeleteProductType`, `AlterarTipoProduto/UpdateProductType` e `ListaTipos/ListTypes`), essa abordagem funciona, mas `não é recomendada`. Para organizar melhor nossas funcionalidades, temos os conceitos das `Actions`. As `ações (Actions) nada mais são do que métodos adicionados na classe de controle com o objetivo de organizar e padronizar ainda mais nosso código`. Com o uso das Actions, devemos criar um controlador para cada domínio e ações para cada funcionalidade (por exemplo: `ControllerTipoProduto/ControllerProductType`, Actions `Criar/Create`, `Excluir/Delete`, `Alterar/Update` e `Listar/List`).
+Em um projeto ASP.NET Core MVC 2, `toda solicitação do usuário feita pelo navegador será recebida e gerenciada por um Controller`, ficando este `responsável por receber o pedido, acionar os componentes necessários e gerar a resposta para o navegador`. Podemos criar um Controller para cada funcionalidade da nossa aplicação (por exemplo: `CriarTipoProduto/CreateProductType`, `ExcluirTipoProduto/DeleteProductType`, `AlterarTipoProduto/UpdateProductType` e `ListaTipos/ListTypes`), essa abordagem funciona, mas `não é recomendada`. Para organizar melhor nossas funcionalidades, temos os conceitos das `Actions`. As `ações (Actions) nada mais são do que métodos adicionados na classe de controle com o objetivo de organizar e padronizar ainda mais nosso código`. Com o uso das Actions, devemos criar um controlador para cada domínio e ações para cada funcionalidade (por exemplo: `ControllerTipoProduto/ControllerProductType`, Actions `Criar/Create`, `Excluir/Delete`, `Alterar/Update` e `Listar/List`).
 
 Todo `Controller` necessita de uma `Action`, caso não seja criada, nada será executado. Além da pasta Controller (namespace), a criação de Controllers e Actions deve seguir algumas particularidades:
 
@@ -219,7 +219,11 @@ Analisando a URL da aplicação `http://localhost:7120/ProductType/Index`, o pri
 
 A composição entre Controller e Action é conhecidacomo `Rota` e todo projeto ASP.NET Core MVC 2 possui uma classe C# responsável por essa configuração. Na janela da Solution Explorer, navegue até a classe `Startup.cs` e abra o código do método `Configure`. A Figura a seguir, exibe o conteúdo da classe `Startup.cs`:
 
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204406673-ab4f90bc-2e21-472e-94ac-591b9fc20a01.png">
+</div>
 
+**Obs.:** A nova versão do .NET unificou `Startup.cs` e `Program.cs` em um único arquivo: `Program.cs`.
 
 O bloco de código do método `Configure` é o responsável por interceptar todas as chamadas do aplicativo, analisar o caminho da URL requisitada e mapear para o Controller e a Action correspondentes. Podemos notar que no código da implementação `routes.MapRoute()` da Figura.  Temos  um  padrão  na propriedade url `{controller}/{action}/{id}` definindo que os caminhos deverão ser compostos pelo nome do controle, ação e id (valores opcionais). 
 
@@ -340,9 +344,15 @@ Para identificar uma expressão Razor em um arquivo `.cshtml`, basta observar bl
 
 O framework ASP.NET Core MVC 2 disponibiliza os componentes auxiliadores para o desenvolvimento dos componentes Views. Os Auxiliadores de Marcação fazem com que o código do lado do servidor participe da criação e renderização de elementos HTML. O `ImageTagHelper` interno pode acrescentar um número de versão ao nome da imagem, assim, `sempre que a imagem é alterada, o servidor gera uma nova versão` exclusiva para a imagem, de modo que os clientes tenham a garantia de obter a imagem atual. Existem auxiliadores para todos os elementos HTML comuns (por exemplo: formulários, links, imagens, botões e outros). Abaixo temos o quadro “Tags Helpers”, com os Tag Helpers disponíves no ASP.NET Core MVC 2:
 
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204406913-a1b416c0-4763-4677-a0f5-0ce4568116a6.png">
+</div>
 
 Para demonstração, a Figura Exemplo de uso de HtmlHelpers, apresenta a sintaxe para a criação de uma caixa de texto usando o helper fortemente tipado e o código HTML gerado depois que oview engine renderiza o código da View:
 
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204406959-1adbd529-9c80-4507-82b3-2b368289178c.png">
+</div>
 
 #### Listando dados na tela (View)
 
