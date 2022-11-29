@@ -1619,10 +1619,63 @@ public IActionResult Create(ProductType productType)
 }
 ```
 
-Mensagem de sucesso inserida na `TempData`, agora precisamos exibir para o usuário. Lembre-se, `quando o usuário finaliza um cadastro com sucesso, ele é direcionado para a View de lista de tipos`, assim, a exibição do valor da TempData `precisa ser inserida na Views/ProdutType/Index.cshtml`:
+Mensagem de sucesso inserida na `TempData`, agora precisamos exibir para o usuário. Lembre-se, `quando o usuário finaliza um cadastro com sucesso, ele é direcionado para a View de lista de tipos`, assim, a exibição do valor da TempData `precisa ser inserida na Views/ProductType/Index.cshtml`:
 
 ``` HTML
+@model IEnumerable<FiapSmartCityMVC.Models.ProductType>
 
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tipo de Produto</h1>
+<p>
+  <!-- uso de TagHelpers para definir o Controller e a Action -->
+  <a asp-controller="ProductType" asp-action="Create">Novo Tipo</a>
+</p>
+
+<!-- Verifica se a chave "Mensagem" existe no TempData -->
+@if (@TempData["Message"] != null)
+{
+  <div class="alert alert-success" role="alert">
+    <!-- Imprime para o usuário a mensagem -->
+    @TempData["Message"]
+  </div>
+}
+
+<table class="table" border="1">
+  <tr>
+    <th>Id</th>
+    <th>Descrição</th>
+    <th></th>
+  </tr>
+
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>
+        <label>@item.TypeId</label>
+      </td>
+      <td>
+        <label>@item.TypeDescription</label>
+      </td>
+      <td>
+        <!-- asp-route-id é usado para informar o Id do Item selecionado. -->
+        <a asp-controller="ProductType"
+          asp-action="Update"
+          asp-route-id="@item.TypeId">Editar</a>
+
+        <a asp-controller="ProductType"
+          asp-action="Read"
+          asp-route-id="@item.TypeId">Consultar</a>
+
+        <a asp-controller="ProductType"
+          asp-action="Delete"
+          asp-route-id="@item.TypeId">Excluir</a>
+      </td>
+    </tr>
+  }
+</table>
 ```
 
 Execute a aplicação, faça o fluxo de cadastro de um novo tipo e verifique a mensagem de sucesso ao final do fluxo. Veja na Figura Exibindo mensagem de sucesso com TempDataatela de lista de tipos com a mensagem de sucesso exibida para o usuário:
