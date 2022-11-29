@@ -813,3 +813,293 @@ Para a View `Editar/Update`, podemos reaproveitar todo o código-fonte criado na
 ```
 
 Execute a aplicação e acesse a lista de tipos. No link “Editar” de um tipo, simule a atualização de um tipo, use breakpoints ou a janela Output para acompanhar os dados digitados. Lembre-se, como estamos usando trechos de código para simulação, os dados da lista não serão alterados.
+
+#### Consultando dados (View e Controller)
+
+Para criar o fluxo de consulta de dados, podemos replicar parte do trabalho do fluxo de edição (update). No Controller,devemos usar apenas o método que utiliza o verbo HTTP Get, e, para a View, podemos remover a criação de formulário e substituir os elementos de edição (input) por simples labels. Segue o método para a consulta dos dados:
+
+
+
+Implementação da Action de `Read` do controler `TypeProductController`:
+
+``` C#
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
+using FiapSmartCityMVC.Models;
+using System.Diagnostics;
+
+namespace FiapSmartCityMVC.Controllers
+{
+  public class ProductTypeController : Controller
+  {
+    // ACTION INDEX
+    public IActionResult Index()
+    {
+      // Criando o atributo da lista
+      IList<Models.ProductType> listType = new List<ProductType>();
+
+      // Adicionando na lista o TipoProduto da Tinta
+      listType.Add(new ProductType()
+      {
+        TypeId = 1,
+        TypeDescription = "Tinta",
+        Marketed = true
+      });
+
+      listType.Add(new ProductType()
+      {
+        TypeId = 2,
+        TypeDescription = "Filtro de água",
+        Marketed = true
+      });
+
+      listType.Add(new ProductType()
+      {
+        TypeId = 3,
+        TypeDescription = "Captador de energia",
+        Marketed = false
+      });
+
+      // Retornando para View a lista de Tipos
+      return View(listType);
+    }
+
+    // ACTION CREATE
+    // Anotação de uso do Verb HTTP Get
+    [HttpGet]
+    public IActionResult Create()
+    {
+      // Imprime a mensagem de execução
+      Debug.Print("Executou a Action Register()");
+
+      // Retorna para a View Cadastrar um 
+      // objeto modelo com as propriedades em branco 
+      return View(new ProductType ());
+    }
+
+    // Anotação de uso do Verb HTTP Post
+    [HttpPost]
+    public IActionResult Create(ProductType productType)
+    {
+      // Imprime os valores do modelo
+      // Debug.Print do System.Diagnostics
+      Debug.Print("Descrição: " + productType.TypeDescription);
+      Debug.Print("Comercializado: " + productType.Marketed);
+
+      // Simila que os dados foram gravados.
+      Debug.Print("Gravando o Tipo de Produto");
+
+      // Substituímos o return View()
+      // pelo método de redirecionamento
+      return RedirectToAction("Index", "ProductType");
+    }
+
+    // ACTION UPDATE
+    [HttpGet]
+    public IActionResult Update(int Id)
+    {
+      // Imprime a mensagem de execução
+      Debug.Print("Consultando o Tipo com Id = " + Id);
+
+      // Cria o modelo que SIMULA a consulta no  banco de dados
+      ProductType productType = new ProductType()
+      {
+          TypeId = Id,
+          TypeDescription = "Tinta",
+          Marketed = true
+      };
+
+      // Retorna para a View o objeto modelo 
+      // com as propriedades preenchidas com dados do banco de dados 
+      return View(productType);
+    }
+
+    [HttpPost]
+    public IActionResult Editar(ProductType productType)
+    {
+      // Imprime os valores do modelo
+      System.Diagnostics.Debug.Print("Descrição: " + productType.TypeDescription);
+      System.Diagnostics.Debug.Print("Comercializado: " + productType.Marketed);
+
+      // Simila que os dados foram gravados.
+      System.Diagnostics.Debug.Print("Gravando o Tipo Editado");
+
+      // Substituímos o return View()
+      // pelo método de redirecionamento
+      return RedirectToAction("Index", "ProductType");
+    }
+  }
+}
+`````` C#
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
+using FiapSmartCityMVC.Models;
+using System.Diagnostics;
+
+namespace FiapSmartCityMVC.Controllers
+{
+  public class ProductTypeController : Controller
+  {
+    // ACTION INDEX
+    public IActionResult Index()
+    {
+      // Criando o atributo da lista
+      IList<Models.ProductType> listType = new List<ProductType>();
+
+      // Adicionando na lista o TipoProduto da Tinta
+      listType.Add(new ProductType()
+      {
+        TypeId = 1,
+        TypeDescription = "Tinta",
+        Marketed = true
+      });
+
+      listType.Add(new ProductType()
+      {
+        TypeId = 2,
+        TypeDescription = "Filtro de água",
+        Marketed = true
+      });
+
+      listType.Add(new ProductType()
+      {
+        TypeId = 3,
+        TypeDescription = "Captador de energia",
+        Marketed = false
+      });
+
+      // Retornando para View a lista de Tipos
+      return View(listType);
+    }
+
+    // ACTION CREATE
+    // Anotação de uso do Verb HTTP Get
+    [HttpGet]
+    public IActionResult Create()
+    {
+      // Imprime a mensagem de execução
+      Debug.Print("Executou a Action Register()");
+
+      // Retorna para a View Cadastrar um 
+      // objeto modelo com as propriedades em branco 
+      return View(new ProductType ());
+    }
+
+    // Anotação de uso do Verb HTTP Post
+    [HttpPost]
+    public IActionResult Create(ProductType productType)
+    {
+      // Imprime os valores do modelo
+      // Debug.Print do System.Diagnostics
+      Debug.Print("Descrição: " + productType.TypeDescription);
+      Debug.Print("Comercializado: " + productType.Marketed);
+
+      // Simila que os dados foram gravados.
+      Debug.Print("Gravando o Tipo de Produto");
+
+      // Substituímos o return View()
+      // pelo método de redirecionamento
+      return RedirectToAction("Index", "ProductType");
+    }
+
+    // ACTION UPDATE
+    [HttpGet]
+    public IActionResult Update(int Id)
+    {
+      // Imprime a mensagem de execução
+      Debug.Print("Consultando o Tipo com Id = " + Id);
+
+      // Cria o modelo que SIMULA a consulta no  banco de dados
+      ProductType productType = new ProductType()
+      {
+          TypeId = Id,
+          TypeDescription = "Tinta",
+          Marketed = true
+      };
+
+      // Retorna para a View o objeto modelo 
+      // com as propriedades preenchidas com dados do banco de dados 
+      return View(productType);
+    }
+
+    [HttpPost]
+    public IActionResult Editar(ProductType productType)
+    {
+      // Imprime os valores do modelo
+      System.Diagnostics.Debug.Print("Descrição: " + productType.TypeDescription);
+      System.Diagnostics.Debug.Print("Comercializado: " + productType.Marketed);
+
+      // Simila que os dados foram gravados.
+      System.Diagnostics.Debug.Print("Gravando o Tipo Editado");
+
+      // Substituímos o return View()
+      // pelo método de redirecionamento
+      return RedirectToAction("Index", "ProductType");
+    }
+
+    // ACTION READ
+    [HttpGet]
+    public IActionResult Read(int Id)
+    {
+      // Imprime a mensagem de execução
+      Debug.Print("Consultando o Tipo com Id = " + Id);
+
+      // Cria o modelo que SIMULA a consulta no  banco de dados
+      ProductType productType = new ProductType()
+      {
+        TypeId = Id,
+        TypeDescription = "Tinta",
+        Marketed = true
+      };
+
+      // Retorna para a View o objeto modelo 
+      // com as propriedades preenchidas com dados do banco de dados 
+      return View(productType);
+    }
+  }
+}
+```
+
+Criando a View `Read`, reaproveitando o código da View `Update` para ter funcionalidade de apenas exibir os dados. Relembrando, devemos remover o bloco do form e substituir os elementos de input:
+
+``` HTML
+@model FiapSmartCityMVC.Models.ProductType;
+
+@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Tipo de Produto - Consultar</title>
+</head>
+<body>
+  <h1>Tipo de Produto - Consultar</h1>
+  <div class="form-horizontal">
+    <hr />
+
+    <div class="form-group">
+      <label><b>Descrição:</b></label>
+      <div class="col-md-10">
+        <span>@Model.TypeDescription</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label><b>Comercializado:</b></label>
+      <div class="checkbox">
+        <span>@Model.Marketed</span>
+      </div>
+    </div>
+    <hr />
+  </div>
+  <div>
+    <a asp-controller="ProductType" asp-action="Index">Voltar</a>
+  </div>
+
+</body>
+</html>
+```
+
