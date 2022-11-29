@@ -1442,9 +1442,9 @@ namespace FiapSmartCityMVC.Models
     public int TypeId { get; set; }
 
     [Required(ErrorMessage = "Descrição obrigatória!")]
-    [StringLength(50,
-      MinimumLength = 3,
-      ErrorMessage = "A descrição deve ter, no mínimo, 3 e, no máximo, 50 caracteres.")]
+      [StringLength(50,
+        MinimumLength = 3,
+        ErrorMessage = "A descrição deve ter, no mínimo 3 e, no máximo, 50 caracteres.")]
     public string TypeDescription { get; set; }
     public bool Marketed { get; set; }
   }
@@ -1493,14 +1493,86 @@ Além das anotações do exemplo anterior, que foram usadas para validar o conte
 
 #### Data Annotationse as Views
 
-Conseguimos validar nossos dados usando as Data Annotations, mas podemos explorar um pouco mais de recursos e padronizar nossa aplicação.O objetivo agora é usar as tagsRazors para inserir os rótulos em nossos formulários e configurar a descrição do rótulo em nosso modelo. Outro ponto é exibir a mensagem de erro de validação em cada um dos campos.O primeiro passo é inserira anotação Display nos atributos do nosso Model. Veja o Código-fonte Anotação para rótulosabaixo:
+Conseguimos validar nossos dados usando as Data Annotations, mas podemos explorar um pouco mais de recursos e padronizar nossa aplicação.
 
+O objetivo agora é usar as `tags Razors para inserir os rótulos em nossos formulários` e configurar a descrição do rótulo em nosso modelo. Outro ponto é exibir a `mensagem de erro de validação em cada um dos campos`.
 
+O primeiro passo é inserira anotação Display nos atributos do nosso `Model ProductType`:
 
-O segundo passo é inserir no rótulo descritivo do campo a propriedade asp-fore incluir um elemento span abaixo da caixa de texto com a propriedade asp-validation-forpara exibir a mensagem de erro do campo específico. Segue exemplo:
+``` C#
+using System;
+using System.ComponentModel.DataAnnotations;
 
+namespace FiapSmartCityMVC.Models
+{
+  public class ProductType
+  {
+    public int TypeId { get; set; }
 
-Você pode remover o bloco da tag asp-validation-summary para evitar a duplicidade das mensagens de erro na tela do usuário. Note como a mensagem é apresentada nesse novo formato:
+    [Required(ErrorMessage = "Descrição obrigatória!")]
+      [StringLength(50,
+        MinimumLength = 3,
+        ErrorMessage = "A descrição deve ter, no mínimo 3 e, no máximo, 50 caracteres.")]
+      [Display(Name="Descrição:")]
+    public string TypeDescription { get; set; }
+
+    public bool Marketed { get; set; }
+  }
+}
+```
+
+O segundo passo é inserir no rótulo descritivo do campo a propriedade `asp-for` e incluir um elemento span abaixo da caixa de texto com a propriedade `asp-validation-for` para exibir a mensagem de erro do campo específico:
+
+``` HTML
+@model FiapSmartCityMVC.Models.ProductType;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tipo de Produto - Cadastrar</h1>
+
+<!-- formulário HTML com Tag Helpers-->
+<form asp-action="Create" asp-controller="ProductType" method="post">
+  <div class="form-horizontal">
+    <hr />
+
+    <!-- Trecho de validação para se existe mensagem a ser exibida -->
+    @if (!Html.ViewData.ModelState.IsValid)
+    {
+      <!-- Tag para exibição da lista de erros -->
+      <!--  <div asp-validation-summary="All" class="alert alert-danger"></div> -->
+    }
+
+    <div class="form-group">
+      <label asp-for="TypeDescription" class="control-label"></label>
+      <input asp-for="TypeDescription" class="form-control col-md-4" />
+      <span asp-validation-for="TypeDescription" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+      <label asp-for="Marketed" class="control-label"></label>
+      <input asp-for="Marketed" />
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+        <input type="reset" value="Limpar" class="btn btn-default" />
+        <!-- HTML Simple para envio dos dados do formulário -->
+        <input type="submit" value="Cadastrar" class="btn btn-default" />
+      </div>
+    </div>
+    <hr />
+  </div>
+</form>
+
+<div>
+  <a asp-controller="ProductType" asp-action="Index">Voltar</a>
+</div>
+```
+
+`Removemos o bloco da tag asp-validation-summary` para `evitar a duplicidade das mensagens de erro na tela do usuário`:
+
 
 
 #### Mensagens de sucesso com TempData
