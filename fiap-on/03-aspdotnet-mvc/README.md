@@ -1487,7 +1487,9 @@ public IActionResult Create(ProductType productType)
 
 Além das anotações do exemplo anterior, que foram usadas para validar o conteúdo de um campo e o tamanho máximo de caracteres digitados, está disponível uma série de outras validações, como: intervalo de números, validação de e-mail, expressões regulares e tipo de dados. Abaixo,segue o quadro com as anotações mais comuns de validação e a sintaxe de uso:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204658310-55ec438a-ab79-4975-9132-d9d3a5b776a4.png">
+</div>
 
 #### Data Annotationse as Views
 
