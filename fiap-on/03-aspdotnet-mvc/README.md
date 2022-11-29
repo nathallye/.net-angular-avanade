@@ -1408,7 +1408,9 @@ Nosso `Controller` já valida a entrada de dados, porém ainda não informa para
 
 Fluxo em execução e a mensagem de erro exibida na tela:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204654389-31ef6bcf-fa21-45b7-8ea3-5a14bed5fd8b.png">
+</div>
 
 Implementamos nossa primeira validação, porém cabe uma análise para aplicação futura. Nosso exemplo contou com apenas um atributo sendo validado, você consegue imaginar um formulário com dez campos para a digitação do usuário? Teríamos que criar dez ou mais condições de verificação, correto? No próximo bloco, vamos avaliar uma alteração para esse nosso problema.
 
