@@ -1151,7 +1151,6 @@ namespace FiapSmartCityMVC.Controllers
 
 Execute a aplicação e acompanhe as mensagens na janela Output a fim devalidar todo o fluxo das operações.
 
-
 ### Layout pages e identidade visual
 
 Apesar de criar componentes View, não implementamos recursos visuais mais profissionais, usamos a estratégia de manter o funcionamento apenas. Passaremos a incrementar nossa camada visual, dando um tom mais profissional com componentes do framework ASP.NET Core MVC 2 para facilitar a evolução do aplicativo. Para isso, vamos usar a biblioteca Bootstrap, pois,além de ser uma biblioteca bemdifundida,foi utilizada em módulos anteriores.
@@ -1164,7 +1163,9 @@ O Nuget é um `gerenciador de pacotes` da tecnologia .NET com o qual possível u
 
 A versão ASP.NET Core MVC já disponibiliza o Bootstrap na criação no projeto, assim não é necessário realizar a instalação. É possível encontrar as pastas e os arquivos da biblioteca na pasta `wwwroot`,disponível na `Solution Explorer` do Visual Studio:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204567714-65f53ea6-e0ea-4deb-8c8d-f05404eae86d.png">
+</div>
 
 #### Criando Layouts
 
@@ -1174,7 +1175,9 @@ Como estamos trabalhando com nossa camada de visualização, devemos trabalhar b
 
 Na pasta Shared, vamos abrir o arquivo `_Layout.cshtml`, limpar e adaptar o código HTML para o nosso projeto:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204567922-540410b5-eb13-4593-9e5a-b8dcfbdcdb8c.png">
+</div>
 
 É possível notar que o arquivo de layout tem seu `conteúdo muito similar` a um `HTML` ou uma `View .cshtml` e também possui algumas `tags Razor` declaradas inicialmente. 
 
@@ -1277,7 +1280,6 @@ A tag `@RenderBody()` é a responsável por e`specificar o ponto em que o conte�
 
 Para juntar o quebra-cabeça do Layoute da View, é necessário especificar para nossas Views o nome do arquivo de layout, que é feito pelo bloco `@{ Layout }` do arquivo `.cshtml`. Edite no arquivo `Views\ProductType\Index.cshtml` a declaração do layout logo após a tag `@model`. É recomendado remover todo o conteúdo HTML duplicado entre View e Layout, para não gerar nenhuma quebra ou incompatibilidade no HTML final:
 
-
 ``` HTML
 @model IEnumerable<FiapSmartCityMVC.Models.ProductType>
 
@@ -1336,6 +1338,8 @@ Para juntar o quebra-cabeça do Layoute da View, é necessário especificar para
 
 Execute o projeto e navegue para a tela de listagem de tipos (Index.cshtml): 
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204568121-e44abd2a-389a-4b7f-b499-e03067326e04.png">
+</div>
 
 Com o layout aplicado na tela de listagem, podemos passar para as demais Views e fazer uso do layout, utilizando a tag `@{ Layout }`.E com a remoção das partes comuns, aplique em todas as Views da funcionalidade de tipo de produto.
