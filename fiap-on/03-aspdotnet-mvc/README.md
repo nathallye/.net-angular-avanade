@@ -374,4 +374,6 @@ A codificação para as tags **Razor** da nossa implementação deverá compreen
 
 Vamos executar a aplicação. Pressione a tecla F5 e, no navegador, informe o caminho `localhost:7120/ProductType`. Depois, aguarde o carregamento da lista de tipos de produtos:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204412888-059a1e1b-6156-4e35-a1aa-b0d1ca5b861f.png">
+</div>
