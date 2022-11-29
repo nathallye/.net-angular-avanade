@@ -151,7 +151,7 @@ Agora podemos observar a classe criada no namespace Controllers; no código da c
 
 Controller criado, agora podemos fazer o primeiro teste. Pressione a tecla F5 e aguarde o navegador-padrão do seu computador ser aberto. Com o navegador aberto, complemente o endereço com o `localhost:7120/ProductType` e pressione enter. O navegador irá exibir uma tela de erro informando que nenhuma View com o nome de Index foi encontrada. Apesar de apresentar uma mensagem de erro, significa que nosso teste foi bem-sucedido, pois, afinal, não criamos a View.
 
-#### Associando uma Viewe Controller
+#### Associando uma View e Controller
 
 Anteriormente, criamos e testamos nosso Controller, porém a validação da execução foi feita por meio da tela de erro, informando que não existe uma `View` para ser exibida. Então, vamos criar a primeira View e validar a execução do nosso Controller. A View será uma página HTML com uma mensagem de texto informando o nome do Controller e da Action. 
 
@@ -307,3 +307,42 @@ Em 2011, integrado com a versão do ASP.NET MVC 3, foi lançado o view engine Ra
 - Permite escrever testes unitários apenas para a camada Views.
 - Uso do autocomplete (IntelliSense) para completar sintaxe de código no Visual Studio.
 - Facilita o uso de layouts predefinidos para todo o site.
+
+Para identificar uma expressão Razor em um arquivo `.cshtml`, basta observar blocos  de  código  iniciados pelo caractere `@`:
+
+``` HTML
+@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Homepage</title>
+</head>
+<body>
+  <div>
+    <h1>Nossa home-page.</h1>
+  </div>
+
+  @{
+    for (int i = 0; i < 10; i++)
+    {
+      <p>@i</p>
+    }
+  }
+</body>
+</html>
+```
+
+#### Tags Helpers
+
+O framework ASP.NET Core MVC 2 disponibiliza os componentes auxiliadores para o desenvolvimento dos componentes Views. Os Auxiliadores de Marcação fazem com que o código do lado do servidor participe da criação e renderização de elementos HTML. O `ImageTagHelper` interno pode acrescentar um número de versão ao nome da imagem, assim, `sempre que a imagem é alterada, o servidor gera uma nova versão` exclusiva para a imagem, de modo que os clientes tenham a garantia de obter a imagem atual. Existem auxiliadores para todos os elementos HTML comuns (por exemplo: formulários, links, imagens, botões e outros). Abaixo temos o quadro “Tags Helpers”, com os Tag Helpers disponíves no ASP.NET Core MVC 2:
+
+
+Para demonstração, a Figura Exemplo de uso de HtmlHelpers, apresenta a sintaxe para a criação de uma caixa de texto usando o helper fortemente tipado e o código HTML gerado depois que oview engine renderiza o código da View:
+
+
+#### Listando dados na tela (View)
+
