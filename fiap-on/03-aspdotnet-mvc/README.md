@@ -1700,7 +1700,7 @@ Esses conjuntos de classes, ou essa biblioteca, são chamados `ADO.NET (ActiveX 
 
 Um dos primeiros passos para o trabalho com banco de dados é a configuração inicial, que consiste em baixar as bibliotecas necessárias e configurar usuário, senha, endereço do banco de dados, porta e outros requisitos. 
 
-Em nosso exemplo, vamos usar o banco de dados `SQL Server`, assim é necessário baixar via `Nuget Package Manager` a biblioteca para o cliente de acesso ao SQL Server. Faça uma busca pelo nuget **Sytem.Data.SqlClient**, selecione e solicite a instalação.
+Em nosso exemplo, vamos usar o banco de dados `SQL Server`, assim é necessário baixar via `Nuget Package Manager` a biblioteca para o cliente de acesso ao SQL Server. Faça uma busca pelo nuget **System.Data.SqlClient**, selecione e solicite a instalação.
 
 Biblioteca para acesso do banco instalada, agora precisamos configurar o caminho do banco de dados, usuário, senha e os demais requisitos. Para não ficar repetindo as configurações em todas as classes de acesso ao banco de dados, vamos adicionar essas informações no arquivo de configuração do projeto `appsettings.json` uma única vez, assim, qualquer alteração será facilitada por estar um único ponto. 
 
