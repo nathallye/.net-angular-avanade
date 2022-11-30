@@ -2071,7 +2071,7 @@ namespace FiapSmartCityMVC.Controllers
 
       // Substituímos o return View()
       // pelo método de redirecionamento
-      return RedirectToAction("Index", "TypeProduct");
+      return RedirectToAction("Index", "ProductType");
     }
   }
 }
