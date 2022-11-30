@@ -2077,5 +2077,3 @@ namespace FiapSmartCityMVC.Controllers
 }
 ```
 
-### Filtros
-
