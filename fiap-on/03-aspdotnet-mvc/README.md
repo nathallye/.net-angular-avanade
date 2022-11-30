@@ -1742,7 +1742,7 @@ Agora que temos uma conexão configurada com nosso banco de dados e exemplos ADO
 ``` SQL
 use FiapSmartCityMVC
 
-CREATE TABLE TIPOPRODUTO (
+CREATE TABLE PRODUCTTYPE (
   TYPEID    int identity(1,1)   PRIMARY KEY,
   TYPEDESCRIPTION VARCHAR(250)  NOT NULL,
   MARKETED  CHAR(1)
