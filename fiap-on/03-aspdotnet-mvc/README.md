@@ -1342,7 +1342,7 @@ Até o momento, criamos um fluxo de navegação, adicionamos um cabeçalho e um 
 
 É preciso criar bloqueios que não permitama digitação de quaisquer dados nos formulários do sistema, para isso, serão apresentadas algumas técnicas com o uso de recursos do framework paraaimplementação de validações.
 
-##### Validação pelo Controller
+- ##### Validação pelo Controller
 
 Para as validações no `Controller`, tomaremos como base a `Action Cadastrar()` do ProductTypeController. Nela,será adicionada a validação que não permitirá o cadastro de um tipo sem que a descrição seja digitada.
 
@@ -1416,7 +1416,7 @@ Fluxo em execução e a mensagem de erro exibida na tela:
 
 Implementamos nossa primeira validação, porém cabe uma análise para aplicação futura. Nosso exemplo contou com apenas um atributo sendo validado, você consegue imaginar um formulário com dez campos para a digitação do usuário? Teríamos que criar dez ou mais condições de verificação, correto? No próximo bloco, vamos avaliar uma alteração para esse nosso problema.
 
-##### Validação com Data Annotations
+- ##### Validação com Data Annotations
 
 Usando anteriormente as validações pelo nosso `Controller`, elas são funcionais, porém apresentam alguns pontos negativos, como a digitação de muitas linhas de código que não são reaproveitáveis.
 
@@ -1696,7 +1696,7 @@ Esses conjuntos de classes, ou essa biblioteca, são chamados `ADO.NET (ActiveX 
   <img width="700" src="https://user-images.githubusercontent.com/86172286/204672988-2dc0249b-8282-4dc0-a949-4830de35e20b.png">
 </div>
 
-##### Configurando acesso
+- ##### Configurando acesso
 
 Um dos primeiros passos para o trabalho com banco de dados é a configuração inicial, que consiste em baixar as bibliotecas necessárias e configurar usuário, senha, endereço do banco de dados, porta e outros requisitos. 
 
@@ -1727,7 +1727,7 @@ Abra o arquivo `appsettings.json` (raiz do projeto) e acrescente a configuraçã
 
 Com a configuração pronta e disponível para acesso da nossa aplicação ao SQL Server, já é possível efetuar a conexão e executar comandos em nossa base.
 
-##### Componentes ADO.NET
+- ##### Componentes ADO.NET
 
 Para executar comandos no banco de dados com ADO.NET, precisamos de um conjunto de classes para executar os processos de abrir uma conexão, executar um comando e receber o resultado. Segue a lista das principais classes e suas características:
 
@@ -1735,7 +1735,7 @@ Para executar comandos no banco de dados com ADO.NET, precisamos de um conjunto 
 - **Command** – É o responsável pela execução de comando no banco de dados. Possui três métodos para a execução dos comandos. `ExecuteReader`, utilizado para recuperação de dados (por exemplo: Select);`ExecuteNonReader`, usado para comandos que não retornam dados (por exemplo: Insert); e `ExecuteScalar`, utilizado para comandos que retornam apenas uma informação (por exemplo: Max. Count). 
 - **DataReader** – É o responsável por ler os dados retornados dos objetos Command, permitindo percorrer a lista de registros retornados.
 
-##### Refatorando a aplicação
+- ##### Refatorando a aplicação
 
 Agora que temos uma conexão configurada com nosso banco de dados e exemplos ADO.NET de como acessar o banco e executar os comandos SQL mais comuns em aplicações comerciais, chegou a hora de remover os códigos simulados e conectar nosso aplicativo MVC em nossa base de dados. O primeiro passo é criar nossa tabela de `ProductType`, para isso use o script SQL abaixo:
 
@@ -1751,7 +1751,7 @@ CREATE TABLE TIPOPRODUTO (
 
 Tabela criada, podemos seguir para o segundo passo, que é a cri`ação de um namespace chamado Repository` que funcionará como nossa Data Access Laye. O namespace Repository `será o responsável pelas classes que irão acessar o banco de dados e executar os comandos`. Em seguida, já podemos executar o terceiro passo, que é criar uma classe com o nome `ProductType` Repository dentro da pasta Repository.
 
-##### Implementando ADO.NET
+- ##### Implementando ADO.NET
 
 Chegamos ao quarto passo e agora é a hora de definir quais operações precisamos ter com o nosso banco de dados. 
 
