@@ -1729,3 +1729,353 @@ Com a configuração pronta e disponível para acesso da nossa aplicação ao SQ
 
 ##### Componentes ADO.NET
 
+Para executar comandos no banco de dados com ADO.NET, precisamos de um conjunto de classes para executar os processos de abrir uma conexão, executar um comando e receber o resultado. Segue a lista das principais classes e suas características:
+
+- **Connection** – O objeto tem a função de gerar conexão com uma base de dados. É necessário informar a string de conexão.
+- **Command** – É o responsável pela execução de comando no banco de dados. Possui três métodos para a execução dos comandos. `ExecuteReader`, utilizado para recuperação de dados (por exemplo: Select);`ExecuteNonReader`, usado para comandos que não retornam dados (por exemplo: Insert); e `ExecuteScalar`, utilizado para comandos que retornam apenas uma informação (por exemplo: Max. Count). 
+- **DataReader** – É o responsável por ler os dados retornados dos objetos Command, permitindo percorrer a lista de registros retornados.
+
+##### Refatorando a aplicação
+
+Agora que temos uma conexão configurada com nosso banco de dados e exemplos ADO.NET de como acessar o banco e executar os comandos SQL mais comuns em aplicações comerciais, chegou a hora de remover os códigos simulados e conectar nosso aplicativo MVC em nossa base de dados. O primeiro passo é criar nossa tabela de `ProductType`, para isso use o script SQL abaixo:
+
+``` SQL
+use FiapSmartCityMVC
+
+CREATE TABLE TIPOPRODUTO (
+  TYPEID    int identity(1,1)   PRIMARY KEY,
+  TYPEDESCRIPTION VARCHAR(250)  NOT NULL,
+  MARKETED  CHAR(1)
+);
+```
+
+Tabela criada, podemos seguir para o segundo passo, que é a cri`ação de um namespace chamado Repository` que funcionará como nossa Data Access Laye. O namespace Repository `será o responsável pelas classes que irão acessar o banco de dados e executar os comandos`. Em seguida, já podemos executar o terceiro passo, que é criar uma classe com o nome `ProductType` Repository dentro da pasta Repository.
+
+##### Implementando ADO.NET
+
+Chegamos ao quarto passo e agora é a hora de definir quais operações precisamos ter com o nosso banco de dados. 
+
+Navegando pela funcionalidade de tipo de produto, é possível notar que precisamos listar os tipos da nossa base, inserir novos, excluir, alterar os existentes e consultar detalhes de um único tipo. No total,precisamos de cinco operações, sendo, assim, vamos precisar de cinco métodos na classe **ProductTypeRepository**.
+
+O Código-fonte Estrutura dos métodos do ProductTypeRepository mostraa declaração dos métodos para a classe Repository:
+
+``` C#
+public IList<TipoProduto> ReadAll()
+{
+  // Codificar e corrigir o retorno
+  return null;
+}
+
+public Read (int id)
+{
+  // Codificar e corrigir o retorno
+  return null;
+}
+
+public void Create(TipoProduto tipoProduto)
+{
+  // Codificar
+}
+
+public void Update(TipoProduto tipoProduto)
+{
+  // Codificar
+}
+
+public void Delete(int id)
+{
+  // Codificar
+}
+```
+
+A estrutura dos métodos está criada. É preciso escrever os comandos SQL e, utilizando os  recursos  do  ADO.NET, também os  códigos  para a execução  dos comandos:
+
+``` C#
+using FiapSmartCityMVC.Models;
+using System.Data.SqlClient;
+using System.Data;
+
+namespace FiapSmartCityMVC.Repository
+{
+  public class ProductTypeRepository
+  {
+    public IList<ProductType> ReadAll()
+    {
+      IList<ProductType> list = new List<ProductType>();
+
+      var connectionString = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json")
+                                .Build().GetConnectionString("FiapSmartCityConnection");
+
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+        String query =
+          "SELECT TYPEID, TYPEDESCRIPTION, MARKETED FROM PRODUCTTYPE  ";
+
+        SqlCommand command = new SqlCommand(query, connection);
+        connection.Open();
+        SqlDataReader dataReader = command.ExecuteReader();
+
+        while (dataReader.Read())
+        {
+          // Recupera os dados
+          ProductType productType = new ProductType();
+          productType.TypeId = Convert.ToInt32(dataReader["TYPEID"]);
+          productType.TypeDescription = dataReader["TYPEDESCRIPTION"].ToString();
+          productType.Marketed = dataReader["MARKETED"].Equals("1");
+
+          // Adiciona o modelo da lista
+          list.Add(productType);
+        }
+
+          connection.Close();
+
+      } // Finaliza o objeto connection
+
+      // Retorna a lista
+      return list;
+    }
+
+    public ProductType Read(int id)
+    {
+
+      ProductType productType = new ProductType();
+
+      var connectionString = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json")
+                                .Build().GetConnectionString("FiapSmartCityConnection");
+
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+        String query =
+          "SELECT TYPEID, TYPEDESCRIPTION, MARKETED FROM PRODUCTTYPE WHERE TYPEID = @TYPEID ";
+
+        SqlCommand command = new SqlCommand(query, connection);
+        command.Parameters.Add("@TYPEID", SqlDbType.Int);
+        command.Parameters["@TYPEID"].Value = id;
+        connection.Open();
+
+        SqlDataReader dataReader = command.ExecuteReader();
+
+        while (dataReader.Read())
+        {
+          // Recupera os dados
+          productType.TypeId = Convert.ToInt32(dataReader["TYPEID"]);
+          productType.TypeDescription = dataReader["TYPEDESCRIPTION"].ToString();
+          productType.Marketed = dataReader["MARKETED"].Equals("1");
+        }
+
+        connection.Close();
+
+      } // Finaliza o objeto connection
+
+        // Retorna a lista
+      return productType;
+    }
+
+    public void Create(ProductType tipoProduto)
+    {
+      var connectionString = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json")
+                                .Build().GetConnectionString("FiapSmartCityConnection");
+
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+        String query =
+          "INSERT INTO PRODUCTTYPE ( TYPEDESCRIPTION, MARKETED ) VALUES ( @descr, @comerc ) ";
+
+        SqlCommand command = new SqlCommand(query, connection);
+
+        // Adicionando o valor ao comando
+        command.Parameters.Add("@descr", SqlDbType.Text);
+        command.Parameters["@descr"].Value = tipoProduto.TypeDescription;
+        command.Parameters.Add("@comerc", SqlDbType.Text);
+        command.Parameters["@comerc"].Value = Convert.ToInt32(tipoProduto.Marketed);
+
+        // Abrindo a conexão com  o Banco
+        connection.Open();
+        command.ExecuteNonQuery();
+        connection.Close();
+      }
+    }
+
+    public void Update(ProductType productType)
+    {
+      var connectionString = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json")
+                                .Build().GetConnectionString("FiapSmartCityConnection");
+
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+        String query =
+          "UPDATE PRODUCTTYPE SET TYPEDESCRIPTION = @descr , MARKETED = @comerc WHERE TYPEID = @id  ";
+
+        SqlCommand command = new SqlCommand(query, connection);
+
+        // Adicionando o valor ao comando
+        command.Parameters.Add("@descr", SqlDbType.Text);
+        command.Parameters.Add("@comerc", SqlDbType.Text);
+        command.Parameters.Add("@id", SqlDbType.Int);
+        command.Parameters["@descr"].Value = productType.TypeDescription;
+        command.Parameters["@comerc"].Value = Convert.ToInt32(productType.Marketed);
+        command.Parameters["@id"].Value = productType.TypeId;
+
+        // Abrindo a conexão com  o Banco
+        connection.Open();
+        command.ExecuteNonQuery();
+        connection.Close();
+      }
+    }
+
+    public void Delete(int id)
+    {
+      var connectionString = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json")
+                                .Build().GetConnectionString("FiapSmartCityConnection");
+
+      using (SqlConnection connection = new SqlConnection(connectionString))
+      {
+        String query =
+          "DELETE PRODUCTTYPE WHERE TYPEID = @id  ";
+
+        SqlCommand command = new SqlCommand(query, connection);
+
+        // Adicionando o valor ao comando
+        command.Parameters.Add("@id", SqlDbType.Int);
+        command.Parameters["@id"].Value = id;
+
+        // Abrindo a conexão com  o Banco
+        connection.Open();
+        command.ExecuteNonQuery();
+        connection.Close();
+      }
+    }
+  }
+}
+```
+
+Agora podemos remover os códigos simulados em nosso componente Controller. Precisamos passar em todos os métodos para remover o código simulado e adicionar uma instância de `ProductTypeRepository` e a chamada do método correspondente para a operação desejada:
+
+``` C#
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
+using System.Diagnostics;
+
+using FiapSmartCityMVC.Models;
+using FiapSmartCityMVC.Repository;
+
+namespace FiapSmartCityMVC.Controllers
+{
+  public class ProductTypeController : Controller
+  {
+    private readonly ProductTypeRepository productTypeRepository;
+
+    public ProductTypeController() 
+    {
+      productTypeRepository = new ProductTypeRepository();
+    }
+
+    // ACTION INDEX
+    // Anotação de uso do Verb HTTP Get
+    [HttpGet]
+    public IActionResult Index()
+    {
+      var listType = productTypeRepository.GetAll();
+
+      // Retornando para View a lista de Tipos
+      return View(listType);
+    }
+
+    // ACTION CREATE
+    // Anotação de uso do Verb HTTP Get
+    [HttpGet]
+    public IActionResult Create()
+    {
+      return View(new ProductType());
+    }
+
+    // Anotação de uso do Verb HTTP Post
+    [HttpPost]
+    public IActionResult Create(ProductType productType)
+    {
+      // Se o ModelState não tem nenhum erro
+      if (ModelState.IsValid)
+      {
+        productTypeRepository.Create(productType);
+
+        // Gravação efetuada com sucesso.
+        // Gravando mensagem de sucesso na TempData
+        @TempData["message"] = "Tipo cadastrado com sucesso!";
+
+        return RedirectToAction("Index", "ProductType");
+
+        // Encontrou um erro no preenchimento do campo descriçao
+      }
+      else
+      {
+        // retorna para tela do formulário
+        return View(productType);
+      }
+    }
+
+    // ACTION UPDATE
+    [HttpGet]
+    public IActionResult Update(int Id)
+    {
+      var productType = productTypeRepository.GetOne(Id);
+
+      // Retorna para a View o objeto modelo 
+      // com as propriedades preenchidas com dados do banco de dados 
+      return View(productType);
+    }
+
+    [HttpPost]
+    public IActionResult Update(ProductType productType)
+    {
+      if (ModelState.IsValid)
+      {
+        productTypeRepository.Update(productType);
+
+        TempData["message"] = "Tipo alterado com sucesso!";
+        return RedirectToAction("Index", "ProductType");
+      }
+      else
+      {
+        return View(productType);
+      }
+    }
+
+    // ACTION READ
+    [HttpGet]
+    public IActionResult Read(int Id)
+    {
+      var productType = productTypeRepository.GetOne(Id);
+
+      // Retorna para a View o objeto modelo 
+      // com as propriedades preenchidas com dados do banco de dados 
+      return View(productType);
+    }
+
+    // ACTION DELETE
+    [HttpGet]
+    public IActionResult Delete(int Id)
+    {
+      productTypeRepository.Delete(Id);
+
+      TempData["message"] = "Tipo removido com sucesso!";
+
+      // Substituímos o return View()
+      // pelo método de redirecionamento
+      return RedirectToAction("Index", "TypeProduct");
+    }
+  }
+}
+```
+
+### Filtros
+
