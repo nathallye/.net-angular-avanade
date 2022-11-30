@@ -26,9 +26,9 @@ Com a utilização dessa tabela anteriormente criada, vamos ter um problema no u
 use FiapSmartCityMVC;
 
 CREATE TABLE PRODUCTTYPEEF (
-	TYPEID    INT identity(1,1)   PRIMARY KEY,
-	TYPEDESCRIPTION VARCHAR(250)  NOT NULL,
-	MARKETED  CHAR(1)
+	TYPEID          INT identity(1,1)   PRIMARY KEY,
+	TYPEDESCRIPTION VARCHAR(250)        NOT NULL,
+	MARKETED        CHAR(1)
 );
 ```
 
@@ -753,22 +753,164 @@ namespace FiapSmartCityMVC.Repository
 
 ## Relacionamentos
 
-Chegamos ao ponto de avançarmos nossas pesquisas fazendo ligações entre duas informações relacionadas. Até aqui trabalhamosapenas com uma entidade que foi a TipoProduto, assim, para seguirmos, será necessária a criação de uma nova entidade. A nova entidade receberá o nome de Produto e será associada ao TipoProduto, pois cada produto deve ser qualificado com um tipo. O diagrama abaixo apresenta essa ligação:
+Chegamos ao ponto de avançarmos nossas pesquisas fazendo ligações entre duas informações relacionadas. Até aqui trabalhamos apenas com uma entidade que foi a `ProductTypeEF`, assim, para seguirmos, será necessária a criação de uma nova entidade. 
+
+A nova entidade receberá o nome de `ProductEF` e será associada ao `ProductTypeEF`, `pois cada produto deve ser qualificado com um tipo`. O diagrama abaixo apresenta essa ligação:
+
+
+
+Como estamos usando a estratégia de **Database First**, é necessária a criação da tabela no banco de dados. O código abaixo apresenta o script SQL para criação da tabela e a chave estrangeira para a tabela de tipo de produto:
+
+``` SQL
+use FiapSmartCityMVC;
+
+CREATE TABLE PRODUCTEF (
+  PRODUCTID				     INT identity(1,1)    PRIMARY KEY,
+  PRODUCTNAME			     VARCHAR(70)          NOT NULL,
+  FEATURES				     VARCHAR(100)         NOT NULL,
+  AVERAGEPRICE			   money,
+  LOGOTIPO      		   VARCHAR(200)         NOT NULL,
+  ACTIVE  				     INT,
+  TYPEID				       INT,
+  CONSTRAINT FK_TYPEID FOREIGN KEY (TYPEID) REFERENCES PRODUCTTYPEEF(TYPEID)
+);
+```
+
+Tabela criada, precisamos anotar nosso modelo e criar o `DbSet` para a manipulação. As anotações usadas são as mesmas do exemplo anterior: `[Table]`, `[Key]` e `[Column]`, mas a classe de modelo terá duas particularidades, são elas:
+
+- **(Foreing Key)** – Atributo que representa a chave estrangeira, será mapeado como uma coluna.
+- **(Navigation Property)** – Atributo que representa o modelo da tabela relacionada, e não receberá nenhuma anotação.
+
+A seguir temos a versão final da classe de modelo `ProductEF`:
+
+``` C#
+using FiapSmartCityMVC.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FiapSmartCityMVC.Models
+{
+  [Table("PRODUCTEF")]
+  public class ProductEF
+  {
+    [Key]
+    [Column("PRODUCTID")]
+    public int ProductId { get; set; }
+
+    [Column("PRODUCTNAME")]
+    public string ProductName { get; set; }
+
+    [Column("FEATURES")]
+    public string Features { get; set; } // Características
+
+    [Column("AVERAGEPRIVE")]
+    public double AveragePrice { get; set; } // preço médio
+
+    [Column("LOGOTIPO")]
+    public string Logotipo { get; set; }
+
+    [Column("ACTIVE")]
+    public bool Active { get; set; } // ativos
+
+    // Foreing Key
+    [Column("TYPEID")]
+    // Referência para classe TipoProduto/ProductType
+    public int TypeId { get; set; }
+  }
+}
+```
+
+Em nossa classe de contexto **(DataBaseContext)** é preciso adicionar a propriedade `DbSet` para o modelo produto:
+
+``` C#
+public DbSet<ProductEF> ProductEF { get; set; }
+```
+
+### Relacionamento umpara um
+
+O relacionamento um para um será o primeiro demonstrado como exemplo. O objetivo será buscar um produto em nossa base e, em seu retorno, trazer os dados do tipo a que está associado (Id e descrição). Como estamos falando do domínio “Produto”, para organizar nossa aplicação vamos adicionar uma nova classe no **namespace Repository**, o nome será `ProductRepositoryEF` e a partir dela vamos adicionar os métodos para buscas avançadas. 
+
+A busca do produto será feita pelo método a partir de dois **Extension Methods**. O primeiro é o método `Include`, que recebe como parâmetro o nome da `Navigation Property` declarado no modelo. O segundo é o método `FirstOrDefault`, responsável por filtrar o produto com o identificador desejado:
+
+``` C#
+public Produto rEAD(int id)
+{
+	var prod = context.ProductEF.Include(t => t.Type)
+		.FirstOrDefault(p => p.ProductId == id);
+	return prod;
+}
+```
+
+Veja na figura a ligação entre as entidades com o método `Include`, o nome passado como parâmetro para o método é o nome do atributo definido para ser a Navigation Property:
 
 
 
 
-Como estamos usando a estratégia de Database First,é necessária a criação da tabela no banco de dados. O código abaixo apresenta o script Oracle para criação da tabela e a chave estrangeira para a tabela de tipo de produto. Segue:
+Para validar a consulta, pode ser feita uma chamada do método **BuscarPorId** e com a opção **QuickWatch** do Debug é possível verificar o conteúdo do objeto Produto retornado na consulta:
 
 
 
+### Relacionamento um para muitos
 
-Tabela criada, precisamos anotar nosso modelo e criar o DbSetpara a manipulação. As anotações usadas são as mesmas do exemplo anterior: [Table], [Key] e [Column], mas a classe de modelo terá duas particularidades, são elas:(Foreing Key)–Atributo que representa a chave estrangeira, será mapeado como uma coluna.(Navigation Property)–Atributo que representa o modelo da tabela relacionada, e não receberá nenhuma anotação.
+Para representar esse relacionamento, vamos fazer o processo inverso, assim, dado um tipo de produto, vamos recuperar todos os produtos associados. O código para executar essa operação é semelhante ao anterior, ou seja, devemos usar o método `Include` para recuperar a lista produto. 
 
+Porém, antes de implementar o código para recuperar as informações, faz-se necessário criar uma *Navigation Property* na classe `ProductTypeEF` que será uma lista de elementos `ProductEF`:
 
-Veja no código a seguir a versão final da classe de modelo Produto:
+``` C#
+using FiapSmartCityMVC.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace FiapSmartCityMVC.Models
+{
+  [Table("PRODUCTEF")]
+  public class ProductEF
+  {
+    [Key]
+    [Column("PRODUCTID")]
+    public int ProductId { get; set; }
 
-Em nossa classe de contexto (DataBaseContext) é preciso adicionar a propriedade DbSetpara o modelo produto. Veja:
+    [Column("PRODUCTNAME")]
+    public string ProductName { get; set; }
+
+    [Column("FEATURES")]
+    public string Features { get; set; } // Características
+
+    [Column("AVERAGEPRIVE")]
+    public double AveragePrice { get; set; } // preço médio
+
+    [Column("LOGOTIPO")]
+    public string Logotipo { get; set; }
+
+    [Column("ACTIVE")]
+    public bool Active { get; set; } // ativos
+
+    // Foreing Key
+    [Column("TYPEID")]
+    // Referência para classe TipoProduto/ProductType
+    public int TypeId { get; set; }
+
+    // Navigation Property
+    public ProductType Tipo { get; set; 
+  }
+}
+```
+
+Agora podemos implementar nossa consulta. Vamos declarar o método ListarProdutosPorTipo na classe ProdutoRepository, que fará uma consulta a uma entidade tipo de produto, com o método Include devemos adicionar a entidade de produto para conseguir operar o relacionamento entre os elementos.Segue a implementação do método:
+
+``` C#
+public IList<ProductEF> BrowseProductsByType(int typeId) // ConsultarProdutosPorTipo
+{
+	// Consulta a lista de produtos de um determinado tipo.
+	var productType =
+		context.ProductType
+			.Include(t => t.Products)
+			.FirstOrDefault(t => t.TypeId == typeId);
+
+	return productType.Products;
+}
+```
+
+A abaixo podemos visualizar a janela **QuickWatch** da execução do método **BrowseProductsByType** com o conteúdo da lista produtos preenchidos:
 
 
