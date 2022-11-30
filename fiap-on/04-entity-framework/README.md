@@ -40,7 +40,9 @@ Tudo pronto para a implementação!
 
 Para que nossa aplicação possa utilizar as facilidades do framework EF Core, precisamos criar a classe de contexto, ou classe de acesso à base. A `classe de contexto` será uma subclasse de **System.Data.Entity.DbContext**, que tem a responsabilidade de interação com os objetos e com o banco de dados. Dentro do namespace `Repository`, adicione uma pasta com o nome `Context`, em seguida adicione uma classe com o nome de `DataBaseContext`:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204895549-c15e0386-6ef1-4fee-8adf-4ddb54d3787e.png">
+</div>
 
 Agora é necessário declarar a classe `DataBaseContext` como uma subclasse de `System.Data.Entity.DbContext`:
 
@@ -757,7 +759,9 @@ Chegamos ao ponto de avançarmos nossas pesquisas fazendo ligações entre duas 
 
 A nova entidade receberá o nome de `ProductEF` e será associada ao `ProductTypeEF`, `pois cada produto deve ser qualificado com um tipo`. O diagrama abaixo apresenta essa ligação:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204894899-2ccdebee-daab-4314-9bde-708faa638ea0.png">
+</div>
 
 Como estamos usando a estratégia de **Database First**, é necessária a criação da tabela no banco de dados. O código abaixo apresenta o script SQL para criação da tabela e a chave estrangeira para a tabela de tipo de produto:
 
@@ -843,12 +847,15 @@ public Produto rEAD(int id)
 
 Veja na figura a ligação entre as entidades com o método `Include`, o nome passado como parâmetro para o método é o nome do atributo definido para ser a Navigation Property:
 
-
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204895026-325f1b9b-c3b1-419e-b1b6-00d5db0a362b.png">
+</div>
 
 Para validar a consulta, pode ser feita uma chamada do método **BuscarPorId** e com a opção **QuickWatch** do Debug é possível verificar o conteúdo do objeto Produto retornado na consulta:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204895106-b438d7b3-54c6-4b12-b4a4-57470494e499.png">
+</div>
 
 ### Relacionamento um para muitos
 
@@ -913,4 +920,6 @@ public IList<ProductEF> BrowseProductsByType(int typeId) // ConsultarProdutosPor
 
 A abaixo podemos visualizar a janela **QuickWatch** da execução do método **BrowseProductsByType** com o conteúdo da lista produtos preenchidos:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/204895224-c406f7f9-0c0d-47e1-8bf8-712e09668911.png">
+</div>
