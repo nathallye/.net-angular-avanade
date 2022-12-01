@@ -760,7 +760,7 @@ Chegamos ao ponto de avançarmos nossas pesquisas fazendo ligações entre duas 
 A nova entidade receberá o nome de `ProductEF` e será associada ao `ProductTypeEF`, `pois cada produto deve ser qualificado com um tipo`. O diagrama abaixo apresenta essa ligação:
 
 <div align="center">
-  <img width="700" src="https://user-images.githubusercontent.com/86172286/204894899-2ccdebee-daab-4314-9bde-708faa638ea0.png">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205099831-4f28a300-fdf0-45a8-a977-680110bfa28f.png">
 </div>
 
 Como estamos usando a estratégia de **Database First**, é necessária a criação da tabela no banco de dados. O código abaixo apresenta o script SQL para criação da tabela e a chave estrangeira para a tabela de tipo de produto:
@@ -837,7 +837,7 @@ O relacionamento um para um será o primeiro demonstrado como exemplo. O objetiv
 A busca do produto será feita pelo método a partir de dois **Extension Methods**. O primeiro é o método `Include`, que recebe como parâmetro o nome da `Navigation Property` declarado no modelo. O segundo é o método `FirstOrDefault`, responsável por filtrar o produto com o identificador desejado:
 
 ``` C#
-public Produto rEAD(int id)
+public Produto Read(int id)
 {
 	var prod = context.ProductEF.Include(t => t.Type)
 		.FirstOrDefault(p => p.ProductId == id);
