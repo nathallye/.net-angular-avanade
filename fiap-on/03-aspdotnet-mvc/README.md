@@ -1693,7 +1693,7 @@ Chegamos ao momento de conectar nosso projeto ao nosso banco de dados e remover 
 Esses conjuntos de classes, ou essa biblioteca, são chamados `ADO.NET (ActiveX Data Objects)`. Para aqueles que são familiarizados com a linguagem Java,  podemos comparar o ADO.NET com as bibliotecas java JDBC. `Suas classes são acessadas pelo namespace System.Data`. A Figura Classes ADO.NET apresenta o conceito das bibliotecas ADO.NET:
 
 <div align="center">
-  <img width="700" src="https://user-images.githubusercontent.com/86172286/204672988-2dc0249b-8282-4dc0-a949-4830de35e20b.png">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205100407-fc4a1309-7f32-4549-83ee-05983c7dcef8.png">
 </div>
 
 - ##### Configurando acesso
