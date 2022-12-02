@@ -75,7 +75,7 @@ Sigla para *Uniform Resource Name*(Nome de Recursos Universal), é o `nome do re
 URI é a *composição do Protocolo* (**http:// ou https://**), a *localização do recurso* (URL - **fiap.com.br**) e do *nome do recurso* (URN - **/online/graduacao/bacharelado/sistemas-de-informacao/**).
 
 <div align="center">
-  <img width="700" src="https://user-images.githubusercontent.com/86172286/205185960-c2fd83e8-17e3-44e4-8042-8ecc87ed61c0.png">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205186426-99c90376-8195-4702-b202-4cf59f264a5b.png">
 </div>
 
  ### Verbos HTTP
