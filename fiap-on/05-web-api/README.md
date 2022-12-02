@@ -210,3 +210,105 @@ namespace FiapSmartCityWebAPI.Models
 Temos dois modelos definidos e criados em nosso projeto, precisamos agora desenvolveros mecanismos para alimentar com dados. Vamos iniciar criando nossa Camada **DAL** e depois nossos controladores, que serão os responsáveis pelas requisições àAPI e também pela validação do fluxo dos nossos serviços. 
 
 ### DAL
+
+*Data Access Layer* (Objeto de Acesso a Dados) `é um padrão para persistência ou consulta de dados, separando as regras de negócio das regras de acesso a banco de dados`. Nesse exemplo de ASP.NET Web API, trabalharemos com `ProductType` e `Products` relacionado ao mesmo. Segue o exemplo do código da classe `DAL.cs`, que irá simular nosso banco de dados:
+
+``` C#
+using FiapSmartCityWebAPI.Models;
+
+namespace FiapSmartCityWebAPI.DAL
+{
+  public class ProductTypeDAL
+  {
+    // Lista criada para armezenar uma lista de Tipo de produto simulando o banco de dados
+    private static Dictionary<long, ProductType> databaseProductType = new Dictionary<long, ProductType>();
+    private static int counterDatabase = 2;
+
+    // Construtor estático serve para criar objetos do Tipo de Produto e Produto
+    // Simulando o banco de dados
+    static TipoProdutoDAL()
+    {
+
+      ProductType EnergiaSolar = new ProductType();
+      EnergiaSolar.TypeId = 1;
+      EnergiaSolar.TypeDescription = "Energia Solar";
+      EnergiaSolar.Marketed = true;
+
+      Product FotoVoltatica = new Product();
+      FotoVoltatica.ProductId = 800;
+      FotoVoltatica.ProductName = "Energia Solar Fotovoltatica";
+      FotoVoltatica.Features = @"A tecnologia fotovoltaica (FV) 
+                              converte diretamente os raios 
+                              solares em eletricidade";
+      FotoVoltatica.AveragePrice = 4000.00;
+      FotoVoltatica.Logotipo = @"data:image/jpeg;base64";
+      FotoVoltatica.Active = true;
+      FotoVoltatica.ProductTypeId = EnergiaSolar.TypeId = 1;
+
+      //Referência do Novo Produto 
+      EnergiaSolar.Add(FotoVoltatica);
+
+      ProductType tinta = new ProductType();
+      tinta.TypeId = 2;
+      tinta.TypeDescription = "Tinta";
+      tinta.Marketed = true;
+
+      //Inserer Registro no Banco
+      databaseProductType.Add(1, EnergiaSolar);
+      databaseProductType.Add(2, tinta);
+    }
+
+    public void Create(ProductType ProductType)
+    {
+      counterDatabase++;
+      ProductType.TypeId = counterDatabase;
+      databaseProductType.Add(counterDatabase, ProductType);
+    }
+
+    public ProductType Read(int TypeId)
+    {
+      return databaseProductType[TypeId];
+    }
+
+    public IList<ProductType> List()
+    {
+      return new List<ProductType>(databaseProductType.Values);
+    }
+
+    public void Delete(int TypeId)
+    {
+      databaseProductType.Remove(TypeId);
+    }
+
+    public void Update(ProductType productType)
+    {
+      databaseProductType[productType.TypeId] = productType;
+    }
+  }
+}
+```
+
+**DICA:** Os componentes DAL podem ser usados do projeto FiapSmartCity (MVC e EntityFramework), basta baixar as bibliotecas do EF e configurar o acesso ao banco de dados no projeto de Web API.
+
+### Controllers
+
+Em um projeto ASP.NET Web API, `toda a requisição será recebida e gerenciada por um Controller`, que é `responsável por receber o pedido, acionar os componentes necessários e gerar a resposta para o navegador`. 
+
+Chegou a hora de criarmos nossa Controller.
+
+Com um `clique no botão direito na pasta Controllers` do projeto, selecione a opção `Add` > `Controller`. 
+
+
+
+O Visual Studio apresentará a `janela Add Scaffold`, selecione, então, a opção “Web API Controller - Empty”.
+
+
+
+
+O próximo passo é definir o `nome do controlador`, que será `ProductTypeController` em nosso projeto. Clique no botão `Add` e aguarde a criação. 
+Lembre-se, todo controller deverá ter o sufixo *Controller* em seu nome. Pronto! Primeiro controlador criado no projeto. 
+
+Agora podemos observar a classe criada no namespace Controllers. No código da classe Controller, é possível ver a importação do namespace **System.Web.Http** e a extensão da classe **System.Web.Http.ApiController**.
+
+
+
