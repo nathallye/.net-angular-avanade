@@ -465,7 +465,8 @@ namespace FiapSmartCityWebAPI.Controllers
     }
 
     // POST localhost:7188/api/FiapSmartCityWebAPI/ProductType
-    [HttpPost(Name = "ProductType")]
+    [HttpPost]
+    [Route("ProductType")]
     public IActionResult Post([FromBody] ProductType productType)
     {
       try
@@ -539,7 +540,8 @@ namespace FiapSmartCityWebAPI.Controllers
     }
 
     // POST localhost:7188/api/FiapSmartCityWebAPI/ProductType
-    [HttpPost(Name = "ProductType")]
+    [HttpPost]
+    [Route("ProductType")]
     public IActionResult Post([FromBody] ProductType productType)
     {
       try
@@ -561,7 +563,8 @@ namespace FiapSmartCityWebAPI.Controllers
     }
 
     // DELETE localhost:7188/api/FiapSmartCityWebAPI/ProductType?id={}
-    [HttpDelete(Name = "ProductType")]
+    [HttpDelete]
+    [Route("ProductType/{id}")]
     public IActionResult Delete(int id)
     {
       try
@@ -628,7 +631,8 @@ namespace FiapSmartCityWebAPI.Controllers
     }
 
     // POST localhost:7188/api/FiapSmartCityWebAPI/ProductType
-    [HttpPost(Name = "ProductType")]
+    [HttpPost]
+    [Route("ProductType")]
     public IActionResult Post([FromBody] ProductType productType)
     {
       try
@@ -650,7 +654,8 @@ namespace FiapSmartCityWebAPI.Controllers
     }
 
     // DELETE localhost:7188/api/FiapSmartCityWebAPI/ProductType?id={}
-    [HttpDelete(Name = "ProductType")]
+    [HttpDelete]
+    [Route("ProductType/{id}")]
     public IActionResult Delete(int id)
     {
       try
@@ -666,7 +671,8 @@ namespace FiapSmartCityWebAPI.Controllers
     }
 
     // PUT or PATCH localhost:7188/api/FiapSmartCityWebAPI/ProductType?id={}
-    [HttpPut(Name = "ProductType")]
+    [HttpPut]
+    [Route("ProductType/{id}")]
     public IActionResult Put([FromBody] ProductType productType)
     {
       try
@@ -685,3 +691,86 @@ namespace FiapSmartCityWebAPI.Controllers
 ```
 
 A requisição PUT é muito similar à requisição POST, pois o seu conteúdo precisa ser enviado no corpo da requisição. O único ponto deatenção é que, no conteúdo dos dados enviados no método PUT, é preciso ter o identificador ou Chave Primária que será usado para atualizar o registro correto.
+
+## Consumir uma API REST
+
+### Padrão de retorno JSON
+
+Por padrão, uma ASP.NET Web API retorna suas respostas com a formatação dos dados JSON, assim como muitas das API disponíveis para uso no mercado. 
+
+O padrão JSON se comporta melhor em alguns cenários, por exemplo, nas requisições POST e PUT, onde temos que inserir os dados que são cadastrados ou alterados no corpo da requisição, em muitos casos, esses dados apresentam entidades com muitos atributos. 
+
+Uma das vantagens de uma ASP.NET Web API é que, independentemente do formato da entradados dados, ela funcionará perfeitamente. 
+
+### Criar a aplicação Cliente
+
+Para esse exemplo, vamos precisar de uma aplicação do tipo Console C#. O nome da nossa aplicação será `FiapSmartCityClient` e terá como objetivo a inserção dos novos tipos de produtos e a consulta dos tipos cadastrados. Assim, vamos fazer a execução das APIS no método POST e GET, e para as duas execuções vamos trabalhar apenas com dados no formato JSON.
+
+**Obs.:** Nos exemplos da aplicação Client, vamos precisar abrir duas janelas do Visual Studio. A primeira será para abrir e executar o projeto de *API*, a segunda será usada para codificaçãoe execução do *Client*.
+
+#### Cliente de requisição GET com JSON
+
+A forma mais simples de executar requisições a APIs com C# é usando as classes **System.Net.Http.HttpClient** e **System.Net.Http.HttpResponseMessage**. A classe `HttpClient` é a responsável em `criar a conexão com o recurso e executar o método solicitado`. A classe `HttpResponseMessage` fica com a responsabilidade de `coletar e deixar o conteúdo da resposta disponível para o uso e manipulação`. 
+
+O exemplo seguinte executará o método GET da nossa API(FiapSmartCityWebAPI) no recurso `ProductType` , e com sucesso na execução será exibido o conteúdo JSON com todos os registros cadastrados:
+
+``` C#
+using System;
+using System.Text;
+
+namespace FiapSmartCityClient
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      get();
+      Console.Read();
+    }
+
+    static void get()
+    {
+      // Criando um objeto Cliente para conectar com o recurso.
+      System.Net.Http.HttpClient client = new HttpClient();
+
+      // Execute o método Get passando a url da API e salvando o resultado.
+      // em um objeto do tipo HttpResponseMessage
+      System.Net.Http.HttpResponseMessage response =
+        client.GetAsync("https://localhost:7188/api/FiapSmartCityWebAPI/ProductType").Result;
+
+      // Verifica se o Status Code é 200.
+      if (response.IsSuccessStatusCode)
+      {
+        // Recupera o conteúdo JSON retornado pela API
+        string conteudo = response.Content.ReadAsStringAsync().Result;
+
+        // Imprime o conteúdo na janela Console.
+        Console.Write(conteudo.ToString());
+      }
+    }
+  }
+}
+```
+
+Segue a janela do aplicativo client em execução e a exibição do conteúdo JSON retornado pela API:
+
+
+
+### Requisição POST com JSON
+
+Seguindo a mesma linha da requisição GET, vamos usar a classe `HttpClient` para exemplificar uma execução do método POST. Porém, como é sabido, em uma requisição do tipo POST é necessário enviar o conteúdo (JSON) no corpo da mensagem, assim, vamos fazer o uso da classe `System.Web.Net.StringContent` para transformar no texto em um conteúdo JSON que será entendido pelo `Controller` da Web API:
+
+``` C#
+
+```
+
+Segue a imagem com o resultado da execução:
+
+
+
+Como podemos ver, o HTTP Status Code retornou sucesso, e na segunda linha impressa no resultado temos no valor a propriedade Location, isto é, o caminho para consultar os dados do novo ProductTYpe com uma requisição GET.
+
+
+### Transformação de dados (Parse)
+
+O conceito de Parse significa transformar dados de diferentes tipos na orientação a objeto, é possível transformar dados string em número, dados numéricos do tipo double ou float em números inteirose assim uma infinidade de transformações.Mas qual é a relação entre Parse e WebAPI? Seguindo o texto,será fácil de entender a relação e também a simplicidade que irá proporcionar algumas transformações em nosso client de API.Antes de apresentar as transformações, vamos criar em nosso projeto FiapSmartCityClient o namespace Models e adicionar duas classes, TipoProduto e Produto.Essas classes devem ter os atributos do mesmo tipo e nomes usados nos projetos FiapSmartCity (MVC) e FiapSmartCityWebApi.A figura a seguir apresenta o conteúdo das duas classesdemodelo:
