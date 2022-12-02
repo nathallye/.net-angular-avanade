@@ -761,7 +761,66 @@ Segue a janela do aplicativo client em execução e a exibição do conteúdo JS
 Seguindo a mesma linha da requisição GET, vamos usar a classe `HttpClient` para exemplificar uma execução do método POST. Porém, como é sabido, em uma requisição do tipo POST é necessário enviar o conteúdo (JSON) no corpo da mensagem, assim, vamos fazer o uso da classe `System.Web.Net.StringContent` para transformar no texto em um conteúdo JSON que será entendido pelo `Controller` da Web API:
 
 ``` C#
+using System;
+using System.Text;
 
+namespace FiapSmartCityClient
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      get();
+      post();
+      Console.Read();
+    }
+
+    static void get()
+    {
+      // Criando um objeto Cliente para conectar com o recurso.
+      System.Net.Http.HttpClient client = new HttpClient();
+
+      // Execute o método Get passando a url da API e salvando o resultado.
+      // em um objeto do tipo HttpResponseMessage
+      System.Net.Http.HttpResponseMessage response =
+        client.GetAsync("https://localhost:7188/api/FiapSmartCityWebAPI/ProductType").Result;
+
+      // Verifica se o Status Code é 200.
+      if (response.IsSuccessStatusCode)
+      {
+        // Recupera o conteúdo JSON retornado pela API
+        string conteudo = response.Content.ReadAsStringAsync().Result;
+
+        // Imprime o conteúdo na janela Console.
+        Console.Write(conteudo.ToString());
+      }
+    }
+
+    static void post()
+    {
+      // Criando um objeto Cliente para conectar com o recurso.
+      System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+
+      // Conteúdo do tipo de produto em JSON.
+      String json = "{ 'TypeID': 100, 'TypeDescription': 'Robo de Limpeza', 'Marketed': true }";
+
+      // Convertendo texto para JSON StringContent. 
+      StringContent content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+
+      // Execute o método POST passando a url da API 
+      // e envia o conteúdo do tipo StringContent.
+      System.Net.Http.HttpResponseMessage response =
+        client.PostAsync("https://localhost:7188/api/FiapSmartCityWebAPI/ProductType", content).Result;
+
+      // Verifica que o POST foi executado com sucesso
+      if (response.IsSuccessStatusCode)
+      {
+        Console.WriteLine("Tipo do produto criado com sucesso");
+        Console.Write("Link para consulta: " + response.Headers.Location);
+      }
+    }
+  }
+}
 ```
 
 Segue a imagem com o resultado da execução:
@@ -773,4 +832,11 @@ Como podemos ver, o HTTP Status Code retornou sucesso, e na segunda linha impres
 
 ### Transformação de dados (Parse)
 
-O conceito de Parse significa transformar dados de diferentes tipos na orientação a objeto, é possível transformar dados string em número, dados numéricos do tipo double ou float em números inteirose assim uma infinidade de transformações.Mas qual é a relação entre Parse e WebAPI? Seguindo o texto,será fácil de entender a relação e também a simplicidade que irá proporcionar algumas transformações em nosso client de API.Antes de apresentar as transformações, vamos criar em nosso projeto FiapSmartCityClient o namespace Models e adicionar duas classes, TipoProduto e Produto.Essas classes devem ter os atributos do mesmo tipo e nomes usados nos projetos FiapSmartCity (MVC) e FiapSmartCityWebApi.A figura a seguir apresenta o conteúdo das duas classesdemodelo:
+O conceito de Parse significa transformar dados de diferentes tipos na orientação a objeto, é possível transformar dados string em número, dados numéricos do tipo double ou float em números inteirose assim uma infinidade de transformações.
+
+Mas qual é a relação entre Parse e WebAPI? 
+
+Seguindo o texto, será fácil de entender a relação e também a simplicidade que irá proporcionar algumas transformações em nosso client de API. Antes de apresentar as transformações, vamos criar em nosso projeto FiapSmartCityClient o namespace `Models` e adicionar duas classes, `ProductType` e `Product`. Essas classes devem ter os atributos do mesmo tipo e nomes usados nos projetos FiapSmartCity (MVC) e FiapSmartCityWebApi.
+
+
+
