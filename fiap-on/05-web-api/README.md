@@ -298,17 +298,21 @@ Chegou a hora de criarmos nossa Controller.
 
 Com um `clique no botão direito na pasta Controllers` do projeto, selecione a opção `Add` > `Controller`. 
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205189221-da1f08c3-4434-49d7-8084-8750357cb5b5.png">
+</div>
 
 O Visual Studio apresentará a `janela Add Scaffold`, selecione, então, a opção “Web API Controller - Empty”.
 
-
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205189266-426cdbb0-01c3-44cd-b4e3-2482de75a145.png">
+</div>
 
 O próximo passo é definir o `nome do controlador`, que será `ProductTypeController` em nosso projeto. Clique no botão `Add` e aguarde a criação. 
 Lembre-se, todo controller deverá ter o sufixo *Controller* em seu nome. Pronto! Primeiro controlador criado no projeto. 
 
 Agora podemos observar a classe criada no namespace Controllers. No código da classe Controller, é possível ver a importação do namespace **System.Web.Http** e a extensão da classe **System.Web.Http.ApiController**.
 
-
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205189328-ede55f9c-42dd-4278-b96f-ef6467672e5e.png">
+</div>
