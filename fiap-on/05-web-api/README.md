@@ -830,7 +830,7 @@ Segue a imagem com o resultado da execução:
   <img width="700" src="https://user-images.githubusercontent.com/86172286/205383339-5f684d4f-0f82-446d-9cc3-6901d1426473.png">
 </div>
 
-Como podemos ver, o HTTP Status Code retornou sucesso, e na segunda linha impressa no resultado temos no valor a propriedade Location, isto é, o caminho para consultar os dados do novo ProductTYpe com uma requisição GET.
+Como podemos ver, o HTTP Status Code retornou sucesso, e na segunda linha impressa no resultado temos no valor a propriedade Location, isto é, o caminho para consultar os dados do novo ProductType com uma requisição GET.
 
 ### Transformação de dados (Parse)
 
@@ -839,3 +839,136 @@ O conceito de Parse significa transformar dados de diferentes tipos na orientaç
 Mas qual é a relação entre Parse e WebAPI? 
 
 Seguindo o texto, será fácil de entender a relação e também a simplicidade que irá proporcionar algumas transformações em nosso client de API. Antes de apresentar as transformações, vamos criar em nosso projeto FiapSmartCityClient o namespace `Models` e adicionar duas classes, `ProductType` e `Product`. Essas classes devem ter os atributos do mesmo tipo e nomes usados nos projetos FiapSmartCity (MVC) e FiapSmartCityWebApi.
+
+## Desserialização
+
+O objetivo desse conceito é bem simples. Desserialização significa transformar conteúdo texto ou JSON em objetos C#.
+
+Podemos usar como exemplo a requisição GET da API ProductType. Se a requisição for efetuada com sucesso, a API retorna uma lista dos objetos com suas propriedadese valores em formato texto, que é composto por um conteúdo JSON. Capturar esse texto e manipular essa informação textual não é um processo muito simples e viável. 
+
+Imagine transformar o conteúdo texto em objetos C#. Imaginou?
+
+Pois bem, é exatamente isso que o conceito de desserialização faz para o desenvolvedor. Com ele, é possível transformar texto com conteúdo JSON em objetos C#, por meio da biblioteca `Newtonsoft.Json` e da classe `JsonConvert`. 
+
+Antes de iniciar o código, é necessário importar a biblioteca `Newtonsoft.Json` no projeto usando o `Nuget Package Manager`. 
+
+Agora, com uma linha de código, é possível transformar o resultado de um método GET em um objeto C#. O exemplo abaixo apresenta o código para recuperar os dados da Web API, desserializar para uma lista de `ProductType` e, por fim, interagir sobre a lista e imprimir os resultados:
+
+``` C#
+using System;
+using System.Text;
+using Newtonsoft.Json;
+
+namespace FiapSmartCityClient
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      get();
+      getdesserializado();
+      
+      post();
+      
+      Console.Read();
+    }
+
+    // [...]
+
+    static void getdesserializado()
+    {
+      // Criando um objeto Cliente para conectar com o recurso
+      System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+
+      // Execute o método Get passando a url da API e salvando o resultado 
+      // em um objeto do tipo HttpResponseMessage
+      System.Net.Http.HttpResponseMessage response =
+      client.GetAsync("https://localhost:7188/api/FiapSmartCityWebAPI/ProductType").Result;
+
+      // Verifica se o Status Code é 200
+      if (response.IsSuccessStatusCode)
+      {
+        // Recupera o conteúdo JSON retornado pela API
+        string content = response.Content.ReadAsStringAsync().Result;
+
+        // Convertendo o conteúdo em uma lista de TipoProduto
+        List<ProductType> list =
+          JsonConvert.DeserializeObject<List<ProductType>>(content);
+
+        // Imprime o conteúdo na janela Console
+        foreach (var item in list)
+        {
+          Console.WriteLine("Descrição:" + item.TypeDescription);
+          Console.WriteLine("Comercializado:" + item.Marketed);
+          Console.WriteLine(" ========== ");
+          Console.WriteLine("");
+        }
+      }
+    }
+  }
+}
+```
+
+## Serialização
+
+Chegou o ponto de executar o processo contrário da desserialização, ou seja, vamos transformar um objeto C# em texto JSON. 
+
+O processo de serialização é extremamente útil para métodos POST e PUT, pois agiliza a montagem da string JSON que deverá ser enviada no corpo da requisição. Semelhante ao exemplo de desserialização, vamos usar os mesmos componentes da biblioteca `Newtonsoft.Json`, alterando apenas a chamada para o método de serialização:
+
+``` C#
+using System;
+using System.Text;
+using Newtonsoft.Json;
+
+namespace FiapSmartCityClient
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      get();
+
+      getdesserializado();
+
+      post();
+      
+      postserializado();
+      
+      Console.Read();
+    }
+
+    // [...]
+
+    static void postserializado()
+    {
+      // Criando um objeto Cliente para conectar com o recurso
+      System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+
+      // Conteudo do tipo de produto em JSON
+      ProductType type = new ProductType();
+      type.TypeID = 101;
+      type.TypeDescription = "Grid de Energia Solar";
+      type.Marketed = true;
+
+      var json = JsonConvert.SerializeObject(type);
+
+      // Convertendo texto para JSON StringContent 
+      StringContent content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+
+      // Execute o método POST passando a url da API 
+      // e envia o conteudo do tipo StringContent
+      System.Net.Http.HttpResponseMessage response =
+        client.PostAsync("https://localhost:7013/FiapSmartCityWebAPI", content).Result;
+
+      // Verifica que o POST foi executado com sucesso
+      if (response.IsSuccessStatusCode)
+      {
+        Console.WriteLine("Tipo do produto criado com sucesso");
+        Console.Write("Link para consulta: " + response.Headers.Location);
+      }
+    }
+  }
+}
+```
+
+Note no código-fonte que não temos mais uma variável do tipo string com o conteúdo JSON a ser enviado, agora temos uma instância da classe `ProductType` que será convertida e postada no corpo da requisição POST.
