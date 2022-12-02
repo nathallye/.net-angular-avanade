@@ -74,7 +74,9 @@ Sigla para *Uniform Resource Name*(Nome de Recursos Universal), é o `nome do re
 
 URI é a *composição do Protocolo* (**http:// ou https://**), a *localização do recurso* (URL - **fiap.com.br**) e do *nome do recurso* (URN - **/online/graduacao/bacharelado/sistemas-de-informacao/**).
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205185960-c2fd83e8-17e3-44e4-8042-8ecc87ed61c0.png">
+</div>
 
  ### Verbos HTTP
 
@@ -87,7 +89,9 @@ URI é a *composição do Protocolo* (**http:// ou https://**), a *localização
  
  Veja alguns exemplos no quadroa baixo:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205186049-f9336bf3-ec0a-4d1b-a893-346562930420.png">
+</div>
 
 ### HTTP Status Code
 
@@ -100,17 +104,19 @@ O Status Code de uma requisição é parte importante de uma Web API, pois com e
 - **404 - Not Found:** O recurso requisitado não foi encontrado. 
 - **500 - Internal Server Error:** Indica um erro do servidor ao processar a solicitação.
 
-
 ## Criar o projeto
 
 Para iniciar a criação de um novo serviço ASP.NET WEB API, iremos seguir o mesmo modelo de negócio dos capítulos anteriores, a Fiap Smart City, nossa cidade “virtual”, cada vez mais tecnológica, proporcionando à população melhores condições e sustentabilidade. 
 
 No Visual Studio, primeiramente vamos no menu `Create a New project`, feito isso vamos  selecionar o tipo de projeto `ASP.NET Core Web API` > `Next` e em seguida definir o nome do projeto, o local no sistema dos arquivos e o nome da solução. Para nosso exemplo, vamos usar como nome do projeto e da solução `FiapSmartCityWebAPI`  `Next` > `Create`.
 
+Finalizado a operação de criação, conseguimos verificar a estrutura criada para o nosso projeto. Na janela **Solutions Explorer**, temos nossa solução, nosso projeto da Web API e as pastas Controllers, Models e Views, que são idênticas ao projeto ASP.NET MVC.
 
-Finalizado a operação de criação, conseguimos verificar a estrutura criada para o nosso projeto. Na janela **Solutions Explorer**, temos nossa solução, nosso projeto da Web API e as pastas Controllers, Models e Views,que são idênticas ao projeto Asp.NET MVC.
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205186131-c5d7774e-ed8a-4835-9ef2-535f60fc45e9.png">
+</div>
 
-
+**Obs.:** Na versão .NET 6 só vem criada a pasta `Controllers`.
 
 ### Modelos
 
@@ -118,7 +124,9 @@ Com o nosso projeto criado, iremos seguir a mesma estrutura que foi explicada no
 
 Nesse primeiro momento, iremos começar pela camada de modelos, onde criaremos a estrutura dos nossos dados. Em seguida, uma camada de acesso a dados e, para finalizar, nossos controladores. Segue a representação UML para as nossas classes de modelo:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205186303-5730940f-71a9-45af-84a7-9c05b764e081.png">
+</div>
 
 Os modelos devem ser adicionados nonamespace `Models` do projeto. Para criar o modelo `ProductType`, clique com o `botão direito na pasta Models` e escolha a opção `Add` > `Class`. Defina o nome como ProductType.cs, utilize o Diagrama de Classe e adicione os atributos `TypeId`, `TypeDescription` e `Marketed` com seus respectivos tipos:
 
