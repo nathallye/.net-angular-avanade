@@ -110,7 +110,7 @@ Para iniciar a criação de um novo serviço ASP.NET WEB API, iremos seguir o me
 
 No Visual Studio, primeiramente vamos no menu `Create a New project`, feito isso vamos  selecionar o tipo de projeto `ASP.NET Core Web API` > `Next` e em seguida definir o nome do projeto, o local no sistema dos arquivos e o nome da solução. Para nosso exemplo, vamos usar como nome do projeto e da solução `FiapSmartCityWebAPI`  `Next` > `Create`.
 
-Finalizado a operação de criação, conseguimos verificar a estrutura criada para o nosso projeto. Na janela **Solutions Explorer**, temos nossa solução, nosso projeto da Web API e as pastas Controllers, Models e Views, que são idênticas ao projeto ASP.NET MVC.
+Finalizado a operação de criação, conseguimos verificar a estrutura criada para o nosso projeto. Na janela **Solutions Explorer**, temos nossa solução, nosso projeto da Web API e as pastas Controllers e Models, que são idênticas ao projeto ASP.NET MVC.
 
 <div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/205186131-c5d7774e-ed8a-4835-9ef2-535f60fc45e9.png">
@@ -226,7 +226,7 @@ namespace FiapSmartCityWebAPI.DAL
 
     // Construtor estático serve para criar objetos do Tipo de Produto e Produto
     // Simulando o banco de dados
-    static TipoProdutoDAL()
+    static ProductTypeDAL()
     {
 
       ProductType EnergiaSolar = new ProductType();
@@ -243,7 +243,6 @@ namespace FiapSmartCityWebAPI.DAL
       FotoVoltatica.AveragePrice = 4000.00;
       FotoVoltatica.Logotipo = @"data:image/jpeg;base64";
       FotoVoltatica.Active = true;
-      FotoVoltatica.ProductTypeId = EnergiaSolar.TypeId = 1;
 
       //Referência do Novo Produto 
       EnergiaSolar.Add(FotoVoltatica);
@@ -265,12 +264,12 @@ namespace FiapSmartCityWebAPI.DAL
       databaseProductType.Add(counterDatabase, ProductType);
     }
 
-    public ProductType Read(int TypeId)
+    public ProductType GetOne(int TypeId)
     {
       return databaseProductType[TypeId];
     }
 
-    public IList<ProductType> List()
+    public IList<ProductType> GetAll()
     {
       return new List<ProductType>(databaseProductType.Values);
     }
@@ -308,7 +307,7 @@ O Visual Studio apresentará a `janela Add Scaffold`, selecione, então, a opç�
   <img width="700" src="https://user-images.githubusercontent.com/86172286/205189266-426cdbb0-01c3-44cd-b4e3-2482de75a145.png">
 </div>
 
-O próximo passo é definir o `nome do controlador`, que será `ProductTypeController` em nosso projeto. Clique no botão `Add` e aguarde a criação. 
+O próximo passo é definir o `nome do controlador`, que será `FiapSmartCityWebAPIController` em nosso projeto. Clique no botão `Add` e aguarde a criação. 
 Lembre-se, todo controller deverá ter o sufixo *Controller* em seu nome. Pronto! Primeiro controlador criado no projeto. 
 
 Agora podemos observar a classe criada no namespace Controllers. No código da classe Controller, é possível ver a importação do namespace **System.Web.Http** e a extensão da classe **System.Web.Http.ApiController**.
@@ -316,3 +315,373 @@ Agora podemos observar a classe criada no namespace Controllers. No código da c
 <div align="center">
   <img width="700" src="https://user-images.githubusercontent.com/86172286/205189328-ede55f9c-42dd-4278-b96f-ef6467672e5e.png">
 </div>
+
+### Requisição GET
+
+Com nosso *controller* criado, agora criaremos nossa primeira requisição, baseada nos Verbos HTTP, a `requisição GET`. 
+
+Nosso método GET será implementado capturando o Id para o tipo de produto, consultando nossa camada dos dados com o Id capturado e retornando um objeto `ProductType`. Por convenção, o nome do nosso método será `Get()`:
+
+``` C#
+using Microsoft.AspNetCore.Mvc;
+
+using FiapSmartCityWebAPI.Models;
+using FiapSmartCityWebAPI.DAL;
+
+namespace FiapSmartCityWebAPI.Controllers
+{
+  [Route("api/[controller]")]
+  [ApiController]
+  public class FiapSmartCityWebAPIController : ControllerBase
+  {
+    [HttpGet]
+    [Route("GetProductType")]
+    public IActionResult Get(int id)
+    {
+      try
+      {
+        FiapSmartCityWebAPIDAL dal = new FiapSmartCityWebAPIDAL();
+        ProductType productType = dal.GetOne(id);
+        return Ok(productType);
+      }
+      catch (KeyNotFoundException)
+      {
+        return NotFound();
+      }
+    }
+  }
+}
+```
+
+*Controller* criado, requisição GET criada, podemos fazer o primeiro teste. Pressione a tecla F5 e aguarde o navegador-padrão do seu computador ser aberto, será exibido o resultado.
+
+**Obs.:** No código acima um bloco chamado `try catch` para trativa de possíveis erros - `try` é chamado de bloco “protegido” porque, caso ocorra algum problema com os comandos dentro do bloco, a execução desviará para os blocos `catch` correspondentes.
+
+**Obs.2:** No código acima usamos a chamada `Interface uniforme` - `Ok()` e `NotFound()` -, que é nada mais que um retorno unificado, diferente de um modelo único das respostas, é um padrão que toda a web entende, assim, qualquer serviço/aplicação/usuário que usar nossa Web API poderá ler o HTTP Status Code e entenderá a resposta.
+
+#### Get – Listar os dados
+
+O nosso *controller* ProductType possui um método `Get()` que recebe o Id como parâmetro e consulta a informação de um determinado tipo. 
+
+Podemos ter mais um método `Get()`, para leistar todos os dados, porém é obrigatório que a assinatura seja diferente
+
+``` C#
+using Microsoft.AspNetCore.Mvc;
+
+using FiapSmartCityWebAPI.Models;
+using FiapSmartCityWebAPI.DAL;
+
+namespace FiapSmartCityWebAPI.Controllers
+{
+  [Route("api/[controller]")]
+  [ApiController]
+  public class FiapSmartCityWebAPIController : ControllerBase
+  {
+    // GET localhost:7188/api/FiapSmartCityWebAPI/ProductType
+    [HttpGet]
+    [Route("ProductType")]
+    public IActionResult Get()
+    {
+      try
+      {
+        return base.Ok(new ProductTypeDAL().GetAll());
+      }
+      catch (KeyNotFoundException)
+      {
+        return NotFound();
+      }
+    }
+
+    // GET localhost:7188/api/FiapSmartCityWebAPI/ProductType?id={}
+    [HttpGet]
+    [Route("ProductType/{id}")]
+    public IActionResult Get(int id)
+    {
+      try
+      {
+        ProductTypeDAL dal = new ProductTypeDAL();
+        ProductType productType = dal.GetOne(id);
+        return Ok(productType);
+      }
+      catch (KeyNotFoundException)
+      {
+        return NotFound();
+      }
+    }
+  }
+}
+```
+
+### Requisição POST
+
+O método de requisição POST recebe o conteúdo para ser inserido no corpo da requisição, isso explica a anotação`[FromBody]` como parâmetro no método. 
+
+Os métodos usados para o retorno em caso de sucesso e falha são outros que ainda não vimos até o momento. Assim que um objeto `ProductType` for adicionado no sistema, o `controller`(FiapSmartCityWebAPIController) vai usar o método `Created()` para retornar o `Status Code 201`, indicando que a informação foi inserida com sucesso. 
+
+Para uma falha na inclusão de dados, é utilizado o método `BadRequest()`, retornando ao solicitante o `Status Code 400`, que indica que as informações estão incompletas ou erradas:
+
+``` C#
+using Microsoft.AspNetCore.Mvc;
+
+using FiapSmartCityWebAPI.Models;
+using FiapSmartCityWebAPI.DAL;
+
+namespace FiapSmartCityWebAPI.Controllers
+{
+  [Route("api/[controller]")]
+  [ApiController]
+  public class FiapSmartCityWebAPIController : ControllerBase
+  {
+    // GET localhost:7188/api/FiapSmartCityWebAPI/ProductType
+    [HttpGet]
+    [Route("ProductType")]
+    public IActionResult Get()
+    {
+      try
+      {
+        return base.Ok(new ProductTypeDAL().GetAll());
+      }
+      catch (KeyNotFoundException)
+      {
+        return NotFound();
+      }
+    }
+
+    // GET localhost:7188/api/FiapSmartCityWebAPI/ProductType?id={}
+    [HttpGet]
+    [Route("ProductType/{id}")]
+    public IActionResult Get(int id)
+    {
+      try
+      {
+        ProductTypeDAL dal = new ProductTypeDAL();
+        ProductType productType = dal.GetOne(id);
+        return Ok(productType);
+      }
+      catch (KeyNotFoundException)
+      {
+        return NotFound();
+      }
+    }
+
+    // POST localhost:7188/api/FiapSmartCityWebAPI/ProductType
+    [HttpPost(Name = "ProductType")]
+    public IActionResult Post([FromBody] ProductType productType)
+    {
+      try
+      {
+        // Cria o objeto DAL
+        ProductTypeDAL dal = new ProductTypeDAL();
+        // Insere a informação do banco de dados
+        dal.Create(productType);
+
+        // Cria uma propriedade para efetuar a consulta da informação cadastrada
+        string location = "https://localhost:7188/api/FiapSmartCityWebAPI";
+
+        return Created(new Uri(location), productType);
+      }
+      catch (Exception)
+      {
+        return BadRequest();
+      }
+    }
+  }
+}
+
+```
+
+### Requisição DELETE
+
+A requisição DELETE, como o próprio nome diz, irá deletar algum recurso por meio de sua chave ou id. Lembrando que a convenção exige que o nome do método seja `Delete()`, os métodos de retorno são `Ok()` para o fluxo de sucesso e `BadRequest()` caso algum erro seja capturado:
+
+``` C#
+using Microsoft.AspNetCore.Mvc;
+
+using FiapSmartCityWebAPI.Models;
+using FiapSmartCityWebAPI.DAL;
+
+namespace FiapSmartCityWebAPI.Controllers
+{
+  [Route("api/[controller]")]
+  [ApiController]
+  public class FiapSmartCityWebAPIController : ControllerBase
+  {
+    // GET localhost:7188/api/FiapSmartCityWebAPI/ProductType
+    [HttpGet]
+    [Route("ProductType")]
+    public IActionResult Get()
+    {
+      try
+      {
+        return base.Ok(new ProductTypeDAL().GetAll());
+      }
+      catch (KeyNotFoundException)
+      {
+        return NotFound();
+      }
+    }
+
+    // GET localhost:7188/api/FiapSmartCityWebAPI/ProductType?id={}
+    [HttpGet]
+    [Route("ProductType/{id}")]
+    public IActionResult Get(int id)
+    {
+      try
+      {
+        ProductTypeDAL dal = new ProductTypeDAL();
+        ProductType productType = dal.GetOne(id);
+        return Ok(productType);
+      }
+      catch (KeyNotFoundException)
+      {
+        return NotFound();
+      }
+    }
+
+    // POST localhost:7188/api/FiapSmartCityWebAPI/ProductType
+    [HttpPost(Name = "ProductType")]
+    public IActionResult Post([FromBody] ProductType productType)
+    {
+      try
+      {
+        // Cria o objeto DAL
+        ProductTypeDAL dal = new ProductTypeDAL();
+        // Insere a informação do banco de dados
+        dal.Create(productType);
+
+        // Cria uma propriedade para efetuar a consulta da informação cadastrada
+        string location = "https://localhost:7188/api/FiapSmartCityWebAPI";
+
+        return Created(new Uri(location), productType);
+      }
+      catch (Exception)
+      {
+        return BadRequest();
+      }
+    }
+
+    // DELETE localhost:7188/api/FiapSmartCityWebAPI/ProductType?id={}
+    [HttpDelete(Name = "ProductType")]
+    public IActionResult Delete(int id)
+    {
+      try
+      {
+        ProductTypeDAL dal = new ProductTypeDAL();
+        dal.Delete(id);
+        return Ok();
+      }
+      catch (Exception)
+      {
+        return BadRequest();
+      }
+    }
+  }
+}
+```
+
+### Requisição PUT
+
+A requisição PUT tem a função de atualizar dados de um recurso:
+
+``` C#
+using Microsoft.AspNetCore.Mvc;
+
+using FiapSmartCityWebAPI.Models;
+using FiapSmartCityWebAPI.DAL;
+
+namespace FiapSmartCityWebAPI.Controllers
+{
+  [Route("api/[controller]")]
+  [ApiController]
+  public class FiapSmartCityWebAPIController : ControllerBase
+  {
+    // GET localhost:7188/api/FiapSmartCityWebAPI/ProductType
+    [HttpGet]
+    [Route("ProductType")]
+    public IActionResult Get()
+    {
+      try
+      {
+        return base.Ok(new ProductTypeDAL().GetAll());
+      }
+      catch (KeyNotFoundException)
+      {
+        return NotFound();
+      }
+    }
+
+    // GET localhost:7188/api/FiapSmartCityWebAPI/ProductType?id={}
+    [HttpGet]
+    [Route("ProductType/{id}")]
+    public IActionResult Get(int id)
+    {
+      try
+      {
+        ProductTypeDAL dal = new ProductTypeDAL();
+        ProductType productType = dal.GetOne(id);
+        return Ok(productType);
+      }
+      catch (KeyNotFoundException)
+      {
+        return NotFound();
+      }
+    }
+
+    // POST localhost:7188/api/FiapSmartCityWebAPI/ProductType
+    [HttpPost(Name = "ProductType")]
+    public IActionResult Post([FromBody] ProductType productType)
+    {
+      try
+      {
+        // Cria o objeto DAL
+        ProductTypeDAL dal = new ProductTypeDAL();
+        // Insere a informação do banco de dados
+        dal.Create(productType);
+
+        // Cria uma propriedade para efetuar a consulta da informação cadastrada
+        string location = "https://localhost:7188/api/FiapSmartCityWebAPI";
+
+        return Created(new Uri(location), productType);
+      }
+      catch (Exception)
+      {
+        return BadRequest();
+      }
+    }
+
+    // DELETE localhost:7188/api/FiapSmartCityWebAPI/ProductType?id={}
+    [HttpDelete(Name = "ProductType")]
+    public IActionResult Delete(int id)
+    {
+      try
+      {
+        ProductTypeDAL dal = new ProductTypeDAL();
+        dal.Delete(id);
+        return Ok();
+      }
+      catch (Exception)
+      {
+        return BadRequest();
+      }
+    }
+
+    // PUT or PATCH localhost:7188/api/FiapSmartCityWebAPI/ProductType?id={}
+    [HttpPut(Name = "ProductType")]
+    public IActionResult Put([FromBody] ProductType productType)
+    {
+      try
+      {
+        ProductTypeDAL dal = new ProductTypeDAL();
+        dal.Update(productType);
+        return Ok();
+      }
+      catch (Exception)
+      {
+        return BadRequest();
+      }
+    }
+  }
+}
+```
+
+A requisição PUT é muito similar à requisição POST, pois o seu conteúdo precisa ser enviado no corpo da requisição. O único ponto deatenção é que, no conteúdo dos dados enviados no método PUT, é preciso ter o identificador ou Chave Primária que será usado para atualizar o registro correto.
