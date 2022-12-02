@@ -488,7 +488,6 @@ namespace FiapSmartCityWebAPI.Controllers
     }
   }
 }
-
 ```
 
 ### Requisição DELETE
@@ -754,7 +753,9 @@ namespace FiapSmartCityClient
 
 Segue a janela do aplicativo client em execução e a exibição do conteúdo JSON retornado pela API:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205383139-a29cc504-56a1-43b9-ac4d-fb7dc2c6be0a.png">
+</div>
 
 ### Requisição POST com JSON
 
@@ -825,10 +826,11 @@ namespace FiapSmartCityClient
 
 Segue a imagem com o resultado da execução:
 
-
+<div align="center">
+  <img width="700" src="https://user-images.githubusercontent.com/86172286/205383339-5f684d4f-0f82-446d-9cc3-6901d1426473.png">
+</div>
 
 Como podemos ver, o HTTP Status Code retornou sucesso, e na segunda linha impressa no resultado temos no valor a propriedade Location, isto é, o caminho para consultar os dados do novo ProductTYpe com uma requisição GET.
-
 
 ### Transformação de dados (Parse)
 
@@ -837,6 +839,3 @@ O conceito de Parse significa transformar dados de diferentes tipos na orientaç
 Mas qual é a relação entre Parse e WebAPI? 
 
 Seguindo o texto, será fácil de entender a relação e também a simplicidade que irá proporcionar algumas transformações em nosso client de API. Antes de apresentar as transformações, vamos criar em nosso projeto FiapSmartCityClient o namespace `Models` e adicionar duas classes, `ProductType` e `Product`. Essas classes devem ter os atributos do mesmo tipo e nomes usados nos projetos FiapSmartCity (MVC) e FiapSmartCityWebApi.
-
-
-
