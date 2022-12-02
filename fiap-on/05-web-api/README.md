@@ -99,3 +99,106 @@ O Status Code de uma requisição é parte importante de uma Web API, pois com e
 - **403 - Forbidden:** Indica que o servidor se recusa a atender à solicitação.
 - **404 - Not Found:** O recurso requisitado não foi encontrado. 
 - **500 - Internal Server Error:** Indica um erro do servidor ao processar a solicitação.
+
+
+## Criar o projeto
+
+Para iniciar a criação de um novo serviço ASP.NET WEB API, iremos seguir o mesmo modelo de negócio dos capítulos anteriores, a Fiap Smart City, nossa cidade “virtual”, cada vez mais tecnológica, proporcionando à população melhores condições e sustentabilidade. 
+
+No Visual Studio, primeiramente vamos no menu `Create a New project`, feito isso vamos  selecionar o tipo de projeto `ASP.NET Core Web API` > `Next` e em seguida definir o nome do projeto, o local no sistema dos arquivos e o nome da solução. Para nosso exemplo, vamos usar como nome do projeto e da solução `FiapSmartCityWebAPI`  `Next` > `Create`.
+
+
+Finalizado a operação de criação, conseguimos verificar a estrutura criada para o nosso projeto. Na janela **Solutions Explorer**, temos nossa solução, nosso projeto da Web API e as pastas Controllers, Models e Views,que são idênticas ao projeto Asp.NET MVC.
+
+
+
+### Modelos
+
+Com o nosso projeto criado, iremos seguir a mesma estrutura que foi explicada no Capítulo ASP.NET MVC. 
+
+Nesse primeiro momento, iremos começar pela camada de modelos, onde criaremos a estrutura dos nossos dados. Em seguida, uma camada de acesso a dados e, para finalizar, nossos controladores. Segue a representação UML para as nossas classes de modelo:
+
+
+
+Os modelos devem ser adicionados nonamespace `Models` do projeto. Para criar o modelo `ProductType`, clique com o `botão direito na pasta Models` e escolha a opção `Add` > `Class`. Defina o nome como ProductType.cs, utilize o Diagrama de Classe e adicione os atributos `TypeId`, `TypeDescription` e `Marketed` com seus respectivos tipos:
+
+``` C#
+namespace FiapSmartCityWebAPI.Models
+{
+  public class ProductType
+  {
+    public int TypeId { get; set; }
+    public string TypeDescription { get; set; }
+    public bool Marketed { get; set; }
+
+    public List<Product> Products { get; set; }
+
+    public ProductType() 
+    {
+      Products = new List<Product>();
+    }
+
+    // MOCK - Método para adicionar um produto ao Tipo
+    public void Add(Product product)
+    {
+      this.Products.Add(product);
+    }
+
+    // MOCK - Método para remover um produto do tipo
+    public void Remove(long id)
+    {
+      Product product = Products.FirstOrDefault(p => p.ProductId == id);
+
+      Products.Remove(product);
+    }
+
+    // MOCK - Método para alterar um produto do tipo
+    public void Altera(Product product)
+    {
+      Remove(product.ProductId);
+      Add(product);
+    }
+  }
+}
+```
+
+Seguindo os passos anteriores e o Diagrama de Classe, vamos criar a classe para o modelo de `Product`. O diagrama apresenta uma agregação entre `Product` e `ProductType`, sendo, assim, na classe de `Product` precisamos ter uma propriedade do tipo `ProductType`:
+
+``` C#
+namespace FiapSmartCityWebAPI.Models
+{
+  public class Product
+  {
+    public int ProductId { get; set; }
+    public string ProductName { get; set; }
+    public string Features { get; set; }
+    public double AveragePrice { get; set; }
+    public string Logotipo { get; set; }
+    public bool Active { get; set; }
+
+    // Referência para classe TipoProduto
+    public ProductType ProductTypeId { get; set; }
+    
+    public Product() 
+    { 
+    }
+
+    public Product(int productId, string productName, string features, double averagePrice, string logotipo, bool active, ProductType productTypeId)
+    {
+      ProductId = productId;
+      ProductName = productName;
+      Features = features;
+      AveragePrice = averagePrice;
+      Logotipo = logotipo;
+      Active = active;
+      ProductTypeId = productTypeId;
+    }
+  }
+}
+```
+
+## Funcionalidades
+
+Temos dois modelos definidos e criados em nosso projeto, precisamos agora desenvolveros mecanismos para alimentar com dados. Vamos iniciar criando nossa Camada **DAL** e depois nossos controladores, que serão os responsáveis pelas requisições àAPI e também pela validação do fluxo dos nossos serviços. 
+
+### DAL
